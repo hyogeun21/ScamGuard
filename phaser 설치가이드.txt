@@ -1,0 +1,8 @@
+1. Visual Studio Code, Node.js, Git 설치
+2. VScode 확장 프로그램 ESLint, Prettier, GitLens 설치
+3. VScode 터미널에서 node -v npm -v
+4. npm create vite@latest scamguard -- --template react-ts (ESLint 선택)
+5. cd scamguard
+6. npm install
+7. npm install phaser@3.90.0
+8. 실행코드 npm run dev
