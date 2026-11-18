@@ -1,0 +1,328 @@
+{
+  "scenarioId": "JOB",
+  "caseType": "NORMAL",
+  "difficulty": "MEDIUM",
+  "content": {
+    "actors": [
+      {
+        "id": "JOB_ACTOR_001",
+        "displayName": "김도윤",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "JOB_ACTOR_002",
+        "displayName": "가온물류서비스 공식인사팀",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "JOB_STEP_001",
+      "unlockedMessageIds": [
+        "JOB_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "JOB_Q_001",
+        "JOB_Q_002",
+        "JOB_Q_003",
+        "JOB_Q_004"
+      ],
+      "unlockedPageIds": [
+        "JOB_PAGE_001",
+        "JOB_PAGE_002",
+        "JOB_PAGE_003",
+        "JOB_PAGE_004"
+      ],
+      "unlockedInquiryIds": [
+        "JOB_CALL_001",
+        "JOB_CALL_002",
+        "JOB_CALL_003",
+        "JOB_CALL_004"
+      ]
+    },
+    "messages": [
+      {
+        "id": "JOB_MSG_001",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:30",
+        "textVariants": [
+          "안녕하세요. 가온물류서비스 채용 담당 김도윤입니다. 물류 운영사무원 채용 건으로 연락드립니다. 서류전형에 합격하셨으며 11월 24일 오전10시에 면접이 예정되어 있습니다.",
+          "가온물류서비스 채용지원팀 김도윤입니다. 지원하신 물류 운영 사무원 직무의 서류 심사가 완료되었습니다. 면접은 11월 24일 오전 10시에 진행됩니다.",
+          "안녕하세요. 채용 업무를 담당하는 김도윤입니다. 가온물류서비스물류 운영 사무원 면접 대상자로 선정되어 연락드립니다. 면접 일정은 11월 24일 오전 10시입니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      },
+      {
+        "id": "JOB_MSG_002",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "14:00",
+        "textVariants": [
+          "가온물류서비스 채용 담당 김도윤입니다. 면접 결과 최종 합격대상으로 선정되셨습니다. 이후 입사 준비 사항은 제가 별도로 안내드리겠습니다.",
+          "안녕하세요. 김도윤 담당자입니다. 물류 운영 사무원 채용에 최종 합격하셨습니다. 근로계약 및 입사 일정과 관련된 내용을 순차적으로 전달드리겠습니다.",
+          "가온물류서비스 채용지원팀입니다. 면접 결과 합격하신 것으로 확인되었습니다. 입사 준비를 위한 후속 안내는 담당자 김도윤이 진행할 예정입니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      },
+      {
+        "id": "JOB_MSG_003",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "14:10",
+        "textVariants": [
+          "입사 준비를 위해 근로계약 관련 서류를 확인해 주세요. 서류는회사에서 정한 공식 채용 절차에 따라 접수하며, 담당자 신원은 인사팀 대표번호로 확인하실 수 있습니다.",
+          "근로계약에 필요한 서류 목록을 안내드립니다. 공식 채용 페이지에서 제출 방법을 확인하신 후 진행해 주세요. 채용 관련 문의는 회사 인사팀에서도 가능합니다.",
+          "입사 서류 제출 안내입니다. 제출 경로는 가온물류서비스 공식채용 안내에 따릅니다. 개별 연락에 대해 확인이 필요하면 공식 인사팀으로 문의하셔도 됩니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "JOB_Q_001",
+        "prompt": "서류 제출 경로는 어디인가요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "근로계약 서류는 회사에서 지정한 공식 채용 절차를 통해 접수합니다. 세부 방법은 별도로 안내드리겠습니다.",
+          "서류 제출은 가온물류서비스 공식 채용 페이지에서 진행됩니다.필요한 사항은 제가 안내해 드리겠습니다.",
+          "회사에서 운영하는 정식 접수 경로를 이용하시면 됩니다. 공식인사팀에서도 해당 절차를 확인하실 수 있습니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_002",
+        "prompt": "공식 채용 페이지는 어디에서 확인할 수 있나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "가온물류서비스 공식 홈페이지에서 채용 안내 메뉴를 확인하시면됩니다.",
+          "회사 홈페이지에 현재 모집 중인 물류 운영 사무원 공고가 등록되어 있습니다.",
+          "공식 홈페이지의 채용 정보 메뉴에 모집 조건과 채용 절차가 안내되어 있습니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_003",
+        "prompt": "담당자님의 신원을 공식적으로 확인할 수 있나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "네. 가온물류서비스 공식 인사팀에 문의하시면 채용 담당 김도윤의 근무 여부를 확인하실 수 있습니다.",
+          "회사 인사팀 대표번호로 연락하시면 제가 현재 채용 업무를 담당하고 있다는 사실을 확인하실 수 있습니다.",
+          "물론입니다. 공식 채용지원팀에 김도윤 담당자의 신원을 문의하셔도 됩니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_004",
+        "prompt": "제출해야 하는 서류는 무엇인가요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "근로계약에 필요한 기본 서류를 준비하시면 됩니다. 제출 대상은공식 채용 안내에 따라 확인해 주세요.",
+          "입사에 필요한 신분 확인 및 계약 관련 서류입니다. 구체적인 목록은 회사 공식 안내를 참고해 주세요.",
+          "최종 합격자에게 필요한 근로계약 서류를 안내하고 있습니다. 회사 공식 채용 페이지에서 제출 목록을 확인하실 수 있습니다."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "JOB_PAGE_001",
+        "title": "채용 공고",
+        "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
+        "body": "기업명: 가온물류서비스\n모집직무: 물류 운영 사무원\n근무기간: 1년 (평가 후 연장 가능)\n근무형태: 계약직, 주 5일 09:00~18:00\n근무조건: 월 240만 원, 경기도 수원시 근무\n주요업무: 입출고 현황 관리, 물류 데이터 입력, 배송 일정 관리"
+      },
+      {
+        "id": "JOB_PAGE_002",
+        "title": "기업 홈페이지",
+        "sourceLabel": "가온물류서비스 공식 홈페이지",
+        "body": "기업소개: 물류 입출고 관리와 배송 운영을 지원하는 종합물류 서비스 기업\n공식연락처: 000-0000-0000\n기업이 제공하는 채용 관련정보: 현재 물류 운영 사무원을 채용 중이며, 채용 절차 및 제출 서류는 공식채용 안내에서 확인할 수 있습니다. 채용 담당자의 신원과 개별 연락의 진위는공식 인사팀에 문의하여 확인할 수 있습니다."
+      },
+      {
+        "id": "JOB_PAGE_003",
+        "title": "채용 절차",
+        "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
+        "body": "온라인 지원: 회사 공식 채용 페이지를 통해 지원서를 접수합니다.\n면접: 서류전형 합격자를 대상으로 면접을 진행합니다.\n합격 안내: 면접 결과를 확인한 후 최종 합격자에게 안내합니다.\n근로계약 진행: 회사에서 승인한 방법으로 입사 서류를 제출하고 근로계약을 체결합니다."
+      },
+      {
+        "id": "JOB_PAGE_004",
+        "title": "서류 제출 안내",
+        "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
+        "body": "제출 대상 서류: 기본 입사 및 근로계약 서류\n회사 승인공식 제출 경로: 공식 채용 홈페이지. 김도윤 담당자의 안내는 공식 인사팀에서 확인 가능"
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "JOB_CALL_001",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "현재 물류 운영 사무원을 실제로 채용하고 있나요?",
+        "answerVariants": [
+          "네. 물류 운영 사무원 채용을 진행하고 있습니다.",
+          "해당 직무의 채용 절차가 현재 진행 중입니다.",
+          "맞습니다. 공식 채용 공고에 등록된 모집 건입니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_002",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "김도윤 담당자가 실제 회사 채용담당자인가요?",
+        "answerVariants": [
+          "네. 김도윤은 현재 해당 채용을 담당하고 있는 직원입니다.",
+          "인사팀 확인 결과, 김도윤 담당자의 채용 업무가 등록되어 있습니다.",
+          "맞습니다. 김도윤 담당자는 회사에서 공식적으로 채용 업무를 수행하고 있습니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_003",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "제가 받은 최종 합격 안내가 공식적으로 발송된것인가요?",
+        "answerVariants": [
+          "네. 김도윤 담당자를 통한 합격 안내가 회사 기록과 일치합니다.",
+          "해당 최종 합격 통보는 정식으로 진행된 안내입니다.",
+          "확인 결과, 회사에서 승인한 합격 안내가 맞습니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_004",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "입사 서류는 어떤 경로로 제출해야 하나요?",
+        "answerVariants": [
+          "공식 채용 페이지를 통해 제출하시면 됩니다.",
+          "서류는 회사 공식 채용 시스템에서 접수하고 있습니다.",
+          "김도윤 담당자의 안내에 따라 공식 홈페이지에서 제출하시면 됩니다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "JOB_EVD_001",
+        "sourceType": "MESSAGE",
+        "sourceId": "JOB_MSG_001",
+        "fact": "김도윤이라는 담당자가 가온물류서비스 채용건으로 개별 연락했다."
+      },
+      {
+        "id": "JOB_EVD_002",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "JOB_CALL_002",
+        "fact": "공식 인사팀에서 김도윤이 실제 채용담당자임을 확인했다."
+      },
+      {
+        "id": "JOB_EVD_003",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "JOB_CALL_003",
+        "fact": "김도윤을 통한 합격 안내가 회사의 공식 기록과 일치한다."
+      },
+      {
+        "id": "JOB_EVD_004",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "JOB_PAGE_004",
+        "fact": "회사의 공식 서류 제출 절차가 채용담당자의 안내와 일치한다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "JOB_STEP_001",
+        "description": "면접 일정 안내 메시지를 받은 상태"
+      },
+      {
+        "id": "JOB_STEP_002",
+        "description": "합격 안내 메시지가 공개된 상태"
+      },
+      {
+        "id": "JOB_STEP_003",
+        "description": "서류 제출 요청 메시지가 공개된 상태"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "JOB_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "JOB_MSG_001",
+          "stepId": "JOB_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "JOB_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "nextStepId": "JOB_STEP_002"
+        }
+      },
+      {
+        "id": "JOB_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "JOB_MSG_002",
+          "stepId": "JOB_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "JOB_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "nextStepId": "JOB_STEP_003"
+        }
+      }
+    ],
+    "scenarioData": {
+      "jobPosting": {
+        "companyName": "가온물류서비스",
+        "companyDescription": "물류 입출고 관리와 배송 운영을 지원하는 종합 물류 서비스 기업",
+        "position": "물류 운영 사무원",
+        "employmentType": "계약직",
+        "workPeriod": "1년 (평가 후 연장 가능)",
+        "workConditions": "주 5일, 09:00~18:00, 월 240만 원, 경기도 수원시 근무",
+        "mainDuties": "입출고 현황 관리, 물류 데이터 입력, 배송 일정관리",
+        "recruitmentProcess": "서류 접수 → 면접 → 최종 합격 → 근로계약",
+        "officialContact": "000-0000-0000"
+      }
+    },
+    "preventionTips": [
+      "채용담당자가 개인적으로 연락하더라도 공식 인사팀을 통해 신원을 확인하세요.",
+      "실제 채용 공고가 존재하는지 확인하고, 연락한 담당자가 해당 채용을담당하는지도 확인하세요.",
+      "담당자의 신원이 확인되었다면 회사에서 승인한 공식 채용 절차에 따라 진행하세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "COMPUTER_PAGE_VIEWED",
+        "targetId": "JOB_PAGE_001",
+        "score": 10
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "JOB_CALL_002",
+        "score": 20
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "JOB_CALL_003",
+        "score": 10
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_OFFICIAL": 30,
+      "VERIFY_OFFICIAL": 20,
+      "STOP_AND_REPORT": 0,
+      "SUBMIT_UNVERIFIED": 0
+    }
+  }
+}

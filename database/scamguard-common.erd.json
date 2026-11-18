@@ -180,6 +180,7 @@
           "03h8ntlnjxkvwkka8wkrkufph",
           "03h8ntbor228gzydkhab1g7jb",
           "03h8ntdifzycbdr5zrnbrw0fe",
+          "03h9bctzgmkacrqcv4v18t2oi",
           "03h8ntdk146u86tr64k36e1pg"
         ],
         "ui": {
@@ -582,6 +583,14 @@
         "name": "session_id",
         "dataType": "uuid",
         "options": 10
+      },
+      "03h9bctzgmkacrqcv4v18t2oi": {
+        "id": "03h9bctzgmkacrqcv4v18t2oi",
+        "tableId": "03h8nt8sxjipf04j0lku6yvcl",
+        "name": "memo_txt",
+        "dataType": "text",
+        "default": "''",
+        "options": 8
       }
     },
     "relationshipEntities": {

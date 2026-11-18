@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS play_session_state
   session_id      uuid        NOT NULL,
   current_step_id varchar    ,
   state_data      jsonb       NOT NULL,
+  memo_text       TEXT        NOT NULL DEFAULT '',
   updated_at      timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (session_id)
 );
