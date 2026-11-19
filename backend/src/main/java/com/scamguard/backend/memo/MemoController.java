@@ -1,4 +1,3 @@
-
 package com.scamguard.backend.memo;
 
 import java.util.Map;
@@ -32,6 +31,7 @@ public class MemoController {
     ) {
         return memoService.saveMemo(
                 sessionId,
+                request.eventId(),
                 request.memoText()
         );
     }
@@ -44,8 +44,7 @@ public class MemoController {
     }
 
     public record MemoRequest(
-            @NotNull
-            @Size(max = 5000)
-            String memoText
+            @NotNull UUID eventId,
+            @NotNull @Size(max = 5000) String memoText
     ) {}
 }

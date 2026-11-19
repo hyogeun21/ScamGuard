@@ -17,7 +17,9 @@
     ],
     "initialState": {
       "currentStepId": "JOB_STEP_001",
-      "unlockedMessageIds": ["JOB_MSG_001"],
+      "unlockedMessageIds": [
+        "JOB_MSG_001"
+      ],
       "unlockedQuestionIds": [
         "JOB_Q_001",
         "JOB_Q_002",
@@ -135,24 +137,28 @@
     "computerPages": [
       {
         "id": "JOB_PAGE_001",
+        "pageType": "DETAIL",
         "title": "채용 공고",
         "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
         "body": "기업명: 가온물류서비스\n모집직무: 물류 운영 사무원\n근무기간: 1년 (평가 후 연장 가능)\n근무형태: 계약직, 주 5일 09:00~18:00\n근무조건: 월 240만 원, 경기도 수원시 근무\n주요업무: 입출고 현황 관리, 물류 데이터 입력, 배송 일정 관리"
       },
       {
         "id": "JOB_PAGE_002",
+        "pageType": "GENERAL",
         "title": "기업 홈페이지",
         "sourceLabel": "가온물류서비스 공식 홈페이지",
         "body": "기업소개: 물류 입출고 관리와 배송 운영을 지원하는 종합 물류 서비스 기업\n공식연락처: 000-0000-0000\n기업이 제공하는 채용 관련 정보: 현재 물류 운영 사무원을 채용 중이며, 채용 절차 및 제출 서류는 공식 채용 안내에서 확인할 수 있습니다. 채용 담당자의 신원과 개별 연락의 진위는 공식 인사팀에 문의하여 확인할 수 있습니다."
       },
       {
         "id": "JOB_PAGE_003",
+        "pageType": "OFFICIAL",
         "title": "채용 절차",
         "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
         "body": "온라인 지원: 회사 공식 채용 페이지를 통해 지원서를 접수합니다.\n면접: 서류전형 합격자를 대상으로 면접을 진행합니다.\n합격 안내: 면접 결과를 확인한 후 최종 합격자에게 안내합니다.\n근로계약 진행: 회사에서 승인한 방법으로 입사 서류를 제출하고 근로계약을 체결합니다."
       },
       {
         "id": "JOB_PAGE_004",
+        "pageType": "OFFICIAL",
         "title": "서류 제출 안내",
         "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
         "body": "제출 대상 서류: 근로계약에 필요한 기본 입사 서류\n회사 승인 공식 제출 경로: 공식 채용 홈페이지"
@@ -250,7 +256,9 @@
           "stepId": "JOB_STEP_001"
         },
         "effects": {
-          "unlockMessageIds": ["JOB_MSG_002"],
+          "unlockMessageIds": [
+            "JOB_MSG_002"
+          ],
           "unlockQuestionIds": [],
           "unlockPageIds": [],
           "unlockInquiryIds": [],
@@ -266,7 +274,9 @@
           "stepId": "JOB_STEP_002"
         },
         "effects": {
-          "unlockMessageIds": ["JOB_MSG_003"],
+          "unlockMessageIds": [
+            "JOB_MSG_003"
+          ],
           "unlockQuestionIds": [],
           "unlockPageIds": [],
           "unlockInquiryIds": [],
@@ -302,7 +312,7 @@
         "score": 10
       },
       {
-        "eventName": "COMPUTER_PAGE_VIEWED",
+        "eventName": "OFFICIAL_INFO_VIEWED",
         "targetId": "JOB_PAGE_004",
         "score": 10
       },

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -22,17 +23,21 @@ public class EventService {
 
     private final JdbcTemplate jdbcTemplate;
     private final JsonMapper jsonMapper;
+    private final List<EventHandler> eventHandlers;
 
     public EventService(
             JdbcTemplate jdbcTemplate,
-            JsonMapper jsonMapper
+            JsonMapper jsonMapper,
+            List<EventHandler> eventHandlers
     ) {
         this.jdbcTemplate = jdbcTemplate;
         this.jsonMapper = jsonMapper;
+        this.eventHandlers = eventHandlers;
     }
 
     @Transactional
     public Map<String, Object> processEvent(
+            UUID eventId,
             UUID sessionId,
             String eventName,
             String targetId,
@@ -42,6 +47,7 @@ public class EventService {
                 """
                 SELECT
                     ps.status,
+                    sc.scenario_id,
                     pss.current_step_id,
                     pss.state_data::text AS state_data,
                     sc.content::text AS content
@@ -55,6 +61,7 @@ public class EventService {
                 """,
                 (rs, rowNum) -> new SessionData(
                         rs.getString("status"),
+                        rs.getString("scenario_id"),
                         rs.getString("current_step_id"),
                         rs.getString("state_data"),
                         rs.getString("content")
@@ -71,6 +78,62 @@ public class EventService {
 
         SessionData session = sessions.get(0);
 
+        List<ExistingEvent> existingEvents = jdbcTemplate.query(
+                """
+                SELECT
+                    session_id,
+                    event_name,
+                    target_id,
+                    elapsed_ms,
+                    event_data::text AS event_data
+                FROM action_event
+                WHERE event_id = ?
+                """,
+                (rs, rowNum) -> {
+                    Object elapsedValue =
+                            rs.getObject("elapsed_ms");
+
+                    Long savedElapsedMs =
+                            elapsedValue == null
+                                    ? null
+                                    : ((Number) elapsedValue).longValue();
+
+                    return new ExistingEvent(
+                            (UUID) rs.getObject("session_id"),
+                            rs.getString("event_name"),
+                            rs.getString("target_id"),
+                            savedElapsedMs,
+                            rs.getString("event_data")
+                    );
+                },
+                eventId
+        );
+
+        if (!existingEvents.isEmpty()) {
+            ExistingEvent existing = existingEvents.get(0);
+
+            boolean sameRequest =
+                    sessionId.equals(existing.sessionId())
+                            && eventName.equals(existing.eventName())
+                            && targetId.equals(existing.targetId())
+                            && Objects.equals(
+                            elapsedMs,
+                            existing.elapsedMs()
+                    );
+
+            if (!sameRequest) {
+                throw new ResponseStatusException(
+                        HttpStatus.CONFLICT,
+                        "동일 eventId에 다른 요청 데이터가 사용되었습니다."
+                );
+            }
+
+            return restoreEventResponse(
+                    eventId,
+                    existing.eventData()
+            );
+        }
+
         if (!"IN_PROGRESS".equals(session.status())) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
@@ -79,12 +142,17 @@ public class EventService {
         }
 
         ObjectNode state =
-                (ObjectNode) jsonMapper.readTree(session.stateData());
+                (ObjectNode) jsonMapper.readTree(
+                        session.stateData()
+                );
 
         JsonNode content =
-                jsonMapper.readTree(session.content());
+                jsonMapper.readTree(
+                        session.content()
+                );
 
-        String currentStepId = session.currentStepId();
+        String currentStepId =
+                session.currentStepId();
 
         if (currentStepId == null || currentStepId.isBlank()) {
             throw new IllegalStateException(
@@ -92,79 +160,36 @@ public class EventService {
             );
         }
 
-        String collectionName;
-        String unlockedField;
-        String usedField = null;
-
-        switch (eventName) {
-            case "MESSAGE_VIEWED" -> {
-                collectionName = "messages";
-                unlockedField = "unlockedMessageIds";
-            }
-            case "QUESTION_SELECTED" -> {
-                collectionName = "questions";
-                unlockedField = "unlockedQuestionIds";
-                usedField = "usedQuestionIds";
-            }
-            case "COMPUTER_PAGE_VIEWED" -> {
-                collectionName = "computerPages";
-                unlockedField = "unlockedPageIds";
-            }
-            case "PHONE_INQUIRY_SELECTED" -> {
-                collectionName = "phoneInquiries";
-                unlockedField = "unlockedInquiryIds";
-                usedField = "usedInquiryIds";
-            }
-            default -> throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "지원하지 않는 이벤트입니다."
-            );
-        }
-
-        JsonNode selectedItem = findById(
-                content.path(collectionName),
-                targetId
+        EventHandler handler = findHandler(
+                session.scenarioId(),
+                eventName
         );
 
-        if (!containsId(state.path(unlockedField), targetId)) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "아직 이용할 수 없는 콘텐츠입니다."
-            );
-        }
+        EventContext context = new EventContext(
+                session.scenarioId(),
+                eventName,
+                targetId,
+                content,
+                state
+        );
 
-        if (usedField != null) {
-            ArrayNode usedIds = getOrCreateArray(
-                    state, usedField
-            );
-
-            if (containsId(usedIds, targetId)) {
-                throw new ResponseStatusException(
-                        HttpStatus.CONFLICT,
-                        "이미 선택한 항목입니다."
-                );
-            }
-
-            usedIds.add(targetId);
-        }
-
-        JsonNode selectedVariants =
-                state.path("selectedVariants");
+        EventResult eventResult =
+                handler.handle(context);
 
         Map<String, Object> interaction =
-                createInteraction(
-                        eventName,
-                        selectedItem,
-                        selectedVariants
-                );
+                eventResult.interaction();
 
         List<Map<String, Object>> newlyUnlockedMessages =
                 new ArrayList<>();
 
+        JsonNode selectedVariants =
+                state.path("selectedVariants");
+
         for (JsonNode trigger : content.path("triggers")) {
 
             if (!"ACTION_COMPLETED".equals(
-                    trigger.path("conditionType").asText())) {
+                    trigger.path("conditionType").asText()
+            )) {
                 continue;
             }
 
@@ -188,7 +213,8 @@ public class EventService {
             JsonNode effects = trigger.path("effects");
 
             unlockIds(
-                    state, effects,
+                    state,
+                    effects,
                     "unlockedMessageIds",
                     "unlockMessageIds",
                     content,
@@ -197,7 +223,8 @@ public class EventService {
             );
 
             unlockIds(
-                    state, effects,
+                    state,
+                    effects,
                     "unlockedQuestionIds",
                     "unlockQuestionIds",
                     content,
@@ -206,7 +233,8 @@ public class EventService {
             );
 
             unlockIds(
-                    state, effects,
+                    state,
+                    effects,
                     "unlockedPageIds",
                     "unlockPageIds",
                     content,
@@ -215,7 +243,8 @@ public class EventService {
             );
 
             unlockIds(
-                    state, effects,
+                    state,
+                    effects,
                     "unlockedInquiryIds",
                     "unlockInquiryIds",
                     content,
@@ -242,11 +271,49 @@ public class EventService {
                 sessionId
         );
 
-        UUID eventId = UUID.randomUUID();
+        Map<String, Object> response =
+                new LinkedHashMap<>();
 
-        ObjectNode eventData = jsonMapper.createObjectNode();
+        response.put(
+                "eventId",
+                eventId.toString()
+        );
+
+        response.put(
+                "sequenceNo",
+                sequenceNo
+        );
+
+        response.put(
+                "currentStepId",
+                currentStepId
+        );
+
+        response.put(
+                "interaction",
+                interaction
+        );
+
+        response.put(
+                "unlockedMessageIds",
+                state.path("unlockedMessageIds")
+        );
+
+        response.put(
+                "newlyUnlockedMessages",
+                newlyUnlockedMessages
+        );
+
+        ObjectNode eventData =
+                jsonMapper.createObjectNode();
+
         eventData.put("eventName", eventName);
         eventData.put("targetId", targetId);
+
+        eventData.set(
+                "response",
+                jsonMapper.valueToTree(response)
+        );
 
         jdbcTemplate.update(
                 """
@@ -289,118 +356,39 @@ public class EventService {
                 sessionId
         );
 
-        Map<String, Object> response =
-                new LinkedHashMap<>();
-
-        response.put("eventId", eventId.toString());
-        response.put("sequenceNo", sequenceNo);
-        response.put("currentStepId", currentStepId);
-        response.put("interaction", interaction);
-        response.put(
-                "unlockedMessageIds",
-                state.path("unlockedMessageIds")
-        );
-        response.put(
-                "newlyUnlockedMessages",
-                newlyUnlockedMessages
-        );
-
         return response;
     }
 
-    private Map<String, Object> createInteraction(
-            String eventName,
-            JsonNode item,
-            JsonNode selectedVariants
+    private EventHandler findHandler(
+            String scenarioId,
+            String eventName
     ) {
-        Map<String, Object> result =
-                new LinkedHashMap<>();
+        EventHandler matchedHandler = null;
 
-        String id = item.path("id").asText();
-        result.put("id", id);
+        for (EventHandler handler : eventHandlers) {
 
-        switch (eventName) {
-            case "MESSAGE_VIEWED" -> {
-                result.put(
-                        "senderId",
-                        item.path("senderId").asText()
-                );
-                result.put(
-                        "channel",
-                        item.path("channel").asText()
-                );
-                result.put(
-                        "sentAt",
-                        item.path("sentAt").asText()
-                );
-                result.put(
-                        "text",
-                        selectedText(selectedVariants, id)
+            if (!handler.supports(scenarioId, eventName)) {
+                continue;
+            }
+
+            if (matchedHandler != null) {
+                throw new IllegalStateException(
+                        "이벤트 Handler가 중복 등록되었습니다: "
+                                + scenarioId + "/" + eventName
                 );
             }
-            case "QUESTION_SELECTED" -> {
-                result.put(
-                        "prompt",
-                        item.path("prompt").asText()
-                );
-                result.put(
-                        "responderId",
-                        item.path("responderId").asText()
-                );
-                result.put(
-                        "answer",
-                        selectedText(selectedVariants, id)
-                );
-            }
-            case "COMPUTER_PAGE_VIEWED" -> {
-                result.put(
-                        "title",
-                        item.path("title").asText()
-                );
-                result.put(
-                        "sourceLabel",
-                        item.path("sourceLabel").asText()
-                );
-                result.put(
-                        "body",
-                        item.path("body").asText()
-                );
-            }
-            case "PHONE_INQUIRY_SELECTED" -> {
-                result.put(
-                        "contactActorId",
-                        item.path("contactActorId").asText()
-                );
-                result.put(
-                        "questionText",
-                        item.path("questionText").asText()
-                );
-                result.put(
-                        "answer",
-                        selectedText(selectedVariants, id)
-                );
-            }
-            default -> throw new IllegalArgumentException(
-                    "지원하지 않는 이벤트"
+
+            matchedHandler = handler;
+        }
+
+        if (matchedHandler == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "지원하지 않는 이벤트입니다: " + eventName
             );
         }
 
-        return result;
-    }
-
-    private String selectedText(
-            JsonNode selectedVariants,
-            String id
-    ) {
-        JsonNode value = selectedVariants.path(id);
-
-        if (!value.isTextual()) {
-            throw new IllegalStateException(
-                    "세션의 선택된 문구가 없습니다: " + id
-            );
-        }
-
-        return value.asText();
+        return matchedHandler;
     }
 
     private void unlockIds(
@@ -412,11 +400,11 @@ public class EventService {
             JsonNode selectedVariants,
             List<Map<String, Object>> newlyUnlockedMessages
     ) {
-        ArrayNode unlocked = getOrCreateArray(
-                state, stateField
-        );
+        ArrayNode unlocked =
+                getOrCreateArray(state, stateField);
 
-        JsonNode ids = effects.path(effectField);
+        JsonNode ids =
+                effects.path(effectField);
 
         if (!ids.isArray()) {
             throw new IllegalStateException(
@@ -434,19 +422,66 @@ public class EventService {
             unlocked.add(id);
 
             if ("unlockedMessageIds".equals(stateField)) {
+
                 JsonNode message = findById(
-                        content.path("messages"), id
+                        content.path("messages"),
+                        id
                 );
 
-                newlyUnlockedMessages.add(
-                        createInteraction(
-                                "MESSAGE_VIEWED",
+                Map<String, Object> messageInteraction =
+                        createMessageInteraction(
                                 message,
                                 selectedVariants
-                        )
+                        );
+
+                newlyUnlockedMessages.add(
+                        messageInteraction
                 );
             }
         }
+    }
+
+    private Map<String, Object> createMessageInteraction(
+            JsonNode message,
+            JsonNode selectedVariants
+    ) {
+        String id = message.path("id").asText();
+
+        JsonNode selectedText =
+                selectedVariants.path(id);
+
+        if (!selectedText.isTextual()) {
+            throw new IllegalStateException(
+                    "세션의 선택된 문구가 없습니다: " + id
+            );
+        }
+
+        Map<String, Object> result =
+                new LinkedHashMap<>();
+
+        result.put("id", id);
+
+        result.put(
+                "senderId",
+                message.path("senderId").asText()
+        );
+
+        result.put(
+                "channel",
+                message.path("channel").asText()
+        );
+
+        result.put(
+                "sentAt",
+                message.path("sentAt").asText()
+        );
+
+        result.put(
+                "text",
+                selectedText.asText()
+        );
+
+        return result;
     }
 
     private ArrayNode getOrCreateArray(
@@ -472,7 +507,10 @@ public class EventService {
         return (ArrayNode) existing;
     }
 
-    private boolean containsId(JsonNode array, String id) {
+    private boolean containsId(
+            JsonNode array,
+            String id
+    ) {
         if (!array.isArray()) {
             return false;
         }
@@ -492,7 +530,9 @@ public class EventService {
     ) {
         if (items.isArray()) {
             for (JsonNode item : items) {
-                if (id.equals(item.path("id").asText())) {
+                if (id.equals(
+                        item.path("id").asText()
+                )) {
                     return item;
                 }
             }
@@ -504,10 +544,72 @@ public class EventService {
         );
     }
 
+    private Map<String, Object> restoreEventResponse(
+            UUID eventId,
+            String eventDataJson
+    ) {
+        JsonNode eventData =
+                jsonMapper.readTree(eventDataJson);
+
+        JsonNode savedResponse =
+                eventData.path("response");
+
+        if (!savedResponse.isObject()) {
+            throw new IllegalStateException(
+                    "기존 이벤트의 응답 데이터가 없습니다: "
+                            + eventId
+            );
+        }
+
+        Map<String, Object> response =
+                new LinkedHashMap<>();
+
+        response.put(
+                "eventId",
+                savedResponse.path("eventId").asText()
+        );
+
+        response.put(
+                "sequenceNo",
+                savedResponse.path("sequenceNo").asInt()
+        );
+
+        response.put(
+                "currentStepId",
+                savedResponse.path("currentStepId").asText()
+        );
+
+        response.put(
+                "interaction",
+                savedResponse.path("interaction")
+        );
+
+        response.put(
+                "unlockedMessageIds",
+                savedResponse.path("unlockedMessageIds")
+        );
+
+        response.put(
+                "newlyUnlockedMessages",
+                savedResponse.path("newlyUnlockedMessages")
+        );
+
+        return response;
+    }
+
     private record SessionData(
             String status,
+            String scenarioId,
             String currentStepId,
             String stateData,
             String content
+    ) {}
+
+    private record ExistingEvent(
+            UUID sessionId,
+            String eventName,
+            String targetId,
+            Long elapsedMs,
+            String eventData
     ) {}
 }

@@ -28,6 +28,7 @@ public class EventController {
             @Valid @RequestBody EventRequest request
     ) {
         return eventService.processEvent(
+                request.eventId(),
                 request.sessionId(),
                 request.eventName(),
                 request.targetId(),
@@ -36,6 +37,7 @@ public class EventController {
     }
 
     public record EventRequest(
+            @NotNull UUID eventId,
             @NotNull UUID sessionId,
             @NotBlank String eventName,
             @NotBlank String targetId,

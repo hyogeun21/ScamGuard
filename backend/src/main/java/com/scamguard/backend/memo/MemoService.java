@@ -1,7 +1,12 @@
 package com.scamguard.backend.memo;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -22,12 +27,15 @@ public class MemoService {
     @Transactional
     public Map<String, Object> saveMemo(
             UUID sessionId,
+            UUID eventId,
             String memoText
     ) {
 
         List<SessionInfo> sessions = jdbcTemplate.query(
                 """
-                SELECT ps.status, pss.current_step_id
+                SELECT
+                    ps.status,
+                    pss.current_step_id
                 FROM play_session_state pss
                 JOIN play_session ps
                     ON ps.session_id = pss.session_id
@@ -49,6 +57,57 @@ public class MemoService {
         }
 
         SessionInfo session = sessions.get(0);
+        String memoHash = createMemoHash(memoText);
+
+        List<ExistingMemoEvent> existingEvents =
+                jdbcTemplate.query(
+                        """
+                        SELECT
+                            session_id,
+                            event_name,
+                            event_data ->> 'memoHash' AS memo_hash,
+                            sequence_no
+                        FROM action_event
+                        WHERE event_id = ?
+                        """,
+                        (rs, rowNum) -> new ExistingMemoEvent(
+                                (UUID) rs.getObject("session_id"),
+                                rs.getString("event_name"),
+                                rs.getString("memo_hash"),
+                                rs.getInt("sequence_no")
+                        ),
+                        eventId
+                );
+
+        if (!existingEvents.isEmpty()) {
+
+            ExistingMemoEvent existing =
+                    existingEvents.get(0);
+
+            boolean sameRequest =
+                    sessionId.equals(existing.sessionId())
+                            && "NOTE_SAVED".equals(
+                            existing.eventName()
+                    )
+                            && Objects.equals(
+                            memoHash,
+                            existing.memoHash()
+                    );
+
+            if (!sameRequest) {
+                throw new ResponseStatusException(
+                        HttpStatus.CONFLICT,
+                        "동일 eventId에 다른 요청 데이터가 사용되었습니다."
+                );
+            }
+
+            return createSaveResponse(
+                    sessionId,
+                    memoText,
+                    eventId,
+                    existing.sequenceNo()
+            );
+        }
 
         if (!"IN_PROGRESS".equals(session.status())) {
             throw new ResponseStatusException(
@@ -80,8 +139,6 @@ public class MemoService {
 
         int sequenceNo = lastSequenceNo + 1;
 
-        UUID eventId = UUID.randomUUID();
-
         jdbcTemplate.update(
                 """
                 INSERT INTO action_event (
@@ -98,15 +155,31 @@ public class MemoService {
                 VALUES (
                     ?, ?, 'NOTE_SAVED',
                     'NOTEBOOK', ?, NULL,
-                    '{}'::jsonb, ?, NOW()
+                    jsonb_build_object('memoHash', ?),
+                    ?, NOW()
                 )
                 """,
                 eventId,
                 sessionId,
                 session.currentStepId(),
+                memoHash,
                 sequenceNo
         );
 
+        return createSaveResponse(
+                sessionId,
+                memoText,
+                eventId,
+                sequenceNo
+        );
+    }
+
+    private Map<String, Object> createSaveResponse(
+            UUID sessionId,
+            String memoText,
+            UUID eventId,
+            int sequenceNo
+    ) {
         return Map.of(
                 "sessionId", sessionId.toString(),
                 "memoText", memoText,
@@ -116,12 +189,33 @@ public class MemoService {
         );
     }
 
+    private String createMemoHash(String memoText) {
+        try {
+            MessageDigest digest =
+                    MessageDigest.getInstance("SHA-256");
+
+            byte[] hash = digest.digest(
+                    memoText.getBytes(StandardCharsets.UTF_8)
+            );
+
+            return HexFormat.of().formatHex(hash);
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException(
+                    "SHA-256 해시 생성에 실패했습니다.",
+                    e
+            );
+        }
+    }
+
     @Transactional(readOnly = true)
     public Map<String, Object> getMemo(UUID sessionId) {
 
         List<MemoInfo> memos = jdbcTemplate.query(
                 """
-                SELECT ps.status, pss.memo_text
+                SELECT
+                    ps.status,
+                    pss.memo_text
                 FROM play_session_state pss
                 JOIN play_session ps
                     ON ps.session_id = pss.session_id
@@ -164,5 +258,12 @@ public class MemoService {
     private record MemoInfo(
             String status,
             String memoText
+    ) {}
+
+    private record ExistingMemoEvent(
+            UUID sessionId,
+            String eventName,
+            String memoHash,
+            int sequenceNo
     ) {}
 }

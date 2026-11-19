@@ -1,6 +1,8 @@
 package com.scamguard.backend.scenario;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.UUID;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,15 +36,14 @@ public class JobCaseSeedLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-
+    public void run(String... args) {
         String[] files = {
-                "1_normal_easy.json",
-                "1_normal_medium.json",
-                "1_normal_hard.json",
-                "1_scam_easy.json",
-                "1_scam_medium.json",
-                "1_scam_hard.json"
+                "2_normal_easy.json",
+                "2_normal_medium.json",
+                "2_normal_hard.json",
+                "2_scam_easy.json",
+                "2_scam_medium.json",
+                "2_scam_hard.json"
         };
 
         transactionTemplate.executeWithoutResult(status -> {
@@ -56,11 +57,9 @@ public class JobCaseSeedLoader implements CommandLineRunner {
                 }
             }
         });
-
     }
 
     private void updateCase(String filename) throws Exception {
-
         ClassPathResource resource = new ClassPathResource(
                 "seed/job/" + filename
         );
@@ -76,49 +75,41 @@ public class JobCaseSeedLoader implements CommandLineRunner {
 
         JsonNode root = jsonMapper.readTree(text);
 
-        String scenarioId =
-                root.path("scenarioId").asText();
-
-        String caseType =
-                root.path("caseType").asText();
-
-        String difficulty =
-                root.path("difficulty").asText();
+        String scenarioId = root.path("scenarioId").asText();
+        String caseType = root.path("caseType").asText();
+        String difficulty = root.path("difficulty").asText();
 
         JsonNode content = root.path("content");
-        JsonNode evaluationRules =
-                root.path("evaluationRules");
+        JsonNode evaluationRules = root.path("evaluationRules");
+
+        String companyName = content.path("scenarioData")
+                .path("jobPosting")
+                .path("companyName")
+                .asText();
 
         if (!"JOB".equals(scenarioId)
-                || content.isMissingNode()
-                || evaluationRules.isMissingNode()
+                || !("NORMAL".equals(caseType)
+                || "SCAM".equals(caseType))
+                || !("EASY".equals(difficulty)
+                || "MEDIUM".equals(difficulty)
+                || "HARD".equals(difficulty))
                 || !content.isObject()
-                || !evaluationRules.isObject()) {
+                || !evaluationRules.isObject()
+                || !"한빛IT솔루션".equals(companyName)) {
+
             throw new IllegalArgumentException(
-                    "JSON 구조가 올바르지 않습니다: " + filename
+                    "JSON 구조 또는 기업 정보가 올바르지 않습니다: "
+                            + filename
             );
         }
 
-        Integer count = jdbcTemplate.queryForObject(
-                """
-                SELECT COUNT(*)
-                FROM scenario_case
-                WHERE scenario_id = ?
-                  AND case_type = ?
-                  AND difficulty = ?
-                """,
-                Integer.class,
+        UUID caseId = findCaseId(
+                filename,
                 scenarioId,
                 caseType,
-                difficulty
+                difficulty,
+                companyName
         );
-
-        if (count == null || count != 1) {
-            throw new IllegalStateException(
-                    "일치하는 사례가 정확히 1개여야 합니다: "
-                            + filename + " (현재 " + count + "개)"
-            );
-        }
 
         int updated = jdbcTemplate.update(
                 """
@@ -126,22 +117,83 @@ public class JobCaseSeedLoader implements CommandLineRunner {
                 SET content = CAST(? AS jsonb),
                     evaluation_rules = CAST(? AS jsonb),
                     is_active = true
-                WHERE scenario_id = ?
-                  AND case_type = ?
-                  AND difficulty = ?
+                WHERE case_id = ?
                 """,
                 content.toString(),
                 evaluationRules.toString(),
+                caseId
+        );
+
+        if (updated != 1) {
+            throw new IllegalStateException(
+                    "업데이트된 행 개수 오류: "
+                            + filename
+                            + " (현재 " + updated + "개)"
+            );
+        }
+    }
+
+    private UUID findCaseId(
+            String filename,
+            String scenarioId,
+            String caseType,
+            String difficulty,
+            String companyName
+    ) {
+
+        List<UUID> registeredIds = jdbcTemplate.query(
+                """
+                SELECT case_id
+                FROM scenario_case
+                WHERE scenario_id = ?
+                  AND case_type = ?
+                  AND difficulty = ?
+                  AND content #>> '{scenarioData,jobPosting,companyName}' = ?
+                """,
+                (rs, rowNum) ->
+                        rs.getObject("case_id", UUID.class),
+                scenarioId,
+                caseType,
+                difficulty,
+                companyName
+        );
+
+        if (registeredIds.size() == 1) {
+            return registeredIds.get(0);
+        }
+
+        if (registeredIds.size() > 1) {
+            throw new IllegalStateException(
+                    "같은 기업의 사례가 중복 등록되어 있습니다: "
+                            + filename
+            );
+        }
+
+        List<UUID> emptyIds = jdbcTemplate.query(
+                """
+                SELECT case_id
+                FROM scenario_case
+                WHERE scenario_id = ?
+                  AND case_type = ?
+                  AND difficulty = ?
+                  AND content = '{}'::jsonb
+                  AND evaluation_rules = '{}'::jsonb
+                """,
+                (rs, rowNum) ->
+                        rs.getObject("case_id", UUID.class),
                 scenarioId,
                 caseType,
                 difficulty
         );
 
-        if (updated != 1) {
+        if (emptyIds.size() != 1) {
             throw new IllegalStateException(
-                    "업데이트된 행 개수 오류: " + filename
+                    "빈 사례가 정확히 1개여야 합니다: "
+                            + filename
+                            + " (현재 " + emptyIds.size() + "개)"
             );
         }
 
+        return emptyIds.get(0);
     }
 }
