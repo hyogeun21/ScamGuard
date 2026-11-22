@@ -1,4 +1,3 @@
-
 package com.scamguard.backend.session;
 
 import java.util.Map;

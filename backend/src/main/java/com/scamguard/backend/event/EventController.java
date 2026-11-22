@@ -32,7 +32,8 @@ public class EventController {
                 request.sessionId(),
                 request.eventName(),
                 request.targetId(),
-                request.elapsedMs()
+                request.elapsedMs(),
+                request.selectedResult()
         );
     }
 
@@ -41,6 +42,7 @@ public class EventController {
             @NotNull UUID sessionId,
             @NotBlank String eventName,
             @NotBlank String targetId,
-            @Min(0) Long elapsedMs
+            @Min(0) Long elapsedMs,
+            String selectedResult
     ) {}
 }

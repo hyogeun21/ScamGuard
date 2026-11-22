@@ -1,0 +1,332 @@
+{
+  "scenarioId": "JOB",
+  "caseType": "NORMAL",
+  "difficulty": "HARD",
+  "content": {
+    "actors": [
+      {
+        "id": "JOB_ACTOR_001",
+        "displayName": "다온커머스 채용담당자",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "JOB_ACTOR_002",
+        "displayName": "다온커머스 공식 인사팀",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "JOB_STEP_001",
+      "unlockedMessageIds": [
+        "JOB_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "JOB_Q_001",
+        "JOB_Q_002",
+        "JOB_Q_003",
+        "JOB_Q_004"
+      ],
+      "unlockedPageIds": [
+        "JOB_PAGE_001",
+        "JOB_PAGE_002",
+        "JOB_PAGE_003",
+        "JOB_PAGE_004"
+      ],
+      "unlockedInquiryIds": [
+        "JOB_CALL_001",
+        "JOB_CALL_002",
+        "JOB_CALL_003",
+        "JOB_CALL_004"
+      ]
+    },
+    "messages": [
+      {
+        "id": "JOB_MSG_001",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:30",
+        "textVariants": [
+          "안녕하세요. 다온커머스 채용팀입니다. 고객상담 및 주문관리 담당자 서류전형에 합격하셨습니다. 12월 2일 오전 10시 화상 면접이 예정되어 있으며 공식 채용 페이지에서 안내를 확인하실 수 있습니다.",
+          "다온커머스 인사팀에서 안내드립니다. 재택 고객상담 및 주문관리 담당자 채용 서류 심사 결과 면접 대상자로 선정되셨습니다. 화상 면접은 12월 2일 오전 10시에 진행됩니다.",
+          "안녕하세요. 다온커머스 채용담당자입니다. 지원하신 고객상담 및 주문관리 직무의 서류전형 합격을 안내드립니다. 화상 면접은 12월 2일 오전 10시입니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      },
+      {
+        "id": "JOB_MSG_002",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "14:00",
+        "textVariants": [
+          "다온커머스 채용팀입니다. 12월 2일 화상 면접 결과 최종 합격하셨습니다. 근로계약이 완료되면 재택근무용 상담 시스템을 설정하며, 회사 IT 운영팀이 공식 지원 절차를 안내할 예정입니다.",
+          "최종 합격을 축하드립니다. 입사 서류는 공식 채용 시스템에 제출해 주세요. 재택근무 환경 설정을 위해 IT 운영팀의 공식 기술 지원 안내를 받으실 수 있습니다.",
+          "안녕하세요. 다온커머스 채용담당자입니다. 화상 면접 결과 최종 합격하셨습니다. 회사가 승인한 재택근무 환경 설정과 보안 점검 절차는 공식 홈페이지에서 확인 가능합니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      },
+      {
+        "id": "JOB_MSG_003",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "14:10",
+        "textVariants": [
+          "재택근무 환경 설정 안내입니다. 회사 IT 운영팀은 공식 업무 시스템에 게시된 승인 도구 목록과 예약된 지원 일정을 통해서만 원격 지원을 진행합니다. 안내된 도구의 이름과 지원 예약 내역을 공식 페이지에서 확인한 후 진행해 주세요. 개인 메신저로 전달된 별도 설치 파일은 사용하지 않습니다.",
+          "고객상담 시스템 사용 준비를 위해 보안 점검이 필요합니다. 다온커머스 공식 업무 포털에서 승인된 지원 프로그램과 IT 운영팀의 예약 내역을 확인할 수 있습니다. 공식 목록에 없는 프로그램이나 개별 전달 파일은 설치하지 마세요.",
+          "입사자 재택근무 설정 안내입니다. IT 운영팀의 원격 지원은 회사 공식 포털에 등록된 승인 도구와 일정에 따라 진행됩니다. 지원 전 공식 인사팀에 확인할 수 있으며 개인 계정 비밀번호나 인증번호를 요청하지 않습니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "JOB_Q_001",
+        "prompt": "재택근무 환경 설정을 위한 원격 지원은 어떻게 진행되나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "회사가 승인한 업무 포털에서 IT 지원을 예약하고 승인 도구 목록을 확인한 뒤 진행합니다. 일정은 제가 개별적으로 알려드릴 수 있습니다.",
+          "공식 업무 시스템의 IT 지원 예약 내역을 확인해 주세요. 원격 지원은 회사 승인 프로그램을 통해서만 진행합니다.",
+          "IT 운영팀에서 공식 포털에 등록된 일정과 승인 도구로 지원합니다. 개인 대화창으로 별도 파일을 전달하지 않습니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_002",
+        "prompt": "공식 승인 프로그램과 지원 예약은 어디에서 확인할 수 있나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "다온커머스 공식 업무 포털의 IT 지원 메뉴에서 승인 도구와 예약된 담당자를 확인할 수 있습니다.",
+          "공식 업무 시스템에 등록된 지원 예약과 승인 프로그램 목록을 확인하시면 됩니다.",
+          "회사 공식 포털에 있는 IT 지원 안내를 확인해 주세요. 미등록 프로그램은 설치하지 않으셔도 됩니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_003",
+        "prompt": "별도 안내받은 프로그램과 담당자 신원을 공식 인사팀에 확인할 수 있나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "네. 공식 인사팀과 IT 운영팀을 통해 담당자 신원, 지원 예약, 승인 프로그램을 확인하셔도 됩니다.",
+          "물론입니다. 회사 공식 연락처에서 IT 지원 담당자와 도구 승인 여부를 확인할 수 있습니다.",
+          "네. 지원을 시작하기 전 회사 공식 인사팀에 예약 내용과 프로그램 승인 여부를 문의해 주세요."
+        ]
+      },
+      {
+        "id": "JOB_Q_004",
+        "prompt": "개인 메신저로 보내는 별도 원격접속 파일을 설치해야 하나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "아니요. 개인 메신저로 받은 별도 설치 파일은 사용하지 않습니다. 공식 업무 포털에 등록된 승인 도구만 이용하세요.",
+          "별도 파일은 설치할 필요가 없습니다. 회사가 승인한 도구만 공식 포털에서 확인하고 사용하세요.",
+          "회사 정책상 개인 대화창으로 받은 원격접속 프로그램은 설치하지 않습니다. 공식 예약과 승인 도구를 먼저 확인해 주세요."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "JOB_PAGE_001",
+        "pageType": "DETAIL",
+        "title": "채용 공고",
+        "sourceLabel": "다온커머스 공식 채용 홈페이지",
+        "body": "기업명: 다온커머스\n모집직무: 고객상담 및 주문관리 담당자\n근무기간: 1년 계약직\n고용형태: 계약직\n근무형태: 재택근무, 주 5일 09:00~18:00(휴게시간 1시간)\n급여조건: 월 240만 원\n주요업무: 고객 문의 응대, 주문 및 배송 내역 확인, 교환·반품 접수, 주문 오류 처리"
+      },
+      {
+        "id": "JOB_PAGE_002",
+        "pageType": "GENERAL",
+        "title": "기업 홈페이지",
+        "sourceLabel": "다온커머스 공식 홈페이지",
+        "body": "기업소개: 생활용품과 잡화를 판매하는 온라인 쇼핑몰을 운영하며, 고객상담 및 주문·배송 관리 서비스를 제공하는 전자상거래 기업\n주요사업: 온라인 쇼핑몰 운영, 생활용품 및 잡화 판매, 고객상담 및 주문·배송 관리\n공식연락처: 000-0000-0000\n채용 정보: 고객상담 및 주문관리 담당자를 재택근무 방식으로 모집하며, 입사 절차와 원격 지원 정책은 공식 채용 홈페이지에서 확인 가능"
+      },
+      {
+        "id": "JOB_PAGE_003",
+        "pageType": "OFFICIAL",
+        "title": "채용 및 재택근무 준비 절차",
+        "sourceLabel": "다온커머스 공식 채용 홈페이지",
+        "body": "서류 접수: 회사 공식 채용 페이지를 통해 진행\n화상 면접: 서류전형 합격자 대상 고객상담 역량 확인\n최종 합격: 공식 채용 기록 및 인사팀 확인 가능\n근로계약: 회사 승인 채용 시스템에서 진행\n재택근무 준비: 계약 완료 후 IT 운영팀이 공식 업무 포털을 통해 계정 및 보안 설정을 지원\n기술 지원: 승인된 도구와 예약 일정에 따라 원격 지원 가능"
+      },
+      {
+        "id": "JOB_PAGE_004",
+        "pageType": "OFFICIAL",
+        "title": "재택근무 보안 및 원격 지원 정책",
+        "sourceLabel": "다온커머스 공식 채용 홈페이지",
+        "body": "지원 대상: 근로계약 및 입사 절차를 완료한 재택근무 담당자\n공식 원격 지원 경로: 다온커머스 업무 포털에 등록된 IT 지원 예약\n승인 프로그램: 공식 업무 포털의 승인 도구 목록에서 확인 가능한 프로그램만 사용\n지원 담당자: 예약 내역에 등록된 IT 운영팀 담당자\n개별 연락: 채용담당자가 지원 일정을 알릴 수 있으나 별도 프로그램 설치 파일을 개인 메신저로 전달하지 않음\n금지 사항: 개인 계정 비밀번호·인증번호 제공 및 미승인 도구 설치\n확인 방법: 공식 인사팀 또는 IT 운영팀을 통해 지원 일정과 프로그램 승인 여부 확인"
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "JOB_CALL_001",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "현재 재택근무 고객상담 및 주문관리 담당자를 실제로 채용하고 있나요?",
+        "answerVariants": [
+          "네. 현재 1년 계약직으로 재택근무 고객상담 및 주문관리 담당자를 채용하고 있습니다.",
+          "맞습니다. 공식 채용 페이지에 해당 직무가 등록되어 있습니다.",
+          "네. 채용 공고와 화상 면접 절차가 공식적으로 진행되고 있습니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_002",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "연락한 채용담당자와 원격 지원 일정은 회사에서 확인할 수 있나요?",
+        "answerVariants": [
+          "네. 해당 연락은 공식 채용담당자의 안내이며 IT 지원 일정도 회사 업무 포털의 예약 내역과 일치합니다.",
+          "채용담당자의 신원이 확인되며 원격 지원 예약 또한 회사에서 승인한 내용입니다.",
+          "맞습니다. 공식 IT 지원 예약이 확인되며 안내 담당자도 등록된 직원입니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_003",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "원격 지원 프로그램은 반드시 공식 포털의 승인 목록에 있어야 하나요?",
+        "answerVariants": [
+          "네. IT 운영팀이 승인한 프로그램만 공식 업무 포털에 등록해 사용합니다.",
+          "맞습니다. 공식 포털의 승인 도구 목록에서 확인되지 않는 원격접속 프로그램은 설치하면 안 됩니다.",
+          "공식 지원 도구와 예약 정보는 업무 포털에서 확인할 수 있습니다. 개인 대화창으로 전달된 미등록 파일은 승인 대상이 아닙니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_004",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "안내받은 원격 지원 예약과 프로그램 사용 절차가 모두 승인된 것인가요?",
+        "answerVariants": [
+          "네. 안내받은 지원 예약과 공식 포털에 등록된 프로그램은 승인된 절차입니다. 별도의 설치 파일은 요청하지 않았습니다.",
+          "정상적인 원격 지원 예약이며 회사 승인 도구만 이용하는 방식입니다. 개인 계정 비밀번호나 별도 프로그램은 필요하지 않습니다.",
+          "맞습니다. 공식 업무 포털에 등록된 예약 및 승인 도구를 이용하면 됩니다. 개인 대화창의 별도 파일은 설치하지 마세요."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "JOB_EVD_001",
+        "sourceType": "MESSAGE",
+        "sourceId": "JOB_MSG_003",
+        "fact": "공식 채용담당자가 업무 포털에 등록된 IT 지원 예약과 승인 도구만 사용하도록 안내했다."
+      },
+      {
+        "id": "JOB_EVD_002",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "JOB_PAGE_004",
+        "fact": "다온커머스 공식 정책에 승인된 IT 지원 예약과 도구 목록의 확인 방법이 명시되어 있다."
+      },
+      {
+        "id": "JOB_EVD_003",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "JOB_CALL_002",
+        "fact": "공식 인사팀에서 담당자 신원과 IT 지원 일정이 회사 기록과 일치함을 확인했다."
+      },
+      {
+        "id": "JOB_EVD_004",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "JOB_CALL_004",
+        "fact": "공식 인사팀에서 안내된 정상 지원 절차와 승인 도구 사용을 확인했다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "JOB_STEP_001",
+        "description": "화상 면접 일정 안내 메시지를 받은 상태"
+      },
+      {
+        "id": "JOB_STEP_002",
+        "description": "최종 합격 및 IT 지원 안내 메시지가 공개된 상태"
+      },
+      {
+        "id": "JOB_STEP_003",
+        "description": "공식 IT 지원 예약과 승인된 보안 도구 안내가 공개된 상태"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "JOB_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "JOB_MSG_001",
+          "stepId": "JOB_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "JOB_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "nextStepId": "JOB_STEP_002"
+        }
+      },
+      {
+        "id": "JOB_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "JOB_MSG_002",
+          "stepId": "JOB_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "JOB_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "nextStepId": "JOB_STEP_003"
+        }
+      }
+    ],
+    "scenarioData": {
+      "jobPosting": {
+        "companyName": "다온커머스",
+        "companyDescription": "생활용품과 잡화를 판매하는 온라인 쇼핑몰을 운영하며, 고객상담 및 주문·배송 관리 서비스를 제공하는 전자상거래 기업",
+        "position": "고객상담 및 주문관리 담당자",
+        "employmentType": "계약직",
+        "workPeriod": "1년 계약직",
+        "workConditions": "재택근무, 주 5일, 09:00~18:00(휴게시간 1시간), 월 240만 원",
+        "mainDuties": "고객 문의 응대, 주문 및 배송 내역 확인, 교환·반품 접수, 주문 오류 처리",
+        "recruitmentProcess": "서류 접수 → 화상 면접 → 최종 합격 → 근로계약",
+        "officialContact": "000-0000-0000"
+      }
+    },
+    "preventionTips": [
+      "재택근무용 원격 지원은 회사 공식 업무 포털에 등록된 예약과 승인 도구를 통해 진행하는지 확인하세요.",
+      "개별 연락을 받더라도 담당자 신원과 지원 예약 및 도구 승인 내역을 공식 인사팀을 통해 검증하세요.",
+      "회사 정책을 확인해 승인된 프로그램만 사용하고 비밀번호나 로그인 인증번호를 타인에게 전달하지 마세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "OFFICIAL_INFO_VIEWED",
+        "targetId": "JOB_PAGE_004",
+        "score": 10
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "JOB_CALL_002",
+        "score": 10
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "JOB_CALL_004",
+        "score": 20
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_OFFICIAL": 30,
+      "VERIFY_OFFICIAL": 20,
+      "STOP_AND_REPORT": 0,
+      "SUBMIT_UNVERIFIED": 0
+    }
+  }
+}

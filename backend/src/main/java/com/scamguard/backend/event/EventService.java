@@ -25,6 +25,200 @@ public class EventService {
     private final JsonMapper jsonMapper;
     private final List<EventHandler> eventHandlers;
 
+
+    private void applySettlementUpdates(
+            UUID sessionId,
+            String eventName,
+            String targetId,
+            JsonNode effects,
+            ObjectNode state
+    ) {
+        JsonNode updates = effects.path("settlementUpdates");
+
+        if (updates.isMissingNode()) {
+            return;
+        }
+
+        if (!updates.isArray()) {
+            throw new IllegalStateException(
+                    "정산 변경 데이터가 배열이 아닙니다."
+            );
+        }
+
+        for (JsonNode update : updates) {
+
+            String settlementId =
+                    update.path("settlementId").asText();
+
+            String settlementStatus =
+                    update.path("settlementStatus").asText();
+
+            JsonNode paidAmountNode =
+                    update.path("paidAmount");
+
+            JsonNode requiredCorrectResult =
+                    update.path("requiredCorrectResult");
+
+            if (settlementId.isBlank()
+                    || !List.of(
+                    "PENDING",
+                    "AVAILABLE",
+                    "PAID",
+                    "BLOCKED"
+            ).contains(settlementStatus)
+                    || !paidAmountNode.isIntegralNumber()
+                    || !paidAmountNode.canConvertToInt()
+                    || paidAmountNode.asInt() < 0) {
+
+                throw new IllegalStateException(
+                        "정산 변경 데이터가 올바르지 않습니다: "
+                                + settlementId
+                );
+            }
+
+            if (!requiredCorrectResult.isMissingNode()) {
+
+                if (!requiredCorrectResult.isBoolean()) {
+                    throw new IllegalStateException(
+                            "requiredCorrectResult는 boolean이어야 합니다."
+                    );
+                }
+
+                if (!"WORK_TASK_COMPLETED".equals(eventName)) {
+                    throw new IllegalStateException(
+                            "업무 검수 이벤트가 아닌 곳에서 정답 조건을 사용했습니다."
+                    );
+                }
+
+                JsonNode taskResult = state
+                        .path("completedTaskResults")
+                        .path(targetId);
+
+                JsonNode correctNode =
+                        taskResult.path("correct");
+
+                if (!correctNode.isBoolean()) {
+                    throw new IllegalStateException(
+                            "검수 정답 기록을 찾을 수 없습니다: "
+                                    + targetId
+                    );
+                }
+
+                boolean actualCorrect =
+                        correctNode.asBoolean();
+
+                boolean expectedCorrect =
+                        requiredCorrectResult.asBoolean();
+
+                if (actualCorrect != expectedCorrect) {
+                    continue;
+                }
+            }
+
+            int updatedRows = jdbcTemplate.update(
+                    """
+                    UPDATE session_settlement
+                    SET settlement_status = ?,
+                        paid_amount = ?,
+                        updated_at = now()
+                    WHERE session_id = ?
+                      AND settlement_id = ?
+                      AND task_id = ?
+                    """,
+                    settlementStatus,
+                    paidAmountNode.asInt(),
+                    sessionId,
+                    settlementId,
+                    targetId
+            );
+
+            if (updatedRows != 1) {
+                throw new IllegalStateException(
+                        "정산 변경 대상을 찾을 수 없습니다: "
+                                + settlementId
+                );
+            }
+        }
+    }
+
+
+    private void applyWithdrawalPolicyUpdate(
+            JsonNode effects,
+            ObjectNode state
+    ) {
+        JsonNode policyUpdate =
+                effects.path("withdrawalPolicyUpdate");
+
+        if (policyUpdate.isMissingNode()) {
+            return;
+        }
+
+        if (!policyUpdate.isObject()) {
+            throw new IllegalStateException(
+                    "출금 정책 변경 데이터가 올바르지 않습니다."
+            );
+        }
+
+        JsonNode existingPolicy =
+                state.path("withdrawalPolicy");
+
+        if (!existingPolicy.isObject()) {
+            throw new IllegalStateException(
+                    "현재 출금 정책이 존재하지 않습니다."
+            );
+        }
+
+        ObjectNode policy =
+                (ObjectNode) existingPolicy;
+
+        policy.setAll((ObjectNode) policyUpdate);
+    }
+
+
+    private List<Map<String, Object>> getSessionSettlements(
+            UUID sessionId
+    ) {
+        return jdbcTemplate.query(
+                """
+                SELECT
+                    settlement_id,
+                    task_id,
+                    settlement_status,
+                    paid_amount
+                FROM session_settlement
+                WHERE session_id = ?
+                ORDER BY settlement_id
+                """,
+                (rs, rowNum) -> {
+                    Map<String, Object> settlement =
+                            new LinkedHashMap<>();
+
+                    settlement.put(
+                            "id",
+                            rs.getString("settlement_id")
+                    );
+
+                    settlement.put(
+                            "taskId",
+                            rs.getString("task_id")
+                    );
+
+                    settlement.put(
+                            "settlementStatus",
+                            rs.getString("settlement_status")
+                    );
+
+                    settlement.put(
+                            "paidAmount",
+                            rs.getInt("paid_amount")
+                    );
+
+                    return settlement;
+                },
+                sessionId
+        );
+    }
+
     public EventService(
             JdbcTemplate jdbcTemplate,
             JsonMapper jsonMapper,
@@ -41,7 +235,8 @@ public class EventService {
             UUID sessionId,
             String eventName,
             String targetId,
-            Long elapsedMs
+            Long elapsedMs,
+            String selectedResult
     ) {
         List<SessionData> sessions = jdbcTemplate.query(
                 """
@@ -112,14 +307,30 @@ public class EventService {
         if (!existingEvents.isEmpty()) {
             ExistingEvent existing = existingEvents.get(0);
 
+            JsonNode previousEventData = jsonMapper.readTree(
+                    existing.eventData()
+            );
+
+            JsonNode previousSelectedResult =
+                    previousEventData.path("selectedResult");
+
+            String savedSelectedResult =
+                    previousSelectedResult.isMissingNode()
+                            ? null
+                            : previousSelectedResult.asText();
+
             boolean sameRequest =
                     sessionId.equals(existing.sessionId())
                             && eventName.equals(existing.eventName())
                             && targetId.equals(existing.targetId())
                             && Objects.equals(
-                            elapsedMs,
-                            existing.elapsedMs()
-                    );
+                                    elapsedMs,
+                                    existing.elapsedMs()
+                            )
+                            && Objects.equals(
+                                    selectedResult,
+                                    savedSelectedResult
+                            );
 
             if (!sameRequest) {
                 throw new ResponseStatusException(
@@ -166,9 +377,11 @@ public class EventService {
         );
 
         EventContext context = new EventContext(
+                sessionId,
                 session.scenarioId(),
                 eventName,
                 targetId,
+                selectedResult,
                 content,
                 state
         );
@@ -212,6 +425,21 @@ public class EventService {
 
             JsonNode effects = trigger.path("effects");
 
+            if ("SIDE".equals(session.scenarioId())) {
+                applySettlementUpdates(
+                        sessionId,
+                        eventName,
+                        targetId,
+                        effects,
+                        state
+                );
+
+                applyWithdrawalPolicyUpdate(
+                        effects,
+                        state
+                );
+            }
+
             unlockIds(
                     state,
                     effects,
@@ -251,6 +479,18 @@ public class EventService {
                     selectedVariants,
                     newlyUnlockedMessages
             );
+
+            if ("SIDE".equals(session.scenarioId())) {
+                unlockIds(
+                        state,
+                        effects,
+                        "unlockedTaskIds",
+                        "unlockTaskIds",
+                        content,
+                        selectedVariants,
+                        newlyUnlockedMessages
+                );
+            }
 
             String nextStepId =
                     effects.path("nextStepId").asText();
@@ -304,11 +544,32 @@ public class EventService {
                 newlyUnlockedMessages
         );
 
+        if ("SIDE".equals(session.scenarioId())) {
+            response.put(
+                    "unlockedTaskIds",
+                    state.path("unlockedTaskIds")
+            );
+
+            response.put(
+                    "settlements",
+                    getSessionSettlements(sessionId)
+            );
+
+            response.put(
+                    "withdrawalPolicy",
+                    state.path("withdrawalPolicy")
+            );
+        }
+
         ObjectNode eventData =
                 jsonMapper.createObjectNode();
 
         eventData.put("eventName", eventName);
         eventData.put("targetId", targetId);
+
+        if (selectedResult != null) {
+            eventData.put("selectedResult", selectedResult);
+        }
 
         eventData.set(
                 "response",
@@ -406,9 +667,14 @@ public class EventService {
         JsonNode ids =
                 effects.path(effectField);
 
+        if (ids.isMissingNode()) {
+            return;
+        }
+
         if (!ids.isArray()) {
             throw new IllegalStateException(
                     "트리거 해금 정보가 올바르지 않습니다."
+                            + effectField
             );
         }
 
@@ -593,6 +859,27 @@ public class EventService {
                 "newlyUnlockedMessages",
                 savedResponse.path("newlyUnlockedMessages")
         );
+
+        if (savedResponse.has("unlockedTaskIds")) {
+            response.put(
+                    "unlockedTaskIds",
+                    savedResponse.path("unlockedTaskIds")
+            );
+        }
+
+        if (savedResponse.has("settlements")) {
+            response.put(
+                    "settlements",
+                    savedResponse.path("settlements")
+            );
+        }
+
+        if (savedResponse.has("withdrawalPolicy")) {
+            response.put(
+                    "withdrawalPolicy",
+                    savedResponse.path("withdrawalPolicy")
+            );
+        }
 
         return response;
     }

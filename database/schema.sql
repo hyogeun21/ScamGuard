@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS action_event
 (
   event_id    uuid        NOT NULL,
@@ -69,7 +68,7 @@ CREATE TABLE IF NOT EXISTS play_session_state
   session_id      uuid        NOT NULL,
   current_step_id varchar    ,
   state_data      jsonb       NOT NULL,
-  memo_text       TEXT        NOT NULL DEFAULT '',
+  memo_txt        text        NOT NULL DEFAULT '',
   updated_at      timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (session_id)
 );
@@ -93,6 +92,17 @@ CREATE TABLE IF NOT EXISTS scenario_case
   evaluation_rules jsonb   NOT NULL,
   is_active        boolean NOT NULL DEFAULT true,
   PRIMARY KEY (case_id)
+);
+
+CREATE TABLE IF NOT EXISTS session_settlement
+(
+  session_id        uuid        NOT NULL,
+  settlement_id     varchar     NOT NULL,
+  task_id           varchar     NOT NULL,
+  settlement_status varchar     NOT NULL,
+  paid_amount       integer     NOT NULL DEFAULT 0,
+  updated_at        timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY (session_id, settlement_id)
 );
 
 ALTER TABLE scenario_case DROP CONSTRAINT IF EXISTS FK_scenario_TO_scenario_case;
@@ -143,6 +153,15 @@ ALTER TABLE play_session_state
     FOREIGN KEY (session_id)
     REFERENCES play_session (session_id)
     ON DELETE CASCADE;
+
+ALTER TABLE session_settlement
+DROP CONSTRAINT IF EXISTS FK_play_session_TO_session_settlement;
+
+ALTER TABLE session_settlement
+ADD CONSTRAINT FK_play_session_TO_session_settlement
+FOREIGN KEY (session_id)
+REFERENCES play_session (session_id)
+ON DELETE CASCADE;
 
 CREATE UNIQUE INDEX IF NOT EXISTS uq_action_event_session_sequence
   ON action_event (session_id ASC, sequence_no ASC);

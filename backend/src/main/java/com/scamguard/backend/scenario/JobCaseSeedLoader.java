@@ -43,7 +43,13 @@ public class JobCaseSeedLoader implements CommandLineRunner {
                 "2_normal_hard.json",
                 "2_scam_easy.json",
                 "2_scam_medium.json",
-                "2_scam_hard.json"
+                "2_scam_hard.json",
+                "3_normal_easy.json",
+                "3_normal_medium.json",
+                "3_normal_hard.json",
+                "3_scam_easy.json",
+                "3_scam_medium.json",
+                "3_scam_hard.json"
         };
 
         transactionTemplate.executeWithoutResult(status -> {
@@ -87,6 +93,10 @@ public class JobCaseSeedLoader implements CommandLineRunner {
                 .path("companyName")
                 .asText();
 
+        String expectedCompanyName = filename.startsWith("2_")
+                ? "한빛IT솔루션"
+                : "다온커머스";
+
         if (!"JOB".equals(scenarioId)
                 || !("NORMAL".equals(caseType)
                 || "SCAM".equals(caseType))
@@ -95,7 +105,10 @@ public class JobCaseSeedLoader implements CommandLineRunner {
                 || "HARD".equals(difficulty))
                 || !content.isObject()
                 || !evaluationRules.isObject()
-                || !"한빛IT솔루션".equals(companyName)) {
+                || !expectedCompanyName.equals(companyName)
+                || !filename.equals(filename.substring(0, 2)
+                        + caseType.toLowerCase()
+                        + "_" + difficulty.toLowerCase() + ".json")) {
 
             throw new IllegalArgumentException(
                     "JSON 구조 또는 기업 정보가 올바르지 않습니다: "

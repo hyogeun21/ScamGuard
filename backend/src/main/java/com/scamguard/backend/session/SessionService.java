@@ -1,4 +1,3 @@
-
 package com.scamguard.backend.session;
 
 import java.util.ArrayList;
@@ -128,6 +127,58 @@ public class SessionService {
 
         state.set("selectedVariants", selectedVariants);
 
+        JsonNode scenarioData =
+                content.path("scenarioData");
+
+        JsonNode jobPosting = null;
+        JsonNode sideJobPosting = null;
+
+        if ("JOB".equals(scenarioId)) {
+
+            jobPosting = scenarioData.path("jobPosting");
+
+            if (!jobPosting.isObject()) {
+                throw new IllegalStateException(
+                        "채용 공고 데이터가 없습니다."
+                );
+            }
+        }
+
+        if ("SIDE".equals(scenarioId)) {
+
+            sideJobPosting =
+                    scenarioData.path("sideJobPosting");
+
+            if (!sideJobPosting.isObject()) {
+                throw new IllegalStateException(
+                        "재택부업 공고 데이터가 없습니다."
+                );
+            }
+
+            JsonNode unlockedTaskIds =
+                    state.path("unlockedTaskIds");
+
+            JsonNode withdrawalPolicy =
+                    content.path("withdrawalPolicy");
+
+            if (!unlockedTaskIds.isArray()) {
+                throw new IllegalStateException(
+                        "재택부업의 업무 해금 데이터가 올바르지 않습니다."
+                );
+            }
+
+            if (!withdrawalPolicy.isObject()) {
+                throw new IllegalStateException(
+                        "재택부업의 출금 정책이 올바르지 않습니다."
+                );
+            }
+
+            state.set(
+                    "withdrawalPolicy",
+                    withdrawalPolicy.deepCopy()
+            );
+        }
+
         UUID sessionId = UUID.randomUUID();
 
         jdbcTemplate.update(
@@ -156,6 +207,13 @@ public class SessionService {
                 state.toString()
         );
 
+        if ("SIDE".equals(scenarioId)) {
+            initializeSettlements(
+                    sessionId,
+                    content.path("settlements")
+            );
+        }
+
         List<Map<String, Object>> initialMessages =
                 new ArrayList<>();
 
@@ -177,38 +235,174 @@ public class SessionService {
                     messageId
             );
 
-            Map<String, Object> response =
+            Map<String, Object> messageResponse =
                     new LinkedHashMap<>();
 
-            response.put("id", messageId);
-            response.put(
+            messageResponse.put("id", messageId);
+            messageResponse.put(
                     "senderId",
                     message.path("senderId").asText()
             );
-            response.put(
+            messageResponse.put(
                     "channel",
                     message.path("channel").asText()
             );
-            response.put(
+            messageResponse.put(
                     "sentAt",
                     message.path("sentAt").asText()
             );
-            response.put(
+            messageResponse.put(
                     "text",
                     selectedVariants.path(messageId).asText()
             );
 
-            initialMessages.add(response);
+            initialMessages.add(messageResponse);
         }
 
-        return Map.of(
-                "sessionId", sessionId.toString(),
-                "scenarioId", scenarioId,
-                "currentStepId", currentStepId,
-                "jobPosting",
-                content.path("scenarioData")
-                        .path("jobPosting"),
-                "messages", initialMessages
+        Map<String, Object> response =
+                new LinkedHashMap<>();
+
+        response.put("sessionId", sessionId.toString());
+        response.put("scenarioId", scenarioId);
+        response.put("currentStepId", currentStepId);
+
+        if ("JOB".equals(scenarioId)) {
+            response.put("jobPosting", jobPosting);
+        }
+
+        if ("SIDE".equals(scenarioId)) {
+
+            response.put("sideJobPosting", sideJobPosting);
+
+            response.put(
+                    "unlockedTaskIds",
+                    state.path("unlockedTaskIds")
+            );
+
+            response.put(
+                    "withdrawalPolicy",
+                    state.path("withdrawalPolicy")
+            );
+
+            response.put(
+                    "settlements",
+                    getSessionSettlements(sessionId)
+            );
+        }
+
+        response.put("messages", initialMessages);
+
+        return response;
+    }
+
+    private void initializeSettlements(
+            UUID sessionId,
+            JsonNode settlements
+    ) {
+
+        if (!settlements.isArray()) {
+            throw new IllegalStateException(
+                    "재택부업 정산 목록이 올바르지 않습니다."
+            );
+        }
+
+        for (JsonNode settlement : settlements) {
+
+            String settlementId =
+                    settlement.path("id").asText();
+
+            String taskId =
+                    settlement.path("taskId").asText();
+
+            String settlementStatus =
+                    settlement.path("settlementStatus").asText();
+
+            JsonNode paidAmountNode =
+                    settlement.path("paidAmount");
+
+            if (settlementId.isBlank()
+                    || taskId.isBlank()
+                    || !List.of(
+                    "PENDING",
+                    "AVAILABLE",
+                    "PAID",
+                    "BLOCKED"
+            ).contains(settlementStatus)
+                    || !paidAmountNode.isIntegralNumber()
+                    || !paidAmountNode.canConvertToInt()
+                    || paidAmountNode.asInt() < 0) {
+
+                throw new IllegalStateException(
+                        "정산 데이터가 올바르지 않습니다: "
+                                + settlementId
+                );
+            }
+
+            int paidAmount = paidAmountNode.asInt();
+
+            jdbcTemplate.update(
+                    """
+                    INSERT INTO session_settlement (
+                        session_id,
+                        settlement_id,
+                        task_id,
+                        settlement_status,
+                        paid_amount
+                    )
+                    VALUES (?, ?, ?, ?, ?)
+                    """,
+                    sessionId,
+                    settlementId,
+                    taskId,
+                    settlementStatus,
+                    paidAmount
+            );
+        }
+    }
+
+    private List<Map<String, Object>> getSessionSettlements(
+            UUID sessionId
+    ) {
+
+        return jdbcTemplate.query(
+                """
+                SELECT
+                    settlement_id,
+                    task_id,
+                    settlement_status,
+                    paid_amount
+                FROM session_settlement
+                WHERE session_id = ?
+                ORDER BY settlement_id
+                """,
+                (rs, rowNum) -> {
+
+                    Map<String, Object> settlement =
+                            new LinkedHashMap<>();
+
+                    settlement.put(
+                            "id",
+                            rs.getString("settlement_id")
+                    );
+
+                    settlement.put(
+                            "taskId",
+                            rs.getString("task_id")
+                    );
+
+                    settlement.put(
+                            "settlementStatus",
+                            rs.getString("settlement_status")
+                    );
+
+                    settlement.put(
+                            "paidAmount",
+                            rs.getInt("paid_amount")
+                    );
+
+                    return settlement;
+                },
+                sessionId
         );
     }
 
@@ -217,6 +411,7 @@ public class SessionService {
             String variantField,
             ObjectNode selectedVariants
     ) {
+
         if (!items.isArray()) {
             throw new IllegalStateException(
                     "콘텐츠 배열이 올바르지 않습니다."
@@ -231,6 +426,7 @@ public class SessionService {
             if (id.isBlank()
                     || !variants.isArray()
                     || variants.isEmpty()) {
+
                 throw new IllegalStateException(
                         "문구 데이터가 올바르지 않습니다: " + id
                 );
@@ -246,7 +442,10 @@ public class SessionService {
         }
     }
 
-    private JsonNode findById(JsonNode items, String id) {
+    private JsonNode findById(
+            JsonNode items,
+            String id
+    ) {
 
         if (!items.isArray()) {
             throw new IllegalStateException(
@@ -255,6 +454,7 @@ public class SessionService {
         }
 
         for (JsonNode item : items) {
+
             if (id.equals(item.path("id").asText())) {
                 return item;
             }

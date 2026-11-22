@@ -50,8 +50,13 @@ public class DecisionController {
 
             @NotBlank
             @Pattern(
-                    regexp = "CONTINUE_OFFICIAL|VERIFY_OFFICIAL"
-                            + "|STOP_AND_REPORT|SUBMIT_UNVERIFIED"
+                    regexp = "CONTINUE_OFFICIAL"
+                            + "|CONTINUE_VERIFIED_WORK"
+                            + "|VERIFY_OFFICIAL"
+                            + "|REFUSE_PERSONAL_DEPOSIT"
+                            + "|STOP_AND_REPORT"
+                            + "|SUBMIT_UNVERIFIED"
+                            + "|TRANSFER_UNVERIFIED"
             )
             String responseAction,
 
