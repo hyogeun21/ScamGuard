@@ -1,0 +1,568 @@
+{
+  "scenarioId": "SIDE",
+  "caseType": "NORMAL",
+  "difficulty": "MEDIUM",
+  "content": {
+    "actors": [
+      {
+        "id": "SIDE_ACTOR_001",
+        "displayName": "온리데이터 채용 담당자",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "SIDE_ACTOR_002",
+        "displayName": "온리데이터 공식 고객지원센터",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "SIDE_STEP_001",
+      "unlockedMessageIds": [
+        "SIDE_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "SIDE_Q_001",
+        "SIDE_Q_002",
+        "SIDE_Q_003",
+        "SIDE_Q_004",
+        "SIDE_Q_005"
+      ],
+      "unlockedPageIds": [
+        "SIDE_PAGE_001",
+        "SIDE_PAGE_002",
+        "SIDE_PAGE_003"
+      ],
+      "unlockedInquiryIds": [
+        "SIDE_CALL_001",
+        "SIDE_CALL_002",
+        "SIDE_CALL_003",
+        "SIDE_CALL_004",
+        "SIDE_CALL_005"
+      ],
+      "unlockedTaskIds": []
+    },
+    "messages": [
+      {
+        "id": "SIDE_MSG_001",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:00",
+        "textVariants": [
+          "안녕하세요, 온리데이터 채용 담당자입니다. 쇼핑몰 주문 데이터 검수에 지원해 주셔서 감사합니다. 최초 검수 후 추가 업무를 안내할 수 있으며, 모든 업무의 보수 조건은 공고와 같습니다.",
+          "온리데이터의 재택 주문 정보 검수 업무를 안내드립니다. 첫 업무가 끝나면 같은 방식의 후속 주문을 배정할 수 있습니다. 공식 업무 조건을 먼저 확인해 주세요.",
+          "지원하신 상품·주문 검수 아르바이트 안내입니다. 초기 작업과 추가 작업 모두 건별 보수이며 선입금 없이 진행됩니다. 공고를 확인해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_002",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_002",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:05",
+        "textVariants": [
+          "첫 주문 검수 건 TASK-101이 등록됐습니다. 등록 가격과 수량이 주문 정보와 일치하는지 확인해 제출해 주세요.",
+          "첫 번째 업무를 시작해 주세요. 키보드 주문의 등록 정보와 주문 가격·수량을 비교하시면 됩니다.",
+          "TASK-101 검수가 준비되었습니다. 정상 또는 오류 있음을 선택한 후 검수 완료를 눌러 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_003",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:18",
+        "textVariants": [
+          "첫 업무 제출이 확인됐습니다. 공고에 안내한 대로 동일한 검수 방식의 추가 주문 TASK-102를 배정했습니다. 추가 비용이나 충전은 필요하지 않습니다.",
+          "첫 주문 제출 감사합니다. 후속 업무 TASK-102가 등록됐고 보수는 건별 기준 그대로입니다. 업무 시작에 개인 돈을 입금하지 않으셔도 됩니다.",
+          "검수 결과가 접수되어 다음 주문을 배정했습니다. TASK-102 역시 가격·수량 대조 작업이며 별도 참여비 없이 진행합니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_003",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_004",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:32",
+        "textVariants": [
+          "두 번째 검수 제출을 확인했습니다. 마지막 후속 주문 TASK-103을 배정했습니다. 계약에 없는 추가 입금 조건은 없습니다.",
+          "TASK-102 제출 감사합니다. 마지막 주문 TASK-103이 준비되었습니다. 보수 지급 기준은 처음 안내한 내용과 동일합니다.",
+          "후속 주문 검수가 접수됐습니다. TASK-103을 마지막으로 진행한 뒤 정산 화면에서 인정 보수를 확인해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_003",
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_005",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:45",
+        "textVariants": [
+          "세 번째 업무 제출까지 확인했습니다. 정확히 검수된 주문의 보수만 정산 내역에서 출금 가능 금액으로 표시됩니다. 추가 업무에도 기존 정책을 적용했습니다.",
+          "모든 검수 제출이 접수됐습니다. 정산 내역을 열어 업무별 보수 인정 여부와 상태를 확인해 주세요. 후속 업무에 따른 별도 선입금은 없습니다.",
+          "마지막 주문 제출 감사합니다. 업무별 정산 내역이 표시됩니다. 공식 업무·정산 조건과 같은 기준인지 확인하셔도 됩니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_006",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:50",
+        "textVariants": [
+          "정확하게 검수한 업무의 보수가 1,000원 이상이면 출금 요청할 수 있습니다. 후속 작업을 수행했다고 별도 보증금이 발생하지는 않습니다.",
+          "추가 업무까지 마쳤더라도 출금 기준은 그대로입니다. 정산 완료 금액 1,000원 이상, 출금 수수료 0원, 개인 자금 선입금 없음입니다.",
+          "출금은 기존 공고대로 진행됩니다. 추가 업무 처리비나 활성화 비용이 필요하지 않으며, 공식 고객지원센터에서 확인할 수 있습니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_005"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "SIDE_Q_001",
+        "prompt": "구체적으로 어떤 업무를 하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "업무 사이트의 상품 등록 가격·수량과 주문 가격·수량을 비교해 정상 또는 오류 있음으로 표시하는 작업입니다.",
+          "상품 정보와 주문 정보를 대조한 후 두 항목이 일치하는지 검수 결과를 제출하시면 됩니다.",
+          "상품의 가격과 수량이 주문서와 같은지 확인하는 온라인 데이터 검수 업무입니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_002",
+        "prompt": "일을 시작하거나 출금하려면 제 돈을 먼저 입금해야 하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "아니요. 업무 시작과 보수 출금에 보증금, 충전금, 선입금은 필요하지 않습니다.",
+          "개인 자금을 보내실 필요가 없습니다. 보수는 검수 결과에 따라 정산됩니다.",
+          "선입금이나 참여비는 받지 않습니다. 공식 정산 안내에도 같은 내용이 있습니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_003",
+        "prompt": "보수는 어떤 기준으로 지급되나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "업무마다 보수가 정해져 있으며, 제출한 검수 결과가 정확한 건에 한해 보수가 인정됩니다.",
+          "각 업무 카드에 건별 보수가 표시됩니다. 검수가 정확하게 완료되면 정산 대상이 됩니다.",
+          "작업별 안내된 보수를 기준으로 하고, 검수 결과가 맞을 때 정산됩니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_004",
+        "prompt": "정산 금액과 지급 여부는 어디에서 확인하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "첫 업무와 후속 업무 모두 정산 내역에서 처리 상태와 인정 보수를 확인할 수 있습니다.",
+          "각 검수 건의 정확도에 따라 보수 인정 여부가 정산 화면에 표시됩니다.",
+          "추가 주문도 동일하게 건별 정산하므로 업무별 정산 화면을 확인해 주세요."
+        ]
+      },
+      {
+        "id": "SIDE_Q_005",
+        "prompt": "첫 업무 후 추가 주문이 오면 별도 비용이나 변경된 조건이 있나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "첫 업무를 완료하면 같은 방식의 추가 주문이 배정될 수 있습니다. 건별 보수와 정산 기준은 그대로이고 별도 비용은 없습니다.",
+          "추가 검수 역시 최초 공고의 조건으로 진행하며 선입금이나 보증금을 요구하지 않습니다.",
+          "후속 업무는 기존 가격·수량 검수 작업이고 보수는 업무별로 사전 표시됩니다. 추가 입금은 필요하지 않습니다."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "SIDE_PAGE_001",
+        "pageType": "DETAIL",
+        "title": "온리데이터 상품·주문 데이터 검수원 모집 (추가 업무 가능)",
+        "sourceLabel": "온리데이터 부업 공고(게임 내 가상 게시물)",
+        "body": "업무: 상품 등록 가격·수량과 주문 정보의 일치 여부 검수. 근무: 재택, 건별 보수. 첫 작업 이후 동일한 검수 방식의 후속 주문이 배정될 수 있음. 업무별 보수는 배정 시 표시되며, 정확하게 검수한 건에 한해 정산. 추가 업무 배정으로 보수 기준·출금 기준이 변경되지 않음. 업무 참여비·추가 주문 보증금·충전금 없음. 정산 완료 금액 1,000원 이상이면 수수료 없이 출금 요청 가능."
+      },
+      {
+        "id": "SIDE_PAGE_002",
+        "pageType": "GENERAL",
+        "title": "온리데이터 업체 소개",
+        "sourceLabel": "온리데이터 공식 홈페이지(게임 내 가상 페이지)",
+        "body": "온리데이터는 온라인 쇼핑몰의 상품 등록 정보와 주문 데이터를 관리하고 검수하는 가상 업체입니다. 재택 데이터 검수 업무를 운영하며, 검수 작업은 업무 사이트에서 진행합니다. 업무 조건과 정산 정책은 공식 안내 페이지와 고객지원센터를 통해 확인할 수 있습니다."
+      },
+      {
+        "id": "SIDE_PAGE_003",
+        "pageType": "OFFICIAL",
+        "title": "공식 업무 및 정산 조건",
+        "sourceLabel": "온리데이터 공식 고객지원 안내(게임 내 가상 페이지)",
+        "body": "공식 검수 정책: 상품 등록 가격·수량과 주문 가격·수량을 대조하고 정상/오류 있음으로 제출. 정확한 검수 건만 공지된 건별 보수 인정. 최초 주문 검수 후 동일한 방식의 추가 주문 배정 가능하며, 계약서에 안내한 보수·정산 조건을 그대로 적용. 업무 시작 또는 후속 업무 배정 시 개인 자금, 보증금, 충전금, 인증비를 요구하지 않음. 정산된 금액이 1,000원 이상이면 출금 요청 가능하며 처리 수수료 0원."
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "SIDE_CALL_001",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "온리데이터는 어떤 업체인가요?",
+        "answerVariants": [
+          "온리데이터는 쇼핑몰 상품·주문 데이터 검수 업무를 운영하는 업체입니다.",
+          "저희는 온라인 쇼핑몰의 상품 정보와 주문 데이터를 관리하는 업무를 제공합니다.",
+          "상품 및 주문 데이터의 일치 여부를 검수하는 재택 업무를 운영하고 있습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_002",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "메시지를 보낸 채용 담당자와 해당 업무가 맞나요?",
+        "answerVariants": [
+          "공식 모집에 등록된 검수 업무가 맞으며, 후속 주문도 최초 조건으로 배정되는 것이 정상입니다.",
+          "상품·주문 검수 모집이 확인됩니다. 추가 주문에 별도의 보증금이 붙지 않는 조건입니다.",
+          "채용 안내와 후속 작업 내용이 공식 공고에 부합합니다. 개인 자금 요구는 없습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_003",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "업무를 시작할 때 개인 자금을 내야 하나요?",
+        "answerVariants": [
+          "아니요. 참여비나 선입금 없이 업무를 시작할 수 있습니다.",
+          "업무 시작을 위한 보증금이나 충전금은 없습니다.",
+          "개인 돈을 먼저 송금해야 하는 조건은 없습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_004",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "공식 정산 기준과 보수 지급 정책이 어떻게 되나요?",
+        "answerVariants": [
+          "첫 업무와 추가 업무 모두 같은 건별 정산 기준입니다. 정확히 검수한 건의 보수는 1,000원 이상부터 수수료 없이 출금할 수 있습니다.",
+          "후속 검수라고 정산 조건이 바뀌지 않습니다. 업무별 보수는 작업 화면에 표시되고 선입금은 필요 없습니다.",
+          "공식 정책은 최초 업무와 후속 업무에 동일하게 적용됩니다. 정산된 금액 1,000원 이상, 출금 수수료 0원입니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_005",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "보수 출금 시 추가 수수료나 인증금을 보내야 하나요?",
+        "answerVariants": [
+          "아니요. 출금 수수료는 0원이며 별도의 인증금이나 선입금도 없습니다.",
+          "출금 과정에서 개인 계좌로 돈을 보내도록 요구하지 않습니다.",
+          "별도 충전이나 보증금 납부 없이 정산된 보수를 출금 요청할 수 있습니다."
+        ]
+      }
+    ],
+    "workTasks": [
+      {
+        "id": "SIDE_TASK_001",
+        "taskNumber": "TASK-101",
+        "productName": "블루투스 키보드",
+        "registeredPrice": 32000,
+        "registeredQuantity": 1,
+        "orderPrice": 32000,
+        "orderQuantity": 1,
+        "reward": 1200,
+        "correctResult": "NORMAL"
+      },
+      {
+        "id": "SIDE_TASK_002",
+        "taskNumber": "TASK-102",
+        "productName": "휴대용 보조배터리",
+        "registeredPrice": 25000,
+        "registeredQuantity": 2,
+        "orderPrice": 25000,
+        "orderQuantity": 3,
+        "reward": 1800,
+        "correctResult": "ERROR"
+      },
+      {
+        "id": "SIDE_TASK_003",
+        "taskNumber": "TASK-103",
+        "productName": "노트북 거치대",
+        "registeredPrice": 21000,
+        "registeredQuantity": 2,
+        "orderPrice": 21000,
+        "orderQuantity": 2,
+        "reward": 1600,
+        "correctResult": "NORMAL"
+      }
+    ],
+    "settlements": [
+      {
+        "id": "SIDE_SETTLEMENT_001",
+        "taskId": "SIDE_TASK_001",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_002",
+        "taskId": "SIDE_TASK_002",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_003",
+        "taskId": "SIDE_TASK_003",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      }
+    ],
+    "withdrawalPolicy": {
+      "minimumAmount": 1000,
+      "processingFee": 0,
+      "requiresPersonalDeposit": false,
+      "depositAmount": 0,
+      "conditions": "첫 업무와 추가 업무 모두 정확히 검수해 정산 완료된 금액이 1,000원 이상이면 출금 요청할 수 있습니다. 후속 업무 처리비나 보증금 등의 개인 자금 선입금은 없습니다.",
+      "requestResult": "정산 완료 금액에 대한 가상 출금 요청이 정상 접수되었습니다. 후속 업무에 대한 추가 비용은 없으며 실제 금융 거래는 발생하지 않습니다."
+    },
+    "evidence": [
+      {
+        "id": "SIDE_EVIDENCE_001",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_001",
+        "fact": "모집 공고에 첫 검수 후 동일 조건의 추가 주문이 배정될 수 있고 참여비가 없다고 명시되어 있다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_002",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_003",
+        "fact": "공식 정책이 추가 업무의 보수·출금 조건을 최초 업무와 동일하게 규정하며 개인 자금 입금을 요구하지 않는다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_003",
+        "sourceType": "QUESTION",
+        "sourceId": "SIDE_Q_005",
+        "fact": "담당자가 후속 업무의 보수 기준은 같고 추가 주문에 대한 비용은 없다고 설명한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_004",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "SIDE_CALL_004",
+        "fact": "공식 고객지원센터에서 추가 업무에도 동일 정산 기준이 적용된다고 확인한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_005",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_002",
+        "fact": "공식 업체 소개에 재택 검수 업무가 안내되어 있어 공고와 업체의 사업 내용이 일치한다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "SIDE_STEP_001",
+        "description": "모집 공고와 최초·추가 업무 조건 확인"
+      },
+      {
+        "id": "SIDE_STEP_002",
+        "description": "첫 번째 주문 검수 수행"
+      },
+      {
+        "id": "SIDE_STEP_003",
+        "description": "첫 검수 완료 후 동일 조건의 추가 주문 검수"
+      },
+      {
+        "id": "SIDE_STEP_004",
+        "description": "두 번째 검수 후 세 번째 주문 검수"
+      },
+      {
+        "id": "SIDE_STEP_005",
+        "description": "업무별 정산, 출금 정책 확인 후 최종 판단"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "SIDE_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_001",
+          "stepId": "SIDE_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_001"
+          ],
+          "nextStepId": "SIDE_STEP_002"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_001",
+          "stepId": "SIDE_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_002"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_001",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_003"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_003",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_002",
+          "stepId": "SIDE_STEP_003"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_004"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_003"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_002",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_004"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_004",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_003",
+          "stepId": "SIDE_STEP_004"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_005"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_003",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_005"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_005",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_005",
+          "stepId": "SIDE_STEP_005"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_006"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "nextStepId": "SIDE_STEP_005"
+        }
+      }
+    ],
+    "scenarioData": {
+      "sideJobPosting": {
+        "companyName": "온리데이터",
+        "companyDescription": "온리데이터는 온라인 쇼핑몰의 상품 등록 정보와 주문 데이터를 관리하고 검수하는 가상 업체입니다.",
+        "position": "온라인 쇼핑몰 상품·주문 데이터 검수원",
+        "workType": "건별 보수형 재택 아르바이트",
+        "workDescription": "업무 사이트에서 상품의 등록 가격 및 수량과 주문 내역을 비교하고, 정보가 일치하는지 확인하여 검수 결과를 제출합니다.",
+        "workEnvironment": "개인 PC를 이용한 비대면 재택근무이며, 게임 내 업무 사이트에서 검수 작업을 진행합니다.",
+        "rewardPolicy": "최초 검수와 후속 검수 모두 업무별 명시 보수를 적용하며, 정확하게 검수한 건에 한해 정산합니다. 추가 업무 배정 시 보수·출금 조건은 변경되지 않습니다.",
+        "requirements": "기본적인 PC 사용이 가능하고 상품 및 주문 정보를 비교할 수 있는 사람",
+        "officialContact": "온리데이터 공식 고객지원센터(게임 내 가상 문의처)"
+      }
+    },
+    "preventionTips": [
+      "최초 공고에 추가 업무 가능 여부와 보수 지급 기준이 명시되어 있는지 확인하세요.",
+      "추가 업무를 배정받을 때 처음 약속한 건별 보수와 정산 조건이 바뀌는지 비교하세요.",
+      "후속 업무를 핑계로 개인 자금 입금이나 계정 충전을 요구하면 공식 연락처로 확인하세요.",
+      "업무별 표시된 수익과 실제 정산·지급된 금액을 구분해 확인하세요.",
+      "업무 사이트 설명과 공식 회사 안내가 일치하는지 교차 확인하세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "DETAIL_VIEWED",
+        "targetId": "SIDE_PAGE_001",
+        "score": 8
+      },
+      {
+        "eventName": "OFFICIAL_INFO_VIEWED",
+        "targetId": "SIDE_PAGE_003",
+        "score": 8
+      },
+      {
+        "eventName": "QUESTION_SELECTED",
+        "targetId": "SIDE_Q_002",
+        "score": 8
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "SIDE_CALL_004",
+        "score": 8
+      },
+      {
+        "eventName": "SETTLEMENT_VIEWED",
+        "targetId": "SIDE_SETTLEMENT_001",
+        "score": 8
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_VERIFIED_WORK": 30,
+      "VERIFY_OFFICIAL": 25,
+      "REFUSE_PERSONAL_DEPOSIT": 15,
+      "STOP_AND_REPORT": 10,
+      "TRANSFER_UNVERIFIED": 0
+    }
+  }
+}

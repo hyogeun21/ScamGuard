@@ -1,0 +1,53 @@
+{
+  "scenarioId": "JOB",
+  "correctJudgment": "SCAM",
+  "userJudgment": "SCAM",
+  "decisionCorrect": true,
+  "score": 80,
+  "responseAction": "STOP_AND_REPORT",
+  "reason": "서류를 외부 페이지에서 받는다는 안내가 공식 채용 홈페이지와 달랐다.",
+  "completedChecks": [
+    {
+      "eventName": "MESSAGE_VIEWED",
+      "targetId": "JOB_MSG_003",
+      "score": 10
+    },
+    {
+      "eventName": "OFFICIAL_INFO_VIEWED",
+      "targetId": "JOB_PAGE_004",
+      "score": 10
+    }
+  ],
+  "missedChecks": [
+    {
+      "eventName": "PHONE_INQUIRY_SELECTED",
+      "targetId": "JOB_CALL_004",
+      "score": 20
+    }
+  ],
+  "riskActions": [],
+  "actions": [
+    {
+      "eventName": "MESSAGE_VIEWED",
+      "targetId": "JOB_MSG_003",
+      "sequenceNo": 1
+    },
+    {
+      "eventName": "OFFICIAL_INFO_VIEWED",
+      "targetId": "JOB_PAGE_004",
+      "sequenceNo": 2
+    }
+  ],
+  "verifiedFacts": [
+    {
+      "sourceId": "JOB_MSG_003",
+      "eventName": "MESSAGE_VIEWED",
+      "fact": "발신자가 별도 접수 페이지로 신분증과 통장 사본을 제출하라고 요구했다."
+    },
+    {
+      "sourceId": "JOB_PAGE_004",
+      "eventName": "OFFICIAL_INFO_VIEWED",
+      "fact": "공식 서류 제출 안내에는 별도 외부 접수 페이지를 운영하지 않는다고 명시되어 있다."
+    }
+  ]
+}

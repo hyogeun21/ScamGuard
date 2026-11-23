@@ -1,0 +1,158 @@
+[
+  {
+    "id": "JOB-NORMAL",
+    "scenarioId": "JOB",
+    "caseType": "NORMAL",
+    "judgment": "NORMAL",
+    "responseAction": "CONTINUE_OFFICIAL",
+    "checked": 3,
+    "score": 100,
+    "reason": "공식 페이지와 인사팀에서 접수 경로를 확인했다.",
+    "expectedFeedback": "공식 채용 홈페이지에서 접수하는 점을 확인한 행동을 강화한다."
+  },
+  {
+    "id": "JOB-SCAM",
+    "scenarioId": "JOB",
+    "caseType": "SCAM",
+    "judgment": "SCAM",
+    "responseAction": "STOP_AND_REPORT",
+    "checked": 2,
+    "score": 80,
+    "reason": "별도 접수 안내가 회사의 공식 안내와 달랐다.",
+    "expectedFeedback": "두 경로의 불일치를 짚고 기록에 없는 인사팀 문의를 칭찬하지 않는다."
+  },
+  {
+    "id": "JOB-RISK",
+    "scenarioId": "JOB",
+    "caseType": "SCAM",
+    "judgment": "SCAM",
+    "responseAction": "SUBMIT_UNVERIFIED",
+    "checked": 1,
+    "score": 40,
+    "reason": "외부 접수 메시지가 수상했지만 서류를 제출하겠다고 골랐다.",
+    "expectedFeedback": "판단의 정오와 서류 제출 선택의 위험을 분리하고 제출이 실행됐다고 서술하지 않는다."
+  },
+  {
+    "id": "SIDE-NORMAL",
+    "scenarioId": "SIDE",
+    "caseType": "NORMAL",
+    "judgment": "NORMAL",
+    "responseAction": "CONTINUE_VERIFIED_WORK",
+    "checked": 5,
+    "score": 100,
+    "reason": "업무와 공식 정산·출금 조건을 대조했다.",
+    "expectedFeedback": "공식 정산 정책을 확인한 점을 설명하고 플랫폼 정산 화면만으로 단정하지 않는다."
+  },
+  {
+    "id": "SIDE-SCAM",
+    "scenarioId": "SIDE",
+    "caseType": "SCAM",
+    "judgment": "SCAM",
+    "responseAction": "REFUSE_PERSONAL_DEPOSIT",
+    "checked": 3,
+    "score": 84,
+    "reason": "공식 정책에는 보증금이 없는데 담당자는 입금을 요구했다.",
+    "expectedFeedback": "보증금 요청과 공식 정책의 차이, 추가 입금을 보류한 선택을 짚는다."
+  },
+  {
+    "id": "SIDE-RISK",
+    "scenarioId": "SIDE",
+    "caseType": "SCAM",
+    "judgment": "NORMAL",
+    "responseAction": "TRANSFER_UNVERIFIED",
+    "checked": 1,
+    "score": 8,
+    "reason": "정산 화면을 보면 언제든 출금할 수 있다고 생각했다.",
+    "expectedFeedback": "정산 화면을 열지 않았다는 기록을 존중하고 이체를 실행했다고 설명하지 않는다."
+  },
+  {
+    "id": "INV-NORMAL",
+    "scenarioId": "INV",
+    "caseType": "NORMAL",
+    "judgment": "NORMAL",
+    "responseAction": "CONTINUE_OFFICIAL",
+    "checked": 2,
+    "score": 100,
+    "reason": "금융회사 공식 채널에서 담당자와 입금 경로를 확인했다.",
+    "expectedFeedback": "업체와 연락 상대의 신원을 별도로 확인한 점을 설명한다.",
+    "facts": [
+      "공식 연락처로 접수하라는 안내를 받았다.",
+      "공식 고객지원에서 담당자 소속과 회사 입금 경로를 확인했다."
+    ]
+  },
+  {
+    "id": "INV-SCAM",
+    "scenarioId": "INV",
+    "caseType": "SCAM",
+    "judgment": "SCAM",
+    "responseAction": "STOP_AND_REPORT",
+    "checked": 2,
+    "score": 100,
+    "reason": "대화방의 개인 계좌가 공식 입금 경로와 달랐다.",
+    "expectedFeedback": "공식 입금 경로와 사칭 정황의 차이를 짚는다.",
+    "facts": [
+      "대화방 발신자는 수익 보장을 내걸고 개인 계좌 송금을 요구했다.",
+      "공식 고객지원은 해당 연락 계정과 입금 요청이 자사 안내가 아니라고 확인했다."
+    ]
+  },
+  {
+    "id": "INV-RISK",
+    "scenarioId": "INV",
+    "caseType": "SCAM",
+    "judgment": "NORMAL",
+    "responseAction": "TRANSFER_UNVERIFIED",
+    "checked": 1,
+    "score": 20,
+    "reason": "대화방 참가자 후기가 많아서 안전하다고 생각했다.",
+    "expectedFeedback": "후기를 공식 소속 증거로 취급하지 않고 송금 선택을 짚는다.",
+    "facts": [
+      "대화방 발신자는 수익 보장을 내걸고 개인 계좌 송금을 요구했다.",
+      "공식 고객지원은 해당 연락 계정과 입금 요청이 자사 안내가 아니라고 확인했다."
+    ]
+  },
+  {
+    "id": "TRAVEL-NORMAL",
+    "scenarioId": "TRAVEL",
+    "caseType": "NORMAL",
+    "judgment": "NORMAL",
+    "responseAction": "CONTINUE_OFFICIAL",
+    "checked": 2,
+    "score": 100,
+    "reason": "앱의 예약 및 결제 정보가 일치했다.",
+    "expectedFeedback": "예약 상태와 결제 경로를 각각 확인한 점을 설명한다.",
+    "facts": [
+      "예약 안내 메시지는 플랫폼 앱의 예약과 결제 내역을 확인하도록 안내했다.",
+      "플랫폼 앱에서 예약 상태와 결제가 완료된 것을 확인했다."
+    ]
+  },
+  {
+    "id": "TRAVEL-SCAM",
+    "scenarioId": "TRAVEL",
+    "caseType": "SCAM",
+    "judgment": "SCAM",
+    "responseAction": "STOP_AND_REPORT",
+    "checked": 2,
+    "score": 100,
+    "reason": "외부 결제 통지와 달리 예약 앱에 추가 결제 내역이 없었다.",
+    "expectedFeedback": "공식 예약 내역과 외부 결제 요청이 다른 점을 설명한다.",
+    "facts": [
+      "예약 취소를 위협하는 메시지가 외부 결제를 요구했다.",
+      "플랫폼 앱에 예약은 유효하나 추가 결제 요청은 표시되지 않았다."
+    ]
+  },
+  {
+    "id": "TRAVEL-RISK",
+    "scenarioId": "TRAVEL",
+    "caseType": "SCAM",
+    "judgment": "SCAM",
+    "responseAction": "TRANSFER_UNVERIFIED",
+    "checked": 1,
+    "score": 50,
+    "reason": "외부 결제는 의심스럽지만 취소를 피하려고 송금을 선택했다.",
+    "expectedFeedback": "정답을 맞혀도 외부 송금 선택은 위험하며 실제 결제까지 추정하지 않는다.",
+    "facts": [
+      "예약 취소를 위협하는 메시지가 외부 결제를 요구했다.",
+      "플랫폼 앱에 예약은 유효하나 추가 결제 요청은 표시되지 않았다."
+    ]
+  }
+]

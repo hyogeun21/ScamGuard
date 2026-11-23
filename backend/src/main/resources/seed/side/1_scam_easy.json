@@ -1,0 +1,505 @@
+{
+  "scenarioId": "SIDE",
+  "caseType": "SCAM",
+  "difficulty": "EASY",
+  "content": {
+    "actors": [
+      {
+        "id": "SIDE_ACTOR_001",
+        "displayName": "온리데이터 채용팀 사칭 담당자",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "SIDE_ACTOR_002",
+        "displayName": "온리데이터 공식 고객지원센터",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "SIDE_STEP_001",
+      "unlockedMessageIds": [
+        "SIDE_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "SIDE_Q_001",
+        "SIDE_Q_002",
+        "SIDE_Q_003",
+        "SIDE_Q_004",
+        "SIDE_Q_005"
+      ],
+      "unlockedPageIds": [
+        "SIDE_PAGE_001",
+        "SIDE_PAGE_002",
+        "SIDE_PAGE_003"
+      ],
+      "unlockedInquiryIds": [
+        "SIDE_CALL_001",
+        "SIDE_CALL_002",
+        "SIDE_CALL_003",
+        "SIDE_CALL_004",
+        "SIDE_CALL_005"
+      ],
+      "unlockedTaskIds": []
+    },
+    "messages": [
+      {
+        "id": "SIDE_MSG_001",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:00",
+        "textVariants": [
+          "안녕하세요. 온리데이터 채용팀입니다. 주문 데이터 검수 재택부업에 선정되셨습니다. 정식 업무를 시작하려면 계정 활성화 보증금 30,000원을 먼저 입금하셔야 합니다.",
+          "온리데이터 채용 담당자입니다. 업무 배정을 위해 최초 1회 참여 보증금 30,000원 입금이 필요합니다. 완료 후 돌려드리는 금액입니다.",
+          "재택 상품 검수 업무 합격 안내입니다. 검수 업무는 간단하지만 신규 참여자는 계정 인증금 30,000원을 입금해야 정식 참여가 가능합니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_002",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_002",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:05",
+        "textVariants": [
+          "검수 화면은 미리 체험할 수 있습니다. 첫 주문을 확인해 보세요. 다만 정식 보수 지급을 위해서는 보증금 30,000원을 먼저 보내야 합니다.",
+          "체험용 첫 검수 업무가 열렸습니다. 상품 가격과 주문 수량을 확인해 제출해 보세요. 출금 전에는 참여 보증금 납부가 필요합니다.",
+          "첫 번째 주문 검수를 진행하실 수 있습니다. 실제 정산 및 다음 보수 지급은 계정 보증금 확인 뒤 처리된다는 점 안내드립니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_003",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:15",
+        "textVariants": [
+          "첫 검수 결과가 접수됐습니다. 업무 사이트에 보수가 표시되어도 보증금 30,000원 입금 전에는 정산금 지급이 제한됩니다.",
+          "검수 제출 확인했습니다. 수익 내역은 조회 가능하지만 첫 지급은 참여 인증금 납부 후 활성화됩니다.",
+          "첫 작업을 확인했습니다. 지급 절차를 열기 위해서는 담당자가 안내한 계정 보증금부터 처리해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_003",
+          "SIDE_Q_004"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_004",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:25",
+        "textVariants": [
+          "두 번째 검수 결과도 접수됐습니다. 누적 수익은 정산 화면에 표시됩니다. 출금하려면 먼저 신규 참여 보증금을 입금해 주세요.",
+          "업무 제출이 확인되었습니다. 수익 확인은 가능하며 출금 기능을 사용하려면 활성화 입금이 필요합니다.",
+          "검수 내역이 쌓였습니다. 지급을 받으려면 계정 인증비 30,000원을 선납해야 합니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_005",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:30",
+        "textVariants": [
+          "보증금 30,000원을 먼저 보내 주시면 출금 요청을 처리하겠습니다. 안내한 입금은 시스템 절차이니 공식 센터에 별도로 문의하지 않으셔도 됩니다.",
+          "첫 정산금을 받으려면 개인 자금 30,000원으로 계정을 활성화해야 합니다. 입금이 없으면 출금은 보류됩니다.",
+          "수익금 지급을 위해 계정 보증금이 필요합니다. 공식 홈페이지와 절차가 달라 보여도 이 업무 사이트 규정에 따라 진행해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_005"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "SIDE_Q_001",
+        "prompt": "구체적으로 어떤 업무를 하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "상품 등록 정보와 주문 가격·수량을 비교하고 정상 또는 오류 있음으로 표시하는 검수 작업입니다.",
+          "쇼핑몰 상품과 주문 정보가 일치하는지 확인하시면 됩니다.",
+          "온라인 상품 가격과 주문 수량이 맞는지 검수 결과를 제출하는 일입니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_002",
+        "prompt": "일을 시작하거나 출금하려면 제 돈을 먼저 입금해야 하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "네. 신규 참여자는 계정 활성화 보증금 30,000원을 먼저 입금해야 업무 보수를 받을 수 있습니다.",
+          "처음 한 번 30,000원의 참여 인증금이 필요합니다. 나중에 정산금과 함께 돌려드립니다.",
+          "업무 사이트의 보수를 출금하려면 보증금 30,000원 납부가 선행돼야 합니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_003",
+        "prompt": "보수는 어떤 기준으로 지급되나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "검수 결과에 따라 건별 수익이 표시됩니다. 다만 실제 지급은 계정 보증금 확인 뒤 진행됩니다.",
+          "업무별 보수가 쌓이지만 출금은 참여 인증금 납부를 마친 뒤 가능합니다.",
+          "맞게 검수한 업무의 보수가 적립되고 초기 보증금을 납부해야 지급됩니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_004",
+        "prompt": "정산 금액과 지급 여부는 어디에서 확인하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "업무 사이트의 정산 내역에 누적 수익이 표시됩니다. 입금 전까지 출금은 제한됩니다.",
+          "정산 화면에서 적립 내역을 볼 수 있지만 계정 활성화 전 지급은 불가능합니다.",
+          "정산 페이지에서 수익을 확인하고, 보증금을 납부한 뒤 출금 신청할 수 있습니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_005",
+        "prompt": "추가 업무와 출금 조건은 어떻게 되나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "추가 검수는 할 수 있으나 누적 보수 출금은 참여 보증금 30,000원을 납부해야 처리됩니다.",
+          "업무를 더 진행할 수 있지만 출금 전 계정 인증금 30,000원 입금은 필수입니다.",
+          "추가 업무의 보수도 누적되며, 처음 출금하려면 개인 자금으로 활성화 보증금을 내야 합니다."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "SIDE_PAGE_001",
+        "pageType": "DETAIL",
+        "title": "온리데이터 재택 검수 부업 모집 안내 (외부 게시물)",
+        "sourceLabel": "온리데이터 채용팀 명의 외부 부업 공고(게임 내 가상 게시물)",
+        "body": "모집 업무: 온라인 쇼핑몰 가격·수량 검수. 비대면 재택으로 진행하며 검수 건별 보수 지급. 신규 참여자는 계정 활성화 보증금 30,000원을 선납해야 정식 정산 및 출금 가능. 보증금은 나중에 환급한다고 안내함. ※ 공식 모집 공고와 내용이 다른 외부 게시물."
+      },
+      {
+        "id": "SIDE_PAGE_002",
+        "pageType": "GENERAL",
+        "title": "온리데이터 업체 소개",
+        "sourceLabel": "온리데이터 공식 홈페이지(게임 내 가상 페이지)",
+        "body": "온리데이터는 온라인 쇼핑몰 상품 등록 정보와 주문 데이터를 검수하는 가상 업체입니다. 공식 재택 검수 업무는 별도 참여비 없이 진행되며, 외부 게시물이나 채팅에서 보증금을 요청하면 공식 고객지원센터에 진위를 확인해야 합니다."
+      },
+      {
+        "id": "SIDE_PAGE_003",
+        "pageType": "OFFICIAL",
+        "title": "공식 업무 및 정산 조건",
+        "sourceLabel": "온리데이터 공식 고객지원 안내(게임 내 가상 페이지)",
+        "body": "공식 검수 업무: 등록 상품의 가격·수량과 주문 정보 비교. 정확히 검수한 완료 업무에 대해 건별 보수 정산. 정산 완료 금액 1,000원 이상 출금 요청 가능. 처리 수수료 0원. 업무 시작 및 보수 출금 시 참여비·보증금·계정 인증비·개인 자금 선입금을 요구하지 않음. 보증금 입금을 요구하는 메시지는 공식 정책과 무관함."
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "SIDE_CALL_001",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "온리데이터는 어떤 업체인가요?",
+        "answerVariants": [
+          "온리데이터는 쇼핑몰의 상품·주문 데이터 검수 업무를 안내하는 업체입니다. 공식 모집 조건은 홈페이지에서 확인 가능합니다.",
+          "공식 검수 업무는 가격과 수량을 대조하는 재택 업무입니다. 보증금은 없습니다.",
+          "당사는 상품·주문 데이터 검수 서비스를 운영하며 참여비를 요구하지 않습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_002",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "메시지를 보낸 채용 담당자와 해당 업무가 맞나요?",
+        "answerVariants": [
+          "공식 채용팀은 계정 보증금 30,000원을 요청하지 않습니다. 그런 메시지를 보냈다면 당사 담당자가 아닐 수 있습니다.",
+          "그 담당자의 보증금 요구는 공식 채용 조건에 없습니다. 사칭 가능성이 있으니 송금하지 마세요.",
+          "당사 채용 절차에 참여 인증금을 요구하는 단계는 없습니다. 의심 메시지는 공식 센터에 전달해 주세요."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_003",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "업무를 시작할 때 개인 자금을 내야 하나요?",
+        "answerVariants": [
+          "아니요. 공식 재택 검수 업무에 참여비나 보증금, 개인 자금 선입금은 필요하지 않습니다.",
+          "30,000원 계정 활성화 비용을 낼 필요가 없습니다. 이는 공식 운영 정책이 아닙니다.",
+          "업무 시작을 위한 인증금·충전금 입금을 요구하지 않습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_004",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "공식 정산 기준과 보수 지급 정책이 어떻게 되나요?",
+        "answerVariants": [
+          "공식 업무는 정확히 검수한 건마다 보수를 정산하며, 1,000원 이상부터 출금할 수 있습니다. 별도 입금은 없습니다.",
+          "보수는 업무별 약정액대로 정산하고, 출금 전 보증금이 필요한 정책은 없습니다.",
+          "검수 보수 정산과 출금은 안내된 조건으로만 처리되며 계정 보증금은 받지 않습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_005",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "보수 출금 시 추가 수수료나 인증금을 보내야 하나요?",
+        "answerVariants": [
+          "아니요. 공식 출금 처리 수수료는 0원이며 개인 자금 입금이나 인증금은 받지 않습니다.",
+          "출금을 위해 돈을 먼저 보내라는 요청은 공식 정책이 아닙니다. 송금을 중단해 주세요.",
+          "보증금·인증비·추가 충전 없이 정산된 금액의 출금 신청이 가능합니다."
+        ]
+      }
+    ],
+    "workTasks": [
+      {
+        "id": "SIDE_TASK_001",
+        "taskNumber": "TASK-001",
+        "productName": "무선 마우스",
+        "registeredPrice": 15000,
+        "registeredQuantity": 2,
+        "orderPrice": 15000,
+        "orderQuantity": 2,
+        "reward": 1000,
+        "correctResult": "NORMAL"
+      },
+      {
+        "id": "SIDE_TASK_002",
+        "taskNumber": "TASK-002",
+        "productName": "USB 허브",
+        "registeredPrice": 20000,
+        "registeredQuantity": 1,
+        "orderPrice": 18000,
+        "orderQuantity": 1,
+        "reward": 1500,
+        "correctResult": "ERROR"
+      }
+    ],
+    "settlements": [
+      {
+        "id": "SIDE_SETTLEMENT_001",
+        "taskId": "SIDE_TASK_001",
+        "settlementStatus": "BLOCKED",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_002",
+        "taskId": "SIDE_TASK_002",
+        "settlementStatus": "BLOCKED",
+        "paidAmount": 0
+      }
+    ],
+    "withdrawalPolicy": {
+      "minimumAmount": 1000,
+      "processingFee": 0,
+      "requiresPersonalDeposit": true,
+      "depositAmount": 30000,
+      "conditions": "업무 사이트에서는 적립 수익을 표시하지만, 최초 출금 전에 계정 활성화 보증금 30,000원을 개인 자금으로 입금하라고 요구합니다. 이는 공식 정책과 일치하지 않는 안내입니다.",
+      "requestResult": "계정 활성화 보증금 30,000원 미납으로 출금이 보류되었습니다. 실제 입금이나 송금은 진행되지 않습니다."
+    },
+    "evidence": [
+      {
+        "id": "SIDE_EVIDENCE_001",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_001",
+        "fact": "외부 모집 공고가 업무 참여와 출금을 위해 계정 활성화 보증금 30,000원 선납을 요구한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_002",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_003",
+        "fact": "공식 온리데이터 정책은 참여비·보증금·출금 인증비를 요구하지 않으며 1,000원 이상 출금 가능하다고 명시한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_003",
+        "sourceType": "QUESTION",
+        "sourceId": "SIDE_Q_002",
+        "fact": "사칭 담당자는 계정 활성화 보증금 30,000원을 먼저 입금하라고 요구한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_004",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "SIDE_CALL_004",
+        "fact": "공식 고객지원센터는 보증금이 필요 없다고 확인하여 담당자 안내와 충돌한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_005",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_003",
+        "fact": "업무 사이트의 선입금 출금 조건이 공식 정산 정책과 서로 다르다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "SIDE_STEP_001",
+        "description": "부업 공고 확인 및 업무 시작 전 계정 보증금 요구 확인"
+      },
+      {
+        "id": "SIDE_STEP_002",
+        "description": "체험 가능한 첫 상품·주문 데이터 검수"
+      },
+      {
+        "id": "SIDE_STEP_003",
+        "description": "첫 검수 접수 및 선입금 조건 안내 확인"
+      },
+      {
+        "id": "SIDE_STEP_004",
+        "description": "두 번째 검수 제출과 출금 제한 확인"
+      },
+      {
+        "id": "SIDE_STEP_005",
+        "description": "공식 정책과 보증금 요구 비교 후 사기 여부 판단"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "SIDE_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_001",
+          "stepId": "SIDE_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_001"
+          ],
+          "nextStepId": "SIDE_STEP_002"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_001",
+          "stepId": "SIDE_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_002"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_001",
+              "requiredCorrectResult": true,
+              "settlementStatus": "BLOCKED",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_003"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_003",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_002",
+          "stepId": "SIDE_STEP_003"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_004"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_002",
+              "requiredCorrectResult": true,
+              "settlementStatus": "BLOCKED",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_004"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_004",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_004",
+          "stepId": "SIDE_STEP_004"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_005"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "nextStepId": "SIDE_STEP_005"
+        }
+      }
+    ],
+    "scenarioData": {
+      "sideJobPosting": {
+        "companyName": "온리데이터",
+        "companyDescription": "온리데이터는 온라인 쇼핑몰의 상품 등록 정보와 주문 데이터를 관리하고 검수하는 가상 업체입니다.",
+        "position": "온라인 쇼핑몰 상품·주문 데이터 검수원",
+        "workType": "건별 보수형 재택 아르바이트",
+        "workDescription": "업무 사이트에서 상품의 등록 가격 및 수량과 주문 내역을 비교하고, 정보가 일치하는지 확인하여 검수 결과를 제출합니다.",
+        "workEnvironment": "개인 PC를 이용한 비대면 재택근무이며, 게임 내 업무 사이트에서 검수 작업을 진행합니다.",
+        "rewardPolicy": "검수 건별 보수가 표시되지만 사칭 담당자가 업무 시작 및 출금을 위해 계정 활성화 보증금 30,000원을 요구합니다. 공식 업체 정책에는 선입금 조건이 없습니다.",
+        "requirements": "기본적인 PC 사용이 가능하고 상품 및 주문 정보를 비교할 수 있는 사람",
+        "officialContact": "온리데이터 공식 고객지원센터(게임 내 가상 문의처)"
+      }
+    },
+    "preventionTips": [
+      "재택부업을 시작하기 전에 보증금·참여비·계정 활성화 비용을 요구하면 사기를 의심하세요.",
+      "외부 채팅 담당자의 설명이 업체 공식 홈페이지 및 고객지원센터 안내와 일치하는지 확인하세요.",
+      "업무 사이트에 표시되는 수익금은 실제 지급 완료 금액과 다를 수 있습니다.",
+      "출금을 미끼로 개인 돈을 먼저 보내라고 하면 입금하지 말고 공식 경로로 확인하세요.",
+      "의심스러운 입금 요구를 받으면 대화를 중단하고 관련 메시지와 안내 화면을 보존해 신고하세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "DETAIL_VIEWED",
+        "targetId": "SIDE_PAGE_001",
+        "score": 8
+      },
+      {
+        "eventName": "OFFICIAL_INFO_VIEWED",
+        "targetId": "SIDE_PAGE_003",
+        "score": 8
+      },
+      {
+        "eventName": "QUESTION_SELECTED",
+        "targetId": "SIDE_Q_002",
+        "score": 8
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "SIDE_CALL_004",
+        "score": 8
+      },
+      {
+        "eventName": "SETTLEMENT_VIEWED",
+        "targetId": "SIDE_SETTLEMENT_001",
+        "score": 8
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_VERIFIED_WORK": 0,
+      "VERIFY_OFFICIAL": 25,
+      "REFUSE_PERSONAL_DEPOSIT": 30,
+      "STOP_AND_REPORT": 30,
+      "TRANSFER_UNVERIFIED": 0
+    }
+  }
+}
