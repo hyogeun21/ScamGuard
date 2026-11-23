@@ -1,0 +1,594 @@
+{
+  "scenarioId": "SIDE",
+  "caseType": "NORMAL",
+  "difficulty": "HARD",
+  "content": {
+    "actors": [
+      {
+        "id": "SIDE_ACTOR_001",
+        "displayName": "온리데이터 채용 담당자",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "SIDE_ACTOR_002",
+        "displayName": "온리데이터 공식 고객지원센터",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "SIDE_STEP_001",
+      "unlockedMessageIds": [
+        "SIDE_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "SIDE_Q_001",
+        "SIDE_Q_002",
+        "SIDE_Q_003",
+        "SIDE_Q_004",
+        "SIDE_Q_005"
+      ],
+      "unlockedPageIds": [
+        "SIDE_PAGE_001",
+        "SIDE_PAGE_002",
+        "SIDE_PAGE_003"
+      ],
+      "unlockedInquiryIds": [
+        "SIDE_CALL_001",
+        "SIDE_CALL_002",
+        "SIDE_CALL_003",
+        "SIDE_CALL_004",
+        "SIDE_CALL_005"
+      ],
+      "unlockedTaskIds": []
+    },
+    "messages": [
+      {
+        "id": "SIDE_MSG_001",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:00",
+        "textVariants": [
+          "온리데이터 재택 주문 검수 업무에 지원해 주셔서 감사합니다. 첫 건은 정확하게 완료하면 소액 보수가 지급됩니다. 정산 기준은 공식 안내에서 확인하실 수 있습니다.",
+          "안녕하세요, 온리데이터 채용 담당자입니다. 먼저 주문 데이터 한 건을 검수해 보세요. 인정된 보수는 초기 정산 규칙에 따라 지급됩니다.",
+          "상품·주문 정보 대조 업무를 안내드립니다. 첫 검수 완료 시 보수 1,200원이 지급될 수 있고, 이후 추가 건도 배정됩니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_002",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_002",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:05",
+        "textVariants": [
+          "첫 주문 TASK-201이 등록됐습니다. 블루투스 키보드의 등록 가격·수량과 주문 정보를 비교해 주세요.",
+          "검수 화면에서 TASK-201을 선택해 정상 또는 오류 있음을 제출해 주세요. 보수는 1,200원으로 표시됩니다.",
+          "첫 번째 상품 주문 검수 건이 준비됐습니다. 결과를 정확히 제출하면 정산 화면에서 지급 내역을 확인할 수 있습니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_003",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "11:05",
+        "textVariants": [
+          "첫 업무 제출을 확인했습니다. 정확하게 검수한 경우 보수 1,200원이 지급됩니다. 오늘 11시부터 후속 업무의 최소 출금 기준이 3,000원으로 변경됐으니 공식 공지를 확인해 주세요.",
+          "첫 업무의 검수 결과와 지급 여부는 정산 내역에서 확인해 주세요. 후속 업무부터는 공식 변경 정책에 따라 최소 출금 금액 3,000원이 적용됩니다.",
+          "첫 검수 결과가 접수됐습니다. 인정된 보수는 정산 내역에 반영됩니다. 11시 이후 새로 정산되는 후속 업무부터 최소 출금 기준이 3,000원으로 변경됩니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_004",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "11:10",
+        "textVariants": [
+          "변경된 정책을 확인하셨다면 후속 업무 TASK-202를 진행해 주세요. 정확한 검수 보수는 1,800원이며, 첫 검수에서 이미 지급된 보수가 있다면 반환할 필요는 없습니다.",
+          "추가 검수 주문 TASK-202가 등록됐습니다. 첫 업무에서 실제 지급된 금액은 유지되며, 새 업무의 미지급 보수에만 변경된 출금 기준을 적용합니다.",
+          "다음 주문 정보를 검수해 주세요. 정산 정책 변경은 최소 출금 금액에만 적용되고 업무별 보수 지급 기준은 동일합니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_003",
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_005",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "11:25",
+        "textVariants": [
+          "추가 업무 TASK-203까지 제출하셨습니다. 정확하게 처리된 후속 검수 건은 합산 정산되며 최소 출금 기준 3,000원을 넘으면 출금 요청이 가능합니다.",
+          "후속 검수 제출이 완료됐습니다. 정산 내역에서 업무별 인정 금액을 확인하시고, 변경된 공식 기준으로 출금 가능한지 살펴보세요.",
+          "추가 업무가 접수됐습니다. 변경된 출금 기준은 공지된 3,000원이고, 별도 처리 수수료나 개인 자금 입금은 요구하지 않습니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_006",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "11:30",
+        "textVariants": [
+          "공식 공지의 출금 기준은 3,000원, 수수료는 0원입니다. 첫 업무에서 실제 지급된 보수는 유지되고 후속 업무의 정산 완료 금액을 기준으로 출금 요청할 수 있습니다.",
+          "출금 기준 변경 여부가 궁금하다면 공식 홈페이지의 오전 11시 운영 공지 또는 고객지원센터를 확인해 주세요. 개인 계좌로 돈을 보내지 않으셔도 됩니다.",
+          "정산 조건 변경은 공식 공지와 동일하게 적용됐습니다. 후속 업무에서 인정된 보수가 3,000원 이상이면 출금 요청을 진행할 수 있습니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_005"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "SIDE_Q_001",
+        "prompt": "어떤 검수 업무를 진행하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "상품 등록 가격·수량과 주문 가격·수량을 비교하고 일치 여부를 제출하는 업무입니다.",
+          "쇼핑몰 상품 정보와 주문 정보를 대조해 정상 또는 오류 있음을 선택합니다.",
+          "등록된 상품의 가격과 수량이 주문서와 맞는지 확인해 주시면 됩니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_002",
+        "prompt": "업무를 시작하거나 출금하려면 개인 돈을 입금해야 하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "아니요. 정책 변경 이후에도 보증금이나 선입금은 없습니다.",
+          "최소 출금 기준만 변경됐고, 개인 자금을 먼저 보내는 조건은 없습니다.",
+          "업무 참여비, 계정 충전금, 출금 인증금은 요구하지 않습니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_003",
+        "prompt": "첫 업무와 후속 업무 보수는 어떻게 결정되나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "각 업무의 건별 보수를 사전에 표시하며, 정확하게 검수한 건의 보수만 인정됩니다.",
+          "첫 업무와 추가 주문 모두 상품별로 정해진 보수를 적용하고 정확한 결과 제출 시 정산합니다.",
+          "업무별 표시 금액이 보수 기준이며 검수 정답을 맞힌 건에 한해 인정됩니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_004",
+        "prompt": "이미 지급된 보수가 있다면, 정책이 변경돼도 다시 돌려줘야 하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "아니요. 최초에 지급된 보수는 유지됩니다. 변경은 오전 11시 이후 발생하는 후속 업무의 미지급 보수 출금 기준에만 적용됩니다.",
+          "이미 지급한 첫 업무 보수를 반환할 필요가 없습니다. 이후 정산되는 미지급 금액만 새 최소 출금 기준을 따릅니다.",
+          "기지급 금액은 그대로이며 새 기준은 향후 정산·출금 요청에 적용됩니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_005",
+        "prompt": "정산 조건 변경이 공식 정책인지 어디에서 검증할 수 있나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "업체 공식 홈페이지의 정산 운영 변경 공지와 공식 고객지원센터에서 확인 가능합니다.",
+          "오전 11시부터 적용된 최소 출금 3,000원 기준은 공식 안내 페이지에 게시되어 있습니다.",
+          "업무 사이트의 문구만 믿지 마시고 공식 정산 안내와 고객지원센터 답변도 비교해 보세요."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "SIDE_PAGE_001",
+        "pageType": "DETAIL",
+        "title": "온리데이터 상품·주문 검수원 모집 안내",
+        "sourceLabel": "온리데이터 공식 부업 공고(게임 내 가상 게시물)",
+        "body": "업무: 쇼핑몰 상품 등록 가격·수량과 주문서 정보 일치 여부 검수. 건별 보수: 업무별 표시, 정확한 검수 결과에만 보수 인정. 최초 안내 시 정산 완료 금액 1,000원 이상이면 수수료 없이 출금 신청 가능. 정산 운영 정책은 사전 공지 후 변경될 수 있으며, 변경 사항은 공식 안내와 고객지원센터에서 확인 가능. 보증금·업무 참여비·추가 계정 충전금 없음."
+      },
+      {
+        "id": "SIDE_PAGE_002",
+        "pageType": "GENERAL",
+        "title": "온리데이터 업체 소개",
+        "sourceLabel": "온리데이터 공식 홈페이지(게임 내 가상 페이지)",
+        "body": "온리데이터는 온라인 쇼핑몰의 상품 등록 정보와 주문 데이터를 관리하고 검수하는 가상 업체입니다. 상품·주문 데이터 비교 업무를 재택으로 운영합니다. 공식 공지사항을 통해 보수·정산 정책의 적용 시각과 변경 내용을 공개하며, 문의는 공식 고객지원센터에서 받습니다."
+      },
+      {
+        "id": "SIDE_PAGE_003",
+        "pageType": "OFFICIAL",
+        "title": "공식 업무·정산 조건 및 11시 변경 공지",
+        "sourceLabel": "온리데이터 공식 정산 운영 공지(게임 내 가상 페이지)",
+        "body": "공식 정산 정책: 상품과 주문 정보 일치 여부를 정확히 검수한 건에 한해 약정 보수를 인정합니다. 초기 출금 최소 금액은 1,000원, 처리 수수료는 0원입니다. [운영 변경 공지: 10:50 게시, 11:00 시행] 정산 배치 처리 기준 조정으로 11:00 이후 새로 정산되는 후속 업무의 미지급 보수에는 최소 출금 금액 3,000원을 적용합니다. 11:00 이전 이미 지급된 보수는 회수하거나 다시 입금하도록 요구하지 않습니다. 개인 보증금·인증금·충전금은 정책 변경 전후 모두 0원이며 출금 수수료도 계속 0원입니다. 공식 고객지원센터에서 동일한 기준을 확인할 수 있습니다."
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "SIDE_CALL_001",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "온리데이터는 실제로 어떤 업무를 운영하나요?",
+        "answerVariants": [
+          "상품과 주문 데이터의 가격·수량 대조 검수 업무를 운영합니다.",
+          "쇼핑몰에 등록된 상품 정보와 주문서를 비교하는 재택 업무입니다.",
+          "재택으로 상품·주문 정보의 일치 여부를 검수하는 업무를 진행합니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_002",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "담당자의 채용 안내와 추가 검수 업무가 공식 모집 조건에 맞나요?",
+        "answerVariants": [
+          "공식 모집에 따른 검수 업무가 맞습니다. 후속 업무도 같은 검수 기준을 따릅니다.",
+          "모집된 상품·주문 검수 업무와 일치하며, 추가 업무도 별도 참여비가 없습니다.",
+          "담당자가 안내한 업무 내용이 공식 공고와 일치합니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_003",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "업무 시작이나 추가 업무에 보증금이 필요한가요?",
+        "answerVariants": [
+          "아니요. 정책 변경과 관계없이 개인 자금 선입금은 요구하지 않습니다.",
+          "추가 주문을 진행하기 위해 보증금이나 충전금을 낼 필요는 없습니다.",
+          "업무 참여비와 계정 활성화비 등 별도 금전 요구는 없습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_004",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "오전 11시부터 최소 출금 금액이 3,000원으로 변경된 것이 공식 정책인가요?",
+        "answerVariants": [
+          "네. 10시 50분에 공식 공지됐으며 11시 이후 새로 정산되는 미지급 보수의 최소 출금 기준만 3,000원으로 바뀌었습니다. 첫 업무에서 이미 지급된 보수는 유지됩니다.",
+          "공식 공지가 맞습니다. 배치 정산 운영상 오전 11시부터 최소 출금 금액을 3,000원으로 조정했으며 개인 자금 선입금은 없습니다.",
+          "공식 정산 안내에 동일한 공지가 있습니다. 신규 정산 건만 최소 출금 3,000원 기준을 적용하고 출금 수수료는 0원입니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_005",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "정산 정책 변경 후 보증금이나 출금 인증금을 보내야 하나요?",
+        "answerVariants": [
+          "아니요. 변경된 것은 최소 출금 금액뿐이며 보증금이나 인증금은 없습니다.",
+          "개인 계좌로 추가 금액을 보내야 한다는 조건은 공식 정책에 없습니다.",
+          "출금 수수료 0원이며 별도의 선입금 없이 정산된 금액을 출금 신청할 수 있습니다."
+        ]
+      }
+    ],
+    "workTasks": [
+      {
+        "id": "SIDE_TASK_001",
+        "taskNumber": "TASK-201",
+        "productName": "블루투스 키보드",
+        "registeredPrice": 32000,
+        "registeredQuantity": 1,
+        "orderPrice": 32000,
+        "orderQuantity": 1,
+        "reward": 1200,
+        "correctResult": "NORMAL"
+      },
+      {
+        "id": "SIDE_TASK_002",
+        "taskNumber": "TASK-202",
+        "productName": "휴대용 보조배터리",
+        "registeredPrice": 25000,
+        "registeredQuantity": 2,
+        "orderPrice": 25000,
+        "orderQuantity": 3,
+        "reward": 1800,
+        "correctResult": "ERROR"
+      },
+      {
+        "id": "SIDE_TASK_003",
+        "taskNumber": "TASK-203",
+        "productName": "노트북 거치대",
+        "registeredPrice": 21000,
+        "registeredQuantity": 2,
+        "orderPrice": 21000,
+        "orderQuantity": 2,
+        "reward": 1600,
+        "correctResult": "NORMAL"
+      }
+    ],
+    "settlements": [
+      {
+        "id": "SIDE_SETTLEMENT_001",
+        "taskId": "SIDE_TASK_001",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_002",
+        "taskId": "SIDE_TASK_002",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_003",
+        "taskId": "SIDE_TASK_003",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      }
+    ],
+    "withdrawalPolicy": {
+      "minimumAmount": 1000,
+      "processingFee": 0,
+      "requiresPersonalDeposit": false,
+      "depositAmount": 0,
+      "conditions": "초기 정산 기준은 인정 보수 1,000원 이상부터 수수료 없이 출금 신청 가능하며 별도의 개인 자금 입금은 필요하지 않습니다. 오전 11시부터 적용되는 공식 변경 내용은 공식 안내에서 확인할 수 있습니다.",
+      "requestResult": "가상 출금 요청이 정상 접수되었습니다. 적용 시점의 공식 최소 출금 금액을 충족해야 하며 실제 금융 거래는 발생하지 않습니다."
+    },
+    "evidence": [
+      {
+        "id": "SIDE_EVIDENCE_001",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_001",
+        "fact": "최초 공고는 최소 출금 1,000원과 함께 정산 정책 변경 시 공식 공지 및 문의 채널을 안내한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_002",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_003",
+        "fact": "10:50 공식 공지에 11:00 이후 신규 정산 건부터 최소 출금 3,000원을 적용한다고 명시되어 있다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_003",
+        "sourceType": "QUESTION",
+        "sourceId": "SIDE_Q_004",
+        "fact": "담당자는 이미 지급된 첫 보수의 반환을 요구하지 않으며 변경이 미지급 후속 보수에만 적용된다고 설명한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_004",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "SIDE_CALL_004",
+        "fact": "공식 고객지원센터가 변경 시행 시각, 최소 출금 금액과 선입금 없음 정책을 일치하게 확인한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_005",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_002",
+        "fact": "업체 홈페이지에 공식 정산 정책 변경을 안내하는 공지 채널이 소개되어 있다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "SIDE_STEP_001",
+        "description": "부업 모집 공고와 초기 보수·정산 조건 확인"
+      },
+      {
+        "id": "SIDE_STEP_002",
+        "description": "첫 검수 업무 수행 및 소액 보수 지급 확인"
+      },
+      {
+        "id": "SIDE_STEP_003",
+        "description": "정산 운영 조건 변경 안내 수신과 공식 정책 비교"
+      },
+      {
+        "id": "SIDE_STEP_004",
+        "description": "변경된 정산 조건 아래 추가 검수 업무 진행"
+      },
+      {
+        "id": "SIDE_STEP_005",
+        "description": "후속 검수 완료와 업무별 보수 정산 확인"
+      },
+      {
+        "id": "SIDE_STEP_006",
+        "description": "변경된 출금 기준의 정당성 확인 및 최종 판단"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "SIDE_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_001",
+          "stepId": "SIDE_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_001"
+          ],
+          "nextStepId": "SIDE_STEP_002"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_001",
+          "stepId": "SIDE_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_001",
+              "requiredCorrectResult": true,
+              "settlementStatus": "PAID",
+              "paidAmount": 1200
+            }
+          ],
+          "nextStepId": "SIDE_STEP_003"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_003",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_003",
+          "stepId": "SIDE_STEP_003"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_004"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_002"
+          ],
+          "withdrawalPolicyUpdate": {
+            "minimumAmount": 3000,
+            "conditions": "[공식 운영 변경: 11:00 시행] 이후 새로 정산된 후속 업무의 미지급 보수는 3,000원 이상부터 출금할 수 있습니다. 기존에 지급된 첫 업무 보수는 유지됩니다. 출금 수수료 및 개인 자금 선입금은 없습니다.",
+            "requestResult": "변경된 공식 기준에 따라 후속 검수에서 정산 완료된 미지급 보수가 3,000원 이상이면 가상 출금 요청이 접수됩니다. 별도 입금은 필요하지 않습니다."
+          },
+          "nextStepId": "SIDE_STEP_004"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_004",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_002",
+          "stepId": "SIDE_STEP_004"
+        },
+        "effects": {
+          "unlockMessageIds": [],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_003"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_002",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_005"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_005",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_003",
+          "stepId": "SIDE_STEP_005"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_005"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_003",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_006"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_006",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_005",
+          "stepId": "SIDE_STEP_006"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_006"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "nextStepId": "SIDE_STEP_006"
+        }
+      }
+    ],
+    "scenarioData": {
+      "sideJobPosting": {
+        "companyName": "온리데이터",
+        "companyDescription": "온리데이터는 온라인 쇼핑몰의 상품 등록 정보와 주문 데이터를 관리하고 검수하는 가상 업체입니다.",
+        "position": "온라인 쇼핑몰 상품·주문 데이터 검수원",
+        "workType": "건별 보수형 재택 아르바이트",
+        "workDescription": "업무 사이트에서 상품의 등록 가격 및 수량과 주문 내역을 비교하고, 정보가 일치하는지 확인하여 검수 결과를 제출합니다.",
+        "workEnvironment": "개인 PC를 이용한 비대면 재택근무이며, 게임 내 업무 사이트에서 검수 작업을 진행합니다.",
+        "rewardPolicy": "업무별로 사전 안내한 건별 보수를 정확한 검수 건에 한해 인정합니다. 초기 최소 출금 1,000원이며 10:50에 공식 공지된 11:00 시행 변경 정책에 따라 이후 신규 정산된 미지급 보수는 3,000원 이상부터 출금 신청 가능합니다. 이미 지급한 보수는 유지되고 개인 자금 선입금은 없습니다.",
+        "requirements": "기본적인 PC 사용이 가능하고 상품 및 주문 정보를 비교할 수 있는 사람",
+        "officialContact": "온리데이터 공식 고객지원센터(게임 내 가상 문의처)"
+      }
+    },
+    "preventionTips": [
+      "정산 조건이 변경됐다는 안내를 받으면 업체 공식 홈페이지의 공지 게시 시각과 시행 시각을 확인하세요.",
+      "업무 담당자의 말뿐 아니라 공식 고객지원센터 답변과 변경된 정책 내용이 일치하는지 대조하세요.",
+      "이미 지급받은 금액과 아직 정산되지 않은 보수를 구분해 확인하세요.",
+      "최소 출금 금액의 변경과 개인 자금 선입금 요구는 서로 다른 사항이므로 별도로 확인하세요.",
+      "출금을 이유로 개인 계좌에 보증금·인증금·충전금을 보내라는 요구가 없는지 점검하세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "DETAIL_VIEWED",
+        "targetId": "SIDE_PAGE_001",
+        "score": 8
+      },
+      {
+        "eventName": "OFFICIAL_INFO_VIEWED",
+        "targetId": "SIDE_PAGE_003",
+        "score": 8
+      },
+      {
+        "eventName": "QUESTION_SELECTED",
+        "targetId": "SIDE_Q_002",
+        "score": 8
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "SIDE_CALL_004",
+        "score": 8
+      },
+      {
+        "eventName": "SETTLEMENT_VIEWED",
+        "targetId": "SIDE_SETTLEMENT_001",
+        "score": 8
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_VERIFIED_WORK": 30,
+      "VERIFY_OFFICIAL": 25,
+      "REFUSE_PERSONAL_DEPOSIT": 15,
+      "STOP_AND_REPORT": 10,
+      "TRANSFER_UNVERIFIED": 0
+    }
+  }
+}

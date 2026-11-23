@@ -1,0 +1,562 @@
+{
+  "scenarioId": "SIDE",
+  "caseType": "NORMAL",
+  "difficulty": "MEDIUM",
+  "content": {
+    "actors": [
+      {
+        "id": "SIDE_ACTOR_001",
+        "displayName": "한글문서랩 채용 담당자",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "SIDE_ACTOR_002",
+        "displayName": "한글문서랩 공식 고객지원센터",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "SIDE_STEP_001",
+      "unlockedMessageIds": [
+        "SIDE_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "SIDE_Q_001",
+        "SIDE_Q_002",
+        "SIDE_Q_003",
+        "SIDE_Q_004",
+        "SIDE_Q_005"
+      ],
+      "unlockedPageIds": [
+        "SIDE_PAGE_001",
+        "SIDE_PAGE_002",
+        "SIDE_PAGE_003"
+      ],
+      "unlockedInquiryIds": [
+        "SIDE_CALL_001",
+        "SIDE_CALL_002",
+        "SIDE_CALL_003",
+        "SIDE_CALL_004",
+        "SIDE_CALL_005"
+      ],
+      "unlockedTaskIds": []
+    },
+    "messages": [
+      {
+        "id": "SIDE_MSG_001",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:00",
+        "textVariants": [
+          "한글문서랩 재택 문서 검수 업무에 지원해 주셔서 감사합니다. 첫 문서는 무료 웹 검수 화면에서 진행하며, 후속 문서도 같은 도구로 검수할 수 있습니다.",
+          "안녕하세요, 한글문서랩 채용 담당자입니다. 원본과 검수 문장을 비교하는 재택 업무입니다. 검수 도구와 교육자료는 모두 무료입니다.",
+          "문서 오탈자 검수원을 모집합니다. 첫 검수 이후 추가 문서가 배정될 수 있으며 유료 프로그램 구매는 필요하지 않습니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_002",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_002",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:05",
+        "textVariants": [
+          "첫 문서 DOC-101을 배정했습니다. 원문과 검수 문장을 비교해 정상 또는 오류 있음을 제출해 주세요.",
+          "DOC-101의 날짜와 표현이 원본과 일치하는지 확인해 주세요. 웹 검수 화면은 무료입니다.",
+          "첫 업무가 열렸습니다. 두 문장을 비교하고 판정 결과를 선택하면 됩니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_003",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:18",
+        "textVariants": [
+          "첫 문서 제출을 확인했습니다. 정확한 검수에 한해 보수가 인정됩니다. 추가 문서 DOC-102도 무료 웹 화면에서 진행해 주세요.",
+          "DOC-101 검수가 접수됐습니다. 후속 주문 DOC-102가 열렸고 추가 프로그램 결제는 없습니다.",
+          "첫 검수 감사합니다. 같은 방식의 DOC-102 문서 검수가 배정됐습니다. 건별 보수는 기존 기준을 적용합니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_003",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_004",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:32",
+        "textVariants": [
+          "DOC-102 검수 결과가 접수됐습니다. 마지막 문서 DOC-103을 배정했습니다. 프로그램은 계속 무료로 사용할 수 있습니다.",
+          "두 번째 검수가 끝났습니다. DOC-103 역시 기존 웹 검수 화면을 이용하시면 됩니다.",
+          "추가 문서 제출을 확인했습니다. 마지막 검수까지 완료한 뒤 정산 내역을 확인해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_003",
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_005",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:45",
+        "textVariants": [
+          "세 번째 검수까지 접수됐습니다. 정확히 판정한 문서만 정산 화면에서 보수와 출금 가능 상태를 확인할 수 있습니다.",
+          "DOC-103 제출을 확인했습니다. 후속 업무에도 별도 프로그램 구매비가 없으며 정산 상태를 확인하시면 됩니다.",
+          "모든 문서 검수가 접수됐습니다. 업무별 보수 인정 여부를 정산 내역에서 확인해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_006",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:50",
+        "textVariants": [
+          "정산된 보수는 1,000원 이상부터 수수료 없이 출금 요청할 수 있습니다. 유료 프로그램 구매나 개인 자금 송금은 없습니다.",
+          "추가 문서도 무료 웹 검수 도구를 이용하고, 정확히 검수한 건의 보수만 정산됩니다.",
+          "공식 공고와 고객지원센터에서 프로그램 무료 제공 및 보수 지급 기준을 확인할 수 있습니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_005"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "SIDE_Q_001",
+        "prompt": "어떤 문서 검수 업무를 진행하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "원본 문장과 검수 대상 문장을 비교해 일치하면 정상, 다르면 오류 있음을 선택합니다.",
+          "두 문서의 날짜·숫자·글자 차이를 확인하고 검수 결과를 제출합니다.",
+          "검수 화면에서 원문과 제출 문장을 대조하는 재택 업무입니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_002",
+        "prompt": "후속 업무를 하려면 전용 프로그램을 구매해야 하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "아니요. 첫 업무와 후속 업무 모두 공식 무료 웹 검수 화면을 이용합니다.",
+          "추가 업무에도 유료 프로그램이나 별도 등록비는 없습니다.",
+          "전용 소프트웨어를 개인 돈으로 구매할 필요 없이 문서 검수를 진행할 수 있습니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_003",
+        "prompt": "보수는 어떤 기준으로 지급되나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "문서별 보수가 미리 표시되고 일치 여부를 정확히 판정한 건만 보수를 인정합니다.",
+          "정확한 검수 결과를 제출한 건에 한해 건별 보수를 정산합니다.",
+          "업무 카드의 보수는 검수 정답이 맞았을 때 인정됩니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_004",
+        "prompt": "무료 웹 검수 화면으로 추가 업무도 진행할 수 있나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "네. DOC-102와 DOC-103도 기존 무료 검수 화면에서 진행할 수 있습니다.",
+          "추가 주문 역시 같은 검수 사이트에서 원문과 문장을 비교하면 됩니다.",
+          "업무마다 별도의 유료 프로그램을 설치하거나 결제할 필요는 없습니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_005",
+        "prompt": "프로그램 사용 조건은 공식 업체에서 확인할 수 있나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "공식 검수 안내 페이지와 고객지원센터에서 무료 도구 사용 정책을 확인하실 수 있습니다.",
+          "업체 공식 공고에 모든 문서 검수는 무료 웹 도구를 사용한다고 명시돼 있습니다.",
+          "공식 고객지원센터가 추가 업무에서도 프로그램 결제비가 없다는 사실을 확인해 드립니다."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "SIDE_PAGE_001",
+        "pageType": "DETAIL",
+        "title": "한글문서랩 재택 문서 오탈자 검수원 모집",
+        "sourceLabel": "한글문서랩 공식 부업 모집 공고(게임 내 가상 게시물)",
+        "body": "업무: 원본과 검수 대상 문장을 비교하여 정상 또는 오류 있음으로 제출하는 재택 검수. 첫 업무 이후 추가 문서 배정 가능. 첫 업무와 후속 업무 모두 공식 무료 웹 검수 화면에서 진행하며 별도 프로그램 결제비·계정 등록비 없음. 정확한 검수에 한해 건별 보수 인정. 정산 금액 1,000원 이상부터 수수료 없이 출금 가능."
+      },
+      {
+        "id": "SIDE_PAGE_002",
+        "pageType": "GENERAL",
+        "title": "한글문서랩 업체 소개",
+        "sourceLabel": "한글문서랩 공식 홈페이지(게임 내 가상 페이지)",
+        "body": "한글문서랩은 안내문과 문서의 원문·검수 대상 문장 일치 여부를 확인하는 게임 내 가상 업체입니다. 업무에 필요한 문서 검수 웹 도구와 교육자료는 무료로 제공합니다. 공식 업무·정산 정책은 홈페이지 안내와 고객지원센터에서 확인할 수 있습니다."
+      },
+      {
+        "id": "SIDE_PAGE_003",
+        "pageType": "OFFICIAL",
+        "title": "공식 문서 검수 및 정산 조건",
+        "sourceLabel": "한글문서랩 공식 고객지원 안내(게임 내 가상 페이지)",
+        "body": "공식 문서 검수 정책: 원본과 검수 문장 일치 여부를 정확히 판정한 건별 보수를 인정합니다. 처음과 추가 업무 모두 공식 무료 웹 검수 도구를 사용하며, 전용 프로그램 구매비·사용료·등록비를 청구하지 않습니다. 추가 검수 및 정산을 이유로 개인 자금 39,000원 결제를 요구하는 절차는 공식 정책에 없습니다. 정산된 금액 1,000원 이상부터 출금 요청 가능하며 처리 수수료는 0원입니다."
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "SIDE_CALL_001",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "한글문서랩은 어떤 업체인가요?",
+        "answerVariants": [
+          "한글문서랩은 문서의 원문과 검수 문장을 대조하는 재택 업무를 운영합니다.",
+          "안내문과 문서의 오탈자 여부를 확인하는 검수 업무를 운영합니다.",
+          "문서의 날짜, 숫자, 문장 내용 일치 여부를 판정하는 업무를 제공하고 있습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_002",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "채팅 담당자의 모집 안내와 프로그램 사용 조건이 공식적으로 확인되나요?",
+        "answerVariants": [
+          "공식 채용 공고와 일치하며 후속 업무도 무료 웹 도구로 진행합니다.",
+          "공식 모집 업무가 맞고 유료 프로그램 사용 조건은 없습니다.",
+          "담당자의 업무 설명과 공식 공고가 일치하며 별도 결제 요구가 없습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_003",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "첫 업무와 후속 업무 모두 무료 검수 프로그램을 사용할 수 있나요?",
+        "answerVariants": [
+          "네. 첫 문서와 추가 문서 모두 공식 웹 도구를 무료로 이용할 수 있습니다.",
+          "업무에 사용하는 검수 프로그램은 무료이며 별도 라이선스 구매가 필요하지 않습니다.",
+          "문서 검수 도구 이용을 위해 개인 자금을 보내지 않아도 됩니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_004",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "공식 정산 기준과 프로그램 사용 정책은 어떻게 되나요?",
+        "answerVariants": [
+          "정확히 검수한 문서마다 건별 보수를 인정하며, 무료 웹 도구로 검수합니다. 1,000원 이상부터 수수료 없이 출금할 수 있습니다.",
+          "첫 업무와 후속 업무 모두 무료 프로그램을 사용하고 보수 지급에 개인 결제는 요구하지 않습니다.",
+          "공식 정산은 검수 결과 기준으로 이루어집니다. 유료 전용 도구 등록비는 없습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_005",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "추가 업무를 위해 별도 프로그램 결제가 필요한가요?",
+        "answerVariants": [
+          "아니요. 추가 문서 검수에도 개인 돈으로 프로그램을 구매할 필요가 없습니다.",
+          "후속 업무 보수를 받기 위해 전용 편집 프로그램 비용을 내도록 요구하지 않습니다.",
+          "유료 프로그램 등록비나 보수 지급을 위한 결제 절차는 공식 정책이 아닙니다."
+        ]
+      }
+    ],
+    "workTasks": [
+      {
+        "id": "SIDE_TASK_001",
+        "taskNumber": "DOC-101",
+        "documentTitle": "수강 신청 일정 안내",
+        "originalText": "수강 신청 기간은 12월 1일부터 12월 5일까지입니다.",
+        "submittedText": "수강 신청 기간은 12월 1일부터 12월 5일까지입니다.",
+        "reward": 1200,
+        "correctResult": "NORMAL"
+      },
+      {
+        "id": "SIDE_TASK_002",
+        "taskNumber": "DOC-102",
+        "documentTitle": "장학금 서류 제출 안내",
+        "originalText": "장학금 신청 서류는 12월 10일까지 제출해 주세요.",
+        "submittedText": "장학금 신청 서류는 12월 11일까지 제출해 주세요.",
+        "reward": 1800,
+        "correctResult": "ERROR"
+      },
+      {
+        "id": "SIDE_TASK_003",
+        "taskNumber": "DOC-103",
+        "documentTitle": "온라인 교육 참여 안내",
+        "originalText": "교육 참여 확인서는 담당자 이메일로 제출합니다.",
+        "submittedText": "교육 참여 확인서는 담당자 이메일로 제출합니다.",
+        "reward": 1600,
+        "correctResult": "NORMAL"
+      }
+    ],
+    "settlements": [
+      {
+        "id": "SIDE_SETTLEMENT_001",
+        "taskId": "SIDE_TASK_001",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_002",
+        "taskId": "SIDE_TASK_002",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_003",
+        "taskId": "SIDE_TASK_003",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      }
+    ],
+    "withdrawalPolicy": {
+      "minimumAmount": 1000,
+      "processingFee": 0,
+      "requiresPersonalDeposit": false,
+      "depositAmount": 0,
+      "conditions": "첫 업무와 후속 업무 모두 정확히 검수하여 인정된 금액이 1,000원 이상이면 수수료 없이 출금할 수 있습니다. 교육자료와 웹 검수 프로그램은 무료이며 선입금이나 별도 프로그램 결제비가 없습니다.",
+      "requestResult": "정산 완료 금액이 1,000원 이상인 경우 가상 출금 요청이 정상 접수됩니다. 실제 금융 거래는 발생하지 않습니다."
+    },
+    "evidence": [
+      {
+        "id": "SIDE_EVIDENCE_001",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_001",
+        "fact": "공식 모집 공고에 첫 업무와 추가 업무 모두 무료 검수 도구를 사용한다고 안내되어 있다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_002",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_003",
+        "fact": "공식 정책은 모든 문서 검수에 프로그램 결제비가 없으며 보수는 정확도에 따라 지급된다고 명시한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_003",
+        "sourceType": "QUESTION",
+        "sourceId": "SIDE_Q_002",
+        "fact": "담당자가 후속 업무에도 별도 전용 프로그램 구매가 필요하지 않다고 답변한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_004",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "SIDE_CALL_004",
+        "fact": "공식 고객지원센터가 무료 웹 검수 도구와 정상 정산 기준을 확인한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_005",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_002",
+        "fact": "업체 소개에 공식 웹 검수 도구가 무료라고 안내되어 있다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "SIDE_STEP_001",
+        "description": "모집 공고 및 무료 웹 검수 도구 사용 조건 확인"
+      },
+      {
+        "id": "SIDE_STEP_002",
+        "description": "첫 문서 검수 수행"
+      },
+      {
+        "id": "SIDE_STEP_003",
+        "description": "첫 검수 완료 후 같은 도구로 추가 문서 검수"
+      },
+      {
+        "id": "SIDE_STEP_004",
+        "description": "두 번째 검수 후 마지막 문서 검수"
+      },
+      {
+        "id": "SIDE_STEP_005",
+        "description": "전체 정산과 무료 프로그램 정책을 비교한 뒤 최종 판단"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "SIDE_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_001",
+          "stepId": "SIDE_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_001"
+          ],
+          "nextStepId": "SIDE_STEP_002"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_001",
+          "stepId": "SIDE_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_002"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_001",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_003"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_003",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_002",
+          "stepId": "SIDE_STEP_003"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_004"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_003"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_002",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_004"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_004",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_003",
+          "stepId": "SIDE_STEP_004"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_005"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_003",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_005"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_005",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_005",
+          "stepId": "SIDE_STEP_005"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_006"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "nextStepId": "SIDE_STEP_005"
+        }
+      }
+    ],
+    "scenarioData": {
+      "sideJobPosting": {
+        "companyName": "한글문서랩",
+        "companyDescription": "한글문서랩은 각종 안내문과 문서의 오탈자 및 내용 일치 여부를 검수하는 게임 내 가상 업체입니다.",
+        "position": "재택 문서 오탈자 검수원",
+        "workType": "건별 보수형 재택 아르바이트",
+        "workDescription": "업무 사이트에서 원본 문서와 검수 대상 문장을 비교하고 두 문장이 일치하는지 정상 또는 오류 있음으로 제출합니다.",
+        "workEnvironment": "개인 PC를 이용한 비대면 재택근무이며 게임 내 문서 검수 화면에서 작업합니다.",
+        "rewardPolicy": "모든 문서 검수는 무료 웹 도구로 진행합니다. 문서마다 보수를 사전에 안내하며 정확하게 검수한 업무에 한해 보수를 인정합니다. 프로그램 사용료나 개인 자금 선입금은 없습니다.",
+        "requirements": "기본적인 PC 사용이 가능하고 문장을 꼼꼼하게 비교할 수 있는 사람",
+        "officialContact": "한글문서랩 공식 고객지원센터(게임 내 가상 문의처)"
+      }
+    },
+    "preventionTips": [
+      "추가 업무에도 공식 검수 도구를 무료로 제공하는지 확인하세요.",
+      "처음 공고와 실제 추가 업무의 프로그램 사용 조건이 일치하는지 비교하세요.",
+      "문서 대조 결과를 정확하게 판정하고 건별 보수 인정 여부를 확인하세요.",
+      "정산 내역에 표시된 출금 가능 금액과 실제 지급 완료 금액을 구분하세요.",
+      "새로운 결제 조건이 생긴다면 공식 고객지원센터에서 먼저 확인하세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "DETAIL_VIEWED",
+        "targetId": "SIDE_PAGE_001",
+        "score": 8
+      },
+      {
+        "eventName": "OFFICIAL_INFO_VIEWED",
+        "targetId": "SIDE_PAGE_003",
+        "score": 8
+      },
+      {
+        "eventName": "QUESTION_SELECTED",
+        "targetId": "SIDE_Q_002",
+        "score": 8
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "SIDE_CALL_004",
+        "score": 8
+      },
+      {
+        "eventName": "SETTLEMENT_VIEWED",
+        "targetId": "SIDE_SETTLEMENT_001",
+        "score": 8
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_VERIFIED_WORK": 30,
+      "VERIFY_OFFICIAL": 25,
+      "REFUSE_PERSONAL_DEPOSIT": 15,
+      "STOP_AND_REPORT": 10,
+      "TRANSFER_UNVERIFIED": 0
+    }
+  }
+}

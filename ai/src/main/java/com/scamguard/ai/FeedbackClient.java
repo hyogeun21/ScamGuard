@@ -33,6 +33,10 @@ public final class FeedbackClient {
         this.model = model;
     }
 
+    public String generateJson(String inputJson) throws IOException {
+        return JSON.writeValueAsString(generate(inputJson));
+    }
+
     public JsonNode generate(String inputJson) throws IOException {
         JsonNode input = JSON.readTree(inputJson);
         validate(INPUT, input, "평가 입력");

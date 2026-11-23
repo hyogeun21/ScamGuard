@@ -1,0 +1,582 @@
+{
+  "scenarioId": "SIDE",
+  "caseType": "SCAM",
+  "difficulty": "MEDIUM",
+  "content": {
+    "actors": [
+      {
+        "id": "SIDE_ACTOR_001",
+        "displayName": "소셜체크 채용팀 사칭 담당자",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "SIDE_ACTOR_002",
+        "displayName": "소셜체크 공식 고객지원센터",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "SIDE_STEP_001",
+      "unlockedMessageIds": [
+        "SIDE_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "SIDE_Q_001",
+        "SIDE_Q_003"
+      ],
+      "unlockedPageIds": [
+        "SIDE_PAGE_001",
+        "SIDE_PAGE_002",
+        "SIDE_PAGE_003"
+      ],
+      "unlockedInquiryIds": [
+        "SIDE_CALL_001",
+        "SIDE_CALL_002",
+        "SIDE_CALL_003",
+        "SIDE_CALL_004",
+        "SIDE_CALL_005"
+      ],
+      "unlockedTaskIds": []
+    },
+    "messages": [
+      {
+        "id": "SIDE_MSG_001",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:08",
+        "textVariants": [
+          "안녕하세요. 소셜체크에서 SNS 홍보 문구 검수 업무를 안내드립니다. 먼저 여름 특별 할인 게시물을 살펴봐 주세요.",
+          "이번에 맡으실 일은 SNS 광고 문구를 원본과 비교하는 작업입니다. 첫 검수 대상은 여름 특별 할인 안내입니다.",
+          "소셜체크 재택 검수 업무에 참여해 주셔서 감사합니다. 여름 특별 할인 게시물의 내용이 정확한지 확인하는 것으로 시작하겠습니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_002",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:16",
+        "textVariants": [
+          "첫 번째 검수 건을 배정했습니다. 공식 할인 문구와 실제 게시물에 적힌 할인율을 비교해 결과를 제출해 주세요.",
+          "여름 특별 할인 게시물이 작업 목록에 올라왔습니다. 원본과 게시된 내용을 대조한 뒤 정상 또는 오류를 선택하시면 됩니다.",
+          "처음 맡으실 게시물은 여름 시즌 할인 안내입니다. 안내된 수치가 원문과 일치하는지 살펴보고 검수 결과를 알려주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_003",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "10:24",
+        "textVariants": [
+          "첫 번째 게시물의 검수 결과를 접수했습니다. 이어서 무료배송 이벤트 안내를 확인해 주세요.",
+          "여름 특별 할인 검수가 제출됐습니다. 다음 작업은 무료배송 조건이 원본과 같은지 점검하는 일입니다.",
+          "첫 작업은 접수 처리했습니다. 이제 구매 금액에 따른 무료배송 안내를 비교해 주시면 됩니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_004",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "11:32",
+        "textVariants": [
+          "무료배송 안내 검수도 접수했습니다. 마지막으로 신규 회원 첫 구매 혜택 게시물을 확인해 주세요.",
+          "두 번째 작업까지 제출됐습니다. 남은 검수 건은 신규 회원 할인 금액이 정확한지 확인하는 것입니다.",
+          "이제 마지막 게시물만 남았습니다. 신규 가입 고객에게 안내한 첫 구매 혜택을 원본 문구와 비교해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_001",
+          "SIDE_Q_003"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_005",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "11:40",
+        "textVariants": [
+          "검수 보수가 쌓였네요. 누적된 금액을 출금하려면 VIP 등급 승급비 40,000원을 먼저 납부하셔야 합니다.",
+          "현재 계정은 일반 등급이라 보수 출금이 제한돼 있습니다. 40,000원을 입금해 VIP로 전환하면 출금이 가능하다는 안내입니다.",
+          "세 건의 작업이 접수됐지만 바로 출금할 수는 없습니다. 정산 등급을 높이는 비용 40,000원을 먼저 보내주셔야 합니다."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      },
+      {
+        "id": "SIDE_MSG_006",
+        "senderId": "SIDE_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "11:48",
+        "textVariants": [
+          "아직 VIP 승급비 납부가 확인되지 않아 출금이 보류 중입니다. 40,000원을 입금하시면 처리하겠습니다.",
+          "정산 요청을 진행하려면 회원 등급 전환부터 완료하셔야 합니다. 필요한 금액은 40,000원이며 입금 전에는 보수를 지급할 수 없습니다.",
+          "검수 보수는 계정에 남아 있지만 일반 등급으로는 인출이 어렵습니다. 승급 비용 40,000원을 먼저 결제해 주세요."
+        ],
+        "questionIds": [
+          "SIDE_Q_002",
+          "SIDE_Q_004",
+          "SIDE_Q_005"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "SIDE_Q_001",
+        "prompt": "어떤 SNS 검수 업무를 진행하나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "소셜체크에서는 공식 홍보 문구와 실제 SNS 게시물의 내용을 비교합니다. 서로 같으면 NORMAL, 차이가 있으면 ERROR로 제출해 주세요.",
+          "게시물의 할인율이나 배송 조건이 원본과 일치하는지 확인하는 일입니다. 검수 결과는 정상 또는 오류로 표시하시면 됩니다.",
+          "원본 안내와 게시된 광고를 나란히 살펴보고 숫자나 문구에 차이가 있는지 판정합니다. 결과 선택지는 NORMAL과 ERROR입니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_002",
+        "prompt": "누적 보수를 출금하려면 VIP 승급비가 필요한가요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "네, 누적된 보수를 출금하려면 VIP로 전환해야 합니다. 승급비는 40,000원입니다.",
+          "일반 등급에서는 정산 금액을 인출할 수 없습니다. 40,000원을 납부해 회원 등급을 올리셔야 해요.",
+          "출금 신청 전에 등급 변경 절차가 필요합니다. 안내된 전환 비용 40,000원을 먼저 보내주세요."
+        ]
+      },
+      {
+        "id": "SIDE_Q_003",
+        "prompt": "정확한 검수 결과의 보수는 어떻게 정해지나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "각 게시물에 표시된 보수는 검수 결과가 정확할 때 인정됩니다. 작업마다 금액이 다를 수 있습니다.",
+          "보수는 게시물 단위로 정해져 있습니다. 원본과 비교한 판정이 맞아야 해당 건의 금액을 정산 대상으로 처리합니다.",
+          "정확하게 검수한 작업만 건별 보수가 쌓입니다. 지급 기준 금액은 업무 화면에서 미리 확인하실 수 있습니다."
+        ]
+      },
+      {
+        "id": "SIDE_Q_004",
+        "prompt": "VIP 승급비를 내지 않으면 인정된 보수를 받을 수 없나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "승급비가 확인되지 않으면 출금 요청은 보류됩니다. 먼저 회원 등급을 변경해 주셔야 합니다.",
+          "현재 일반 계정으로는 쌓인 보수를 인출할 수 없습니다. 40,000원 납부 후 정산을 진행할 수 있습니다.",
+          "비용을 내지 않으시면 작업 보수는 계정에 남아 있어도 지급 처리가 어렵습니다. 내부 등급 절차를 완료해 주세요."
+        ]
+      },
+      {
+        "id": "SIDE_Q_005",
+        "prompt": "추가 요구가 소셜체크 공식 정책에 명시돼 있나요?",
+        "responderId": "SIDE_ACTOR_001",
+        "answerVariants": [
+          "이 내용은 정산 담당팀에서 별도로 안내하는 절차입니다. 채팅으로 전달된 기준에 따라 진행해 주세요.",
+          "공식 공고에는 세부 승급 절차가 모두 적혀 있지 않을 수 있습니다. 저희가 안내한 출금 조건을 우선 확인해 주세요.",
+          "등급 관련 조건은 담당 부서에서 관리합니다. 일반 안내와 별개로 전달되는 절차라 여기서 설명드리고 있습니다."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "SIDE_PAGE_001",
+        "pageType": "DETAIL",
+        "title": "소셜체크 재택 SNS 홍보 문구 검수원 모집",
+        "sourceLabel": "소셜체크 공식 모집 공고(게임 내 가상 게시물)",
+        "body": "SNS에 게시된 광고 문구를 원본과 대조해 정상/오류로 판정하는 건별 검수입니다. 정확한 판정에만 보수를 인정하며, 인정된 금액 1,000원 이상부터 수수료 없이 가상 출금이 가능합니다. 실제 송금은 발생하지 않습니다."
+      },
+      {
+        "id": "SIDE_PAGE_002",
+        "pageType": "GENERAL",
+        "title": "소셜체크 업체 및 업무 소개",
+        "sourceLabel": "소셜체크 공식 홈페이지(게임 내 가상 페이지)",
+        "body": "소셜체크는 SNS 홍보 문구 검수를 운영하는 게임 내 가상 업체입니다. 채용 안내의 진위, 정산 기준 및 개인정보 관련 사항은 공식 고객지원센터에서 확인할 수 있습니다."
+      },
+      {
+        "id": "SIDE_PAGE_003",
+        "pageType": "OFFICIAL",
+        "title": "공식 SNS 검수·정산·보안 정책",
+        "sourceLabel": "소셜체크 공식 업무 정책(게임 내 가상 페이지)",
+        "body": "공식 SNS 문구 검수는 정확하게 완료한 건별로 보수를 인정합니다. 1,000원 이상부터 수수료 없이 출금할 수 있습니다. SNS 문구 검수 보수는 유료 VIP 회원 가입 없이 출금할 수 있으며, 회원 등급 상승을 조건으로 가입비를 청구하지 않습니다. 공식 채널 외의 개인정보 제공이나 개인 자금 송금은 요구하지 않습니다."
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "SIDE_CALL_001",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "소셜체크에서 SNS 문구 검수 재택업무를 운영하나요?",
+        "answerVariants": [
+          "네, 소셜체크는 SNS 홍보 게시물을 공식 문구와 비교하는 재택 검수 업무를 운영하고 있습니다.",
+          "실제 운영하는 업무가 맞습니다. 게시물에 안내된 할인율과 배송 조건이 원본과 일치하는지 확인하는 일입니다.",
+          "저희 공식 업무 중 하나입니다. 홍보 문구의 숫자와 조건을 대조해 검수 결과를 제출하는 방식으로 진행합니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_002",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "누적 보수를 출금하려면 VIP 승급비가 필요한가요?",
+        "answerVariants": [
+          "아니요. 검수 보수 출금에 VIP 승급비는 필요하지 않습니다. 등급 변경을 이유로 돈을 받지 않습니다.",
+          "일반 회원도 정산된 보수를 출금할 수 있습니다. 유료 회원 가입이 출금 조건으로 지정되어 있지 않습니다.",
+          "공식 정산 정책에는 VIP 전환비가 없습니다. 돈을 내야 인출된다는 안내를 받으셨다면 저희 규정과 다릅니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_003",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "검수 보수는 어떻게 정산되나요?",
+        "answerVariants": [
+          "정확히 완료한 검수 건에만 보수가 인정됩니다. 인정 금액이 1,000원 이상이면 수수료 없이 가상 출금을 신청할 수 있습니다.",
+          "업무별 검수 결과에 따라 보수가 누적됩니다. 출금은 인정 금액 1,000원부터 가능하며 별도 처리 수수료는 없습니다.",
+          "정산 대상은 올바르게 판정한 게시물입니다. 누적된 인정 보수가 1,000원 이상일 때 무료로 가상 출금할 수 있습니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_004",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "VIP 승급비를 내지 않으면 인정된 보수를 받을 수 없나요?",
+        "answerVariants": [
+          "VIP 가입비를 내지 않았다는 이유로 정상적인 검수 보수를 보류하지 않습니다. 해당 비용은 공식 출금 조건이 아닙니다.",
+          "별도 승급비가 없으므로 이를 납부하지 않아도 됩니다. 인정된 보수는 일반 정산 규정에 따라 처리합니다.",
+          "회원 등급 전환을 위해 개인 돈을 보낼 필요가 없습니다. 그런 요구와 무관하게 공식 출금 기준을 적용합니다."
+        ]
+      },
+      {
+        "id": "SIDE_CALL_005",
+        "contactActorId": "SIDE_ACTOR_002",
+        "questionText": "채팅 담당자의 추가 요구가 공식 정책에 포함돼 있나요?",
+        "answerVariants": [
+          "공식 정책에는 VIP 승급 비용이 없습니다. 채팅에서 별도 입금을 요구한다면 공식 정산 조건과 다른 안내입니다.",
+          "회원 등급을 올려야 출금된다는 규정은 운영하지 않습니다. 담당자에게 돈을 보내라는 안내는 고객지원센터의 정책과 일치하지 않습니다.",
+          "저희는 출금 조건으로 유료 VIP 가입을 요청하지 않습니다. 채팅의 추가 비용 요구는 공식 정책에서 확인되지 않습니다."
+        ]
+      }
+    ],
+    "workTasks": [
+      {
+        "id": "SIDE_TASK_001",
+        "taskNumber": "SNS-101",
+        "documentTitle": "여름 특별 할인",
+        "originalText": "여름 시즌 전 상품 15% 할인",
+        "submittedText": "여름 시즌 전 상품 25% 할인",
+        "reward": 1200,
+        "correctResult": "ERROR"
+      },
+      {
+        "id": "SIDE_TASK_002",
+        "taskNumber": "SNS-102",
+        "documentTitle": "무료배송 이벤트",
+        "originalText": "3만원 이상 구매 시 무료배송",
+        "submittedText": "3만원 이상 구매 시 무료배송",
+        "reward": 1800,
+        "correctResult": "NORMAL"
+      },
+      {
+        "id": "SIDE_TASK_003",
+        "taskNumber": "SNS-103",
+        "documentTitle": "신규 회원 혜택",
+        "originalText": "신규 회원 첫 구매 시 5,000원 할인",
+        "submittedText": "신규 회원 첫 구매 시 3,000원 할인",
+        "reward": 1600,
+        "correctResult": "ERROR"
+      }
+    ],
+    "settlements": [
+      {
+        "id": "SIDE_SETTLEMENT_001",
+        "taskId": "SIDE_TASK_001",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_002",
+        "taskId": "SIDE_TASK_002",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      },
+      {
+        "id": "SIDE_SETTLEMENT_003",
+        "taskId": "SIDE_TASK_003",
+        "settlementStatus": "PENDING",
+        "paidAmount": 0
+      }
+    ],
+    "withdrawalPolicy": {
+      "minimumAmount": 1000,
+      "processingFee": 0,
+      "requiresPersonalDeposit": false,
+      "depositAmount": 0,
+      "conditions": "정확하게 검수한 건별 인정 보수는 1,000원 이상부터 수수료 없이 가상 출금 가능합니다. 개인 자금 선입금은 필요하지 않습니다.",
+      "requestResult": "공식 조건 충족 시 가상 출금 요청 가능합니다. 실제 금융 거래는 발생하지 않습니다."
+    },
+    "evidence": [
+      {
+        "id": "SIDE_EVIDENCE_001",
+        "sourceType": "MESSAGE",
+        "sourceId": "SIDE_MSG_003",
+        "fact": "첫 업무 완료 후에도 검수 업무를 계속 배정한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_002",
+        "sourceType": "MESSAGE",
+        "sourceId": "SIDE_MSG_005",
+        "fact": "보수 누적 후 VIP 승급비를 요구한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_003",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "SIDE_PAGE_003",
+        "fact": "공식 정책에는 유료 VIP 가입 없이 출금 가능하다고 안내한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_004",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "SIDE_CALL_002",
+        "fact": "공식 고객지원센터는 VIP 승급비가 필요하지 않다고 확인한다."
+      },
+      {
+        "id": "SIDE_EVIDENCE_005",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "SIDE_CALL_005",
+        "fact": "채팅 담당자의 VIP 관련 안내와 공식 정책이 충돌한다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "SIDE_STEP_001",
+        "description": "업무 조건 확인"
+      },
+      {
+        "id": "SIDE_STEP_002",
+        "description": "SNS-101 검수"
+      },
+      {
+        "id": "SIDE_STEP_003",
+        "description": "SNS-102 검수"
+      },
+      {
+        "id": "SIDE_STEP_004",
+        "description": "SNS-103 검수"
+      },
+      {
+        "id": "SIDE_STEP_005",
+        "description": "정산 및 VIP 등급 안내 확인 후 최종 판단"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "SIDE_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_001",
+          "stepId": "SIDE_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_001"
+          ],
+          "nextStepId": "SIDE_STEP_002"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_001",
+          "stepId": "SIDE_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_002"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_001",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_003"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_003",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_002",
+          "stepId": "SIDE_STEP_003"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_004"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [
+            "SIDE_TASK_003"
+          ],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_002",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_004"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_004",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "WORK_TASK_COMPLETED",
+          "targetId": "SIDE_TASK_003",
+          "stepId": "SIDE_STEP_004"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_005"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_003",
+              "requiredCorrectResult": true,
+              "settlementStatus": "AVAILABLE",
+              "paidAmount": 0
+            }
+          ],
+          "nextStepId": "SIDE_STEP_005"
+        }
+      },
+      {
+        "id": "SIDE_TRIGGER_005",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "SIDE_MSG_005",
+          "stepId": "SIDE_STEP_005"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "SIDE_MSG_006"
+          ],
+          "unlockQuestionIds": [
+            "SIDE_Q_002",
+            "SIDE_Q_004",
+            "SIDE_Q_005"
+          ],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "unlockTaskIds": [],
+          "settlementUpdates": [
+            {
+              "settlementId": "SIDE_SETTLEMENT_002",
+              "requiredCorrectResult": true,
+              "settlementStatus": "BLOCKED",
+              "paidAmount": 0
+            },
+            {
+              "settlementId": "SIDE_SETTLEMENT_003",
+              "requiredCorrectResult": true,
+              "settlementStatus": "BLOCKED",
+              "paidAmount": 0
+            }
+          ],
+          "withdrawalPolicyUpdate": {
+            "requiresPersonalDeposit": true,
+            "depositAmount": 40000,
+            "conditions": "누적 보수를 출금하려면 VIP 회원 등급으로 전환해야 하며, 승급비 40,000원을 먼저 납부해야 합니다.",
+            "requestResult": "VIP 승급비 미납으로 출금 보류. 게임 내에서 실제 입금은 진행하지 않습니다."
+          },
+          "nextStepId": "SIDE_STEP_005"
+        }
+      }
+    ],
+    "scenarioData": {
+      "sideJobPosting": {
+        "companyName": "소셜체크",
+        "companyDescription": "소셜체크는 SNS 홍보 문구와 공식 광고 문구의 일치 여부를 검수하는 게임 내 가상 업체입니다.",
+        "position": "재택 SNS 홍보 문구 검수원",
+        "workType": "건별 보수형 재택 아르바이트",
+        "workDescription": "공식 홍보 문구와 SNS 게시물 문구를 비교해 NORMAL(정상) 또는 ERROR(오류 있음)를 제출합니다.",
+        "workEnvironment": "개인 PC에서 게임 내 SNS 게시물 검수 화면을 이용하는 비대면 재택근무입니다.",
+        "rewardPolicy": "정확히 검수한 건별 보수를 사전에 안내하며, 인정된 보수는 1,000원 이상부터 수수료 없이 출금 가능합니다. 업무 참여 시 개인 자금 선입금은 필요하지 않습니다.",
+        "requirements": "기본적인 PC 사용이 가능하고 SNS 게시물의 숫자·기간·문구를 꼼꼼히 비교할 수 있는 사람",
+        "officialContact": "소셜체크 공식 고객지원센터(게임 내 가상 문의처)"
+      }
+    },
+    "preventionTips": [
+      "적립된 보수를 출금하기 위해 별도의 가입비를 요구한다면 의심하세요.",
+      "VIP 등급 상향이 실제 공식 정책인지 확인하세요.",
+      "출금 제한 해제를 조건으로 개인 자금 입금을 요구하는지 살펴보세요.",
+      "추가 입금을 요구받았다면 송금하기 전에 공식 고객센터에 확인하세요.",
+      "정산 내역과 담당자의 안내 메시지를 증거로 보관하세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "DETAIL_VIEWED",
+        "targetId": "SIDE_PAGE_001",
+        "score": 8
+      },
+      {
+        "eventName": "WORK_TASK_COMPLETED",
+        "targetId": "SIDE_TASK_001",
+        "score": 8
+      },
+      {
+        "eventName": "MESSAGE_VIEWED",
+        "targetId": "SIDE_MSG_005",
+        "score": 8
+      },
+      {
+        "eventName": "OFFICIAL_INFO_VIEWED",
+        "targetId": "SIDE_PAGE_003",
+        "score": 8
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "SIDE_CALL_005",
+        "score": 8
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_VERIFIED_WORK": 0,
+      "VERIFY_OFFICIAL": 25,
+      "REFUSE_PERSONAL_DEPOSIT": 30,
+      "STOP_AND_REPORT": 30,
+      "TRANSFER_UNVERIFIED": 0
+    }
+  }
+}

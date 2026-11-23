@@ -1,0 +1,332 @@
+{
+  "scenarioId": "JOB",
+  "caseType": "NORMAL",
+  "difficulty": "HARD",
+  "content": {
+    "actors": [
+      {
+        "id": "JOB_ACTOR_001",
+        "displayName": "가온물류서비스 채용담당자",
+        "role": "RECRUITER"
+      },
+      {
+        "id": "JOB_ACTOR_002",
+        "displayName": "가온물류서비스 공식인사팀",
+        "role": "OFFICIAL_HR"
+      }
+    ],
+    "initialState": {
+      "currentStepId": "JOB_STEP_001",
+      "unlockedMessageIds": [
+        "JOB_MSG_001"
+      ],
+      "unlockedQuestionIds": [
+        "JOB_Q_001",
+        "JOB_Q_002",
+        "JOB_Q_003",
+        "JOB_Q_004"
+      ],
+      "unlockedPageIds": [
+        "JOB_PAGE_001",
+        "JOB_PAGE_002",
+        "JOB_PAGE_003",
+        "JOB_PAGE_004"
+      ],
+      "unlockedInquiryIds": [
+        "JOB_CALL_001",
+        "JOB_CALL_002",
+        "JOB_CALL_003",
+        "JOB_CALL_004"
+      ]
+    },
+    "messages": [
+      {
+        "id": "JOB_MSG_001",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "09:30",
+        "textVariants": [
+          "가온물류서비스 채용지원팀입니다. 물류 운영 사무원 서류전형에합격하셨습니다. 면접은 11월 24일 오전 10시에 예정되어 있으며 자세한 장소는 담당자를 통해 안내드립니다.",
+          "안녕하세요. 가온물류서비스 채용 담당자입니다. 지원하신 직무의서류 심사가 완료되었습니다. 11월 24일 오전 10시 면접에 참석해 주시기 바랍니다.",
+          "가온물류서비스 인사팀입니다. 물류 운영 사무원 채용 면접 대상자로 선정되셨습니다. 면접 일정은 11월 24일 오전 10시이며 추가 안내는 별도로 전달됩니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      },
+      {
+        "id": "JOB_MSG_002",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "14:00",
+        "textVariants": [
+          "가온물류서비스 채용지원팀입니다. 면접 결과 최종 합격하셨습니다. 현재 내부 채용 시스템 점검으로 입사 서류 접수 방식이 일부 변경되어 별도로 안내드릴 예정입니다.",
+          "물류 운영 사무원 채용에 최종 합격하셨습니다. 현재 채용 시스템 점검이 진행 중이어서 근로계약 서류 제출 절차에 일시적인 변경이 있습니다.",
+          "가온물류서비스 인사팀입니다. 최종 합격을 축하드립니다. 입사관련 서류는 시스템 점검 기간에 적용되는 임시 접수 절차를 통해 제출하실 수있습니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      },
+      {
+        "id": "JOB_MSG_003",
+        "senderId": "JOB_ACTOR_001",
+        "channel": "CHAT",
+        "sentAt": "14:10",
+        "textVariants": [
+          "채용 시스템 점검 기간에는 인사팀에서 승인한 임시 서류 접수창구를 이용하고 있습니다. 제출 대상 서류와 접수 방법은 채용지원팀을 통해확인해 주세요.",
+          "근로계약 서류 제출 방법을 안내드립니다. 현재 공식 채용 시스템 점검으로 임시 접수 창구가 운영 중이며, 해당 절차는 회사 인사팀에서 승인한 방식입니다.",
+          "입사 서류 접수 안내입니다. 시스템 점검이 종료될 때까지 임시제출 절차가 적용됩니다. 변경된 접수 방법은 공식 인사팀에 문의하여 확인하실수 있습니다."
+        ],
+        "questionIds": [
+          "JOB_Q_001",
+          "JOB_Q_002",
+          "JOB_Q_003",
+          "JOB_Q_004"
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "JOB_Q_001",
+        "prompt": "서류 제출 경로는 어디인가요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "현재 채용 시스템 점검으로 인해 인사팀에서 승인한 임시 접수창구를 이용하고 있습니다.",
+          "일시적으로 공식 채용 시스템의 서류 접수가 중단되어 회사에서지정한 임시 제출 절차가 적용됩니다.",
+          "서류는 회사 인사팀에서 승인한 임시 접수 창구로 제출하시면 됩니다. 공식 인사팀에서도 확인 가능합니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_002",
+        "prompt": "공식 채용 페이지는 어디에서 확인할 수 있나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "공식 채용 페이지는 기존과 동일하게 이용할 수 있지만 현재 서류 접수 기능은 점검 중입니다.",
+          "가온물류서비스 공식 홈페이지에서 채용 정보를 확인하실 수 있습니다. 다만 서류 제출 기능은 일시적으로 제한됩니다.",
+          "회사 공식 채용 홈페이지에 모집 공고가 등록되어 있습니다. 현재 서류 접수는 별도 승인된 절차로 진행하고 있습니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_003",
+        "prompt": "담당자님의 신원을 공식적으로 확인할 수 있나요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "네. 공식 인사팀에 문의하시면 제 신원과 임시 서류 접수 절차의승인 여부를 확인하실 수 있습니다.",
+          "회사 인사팀 대표번호로 연락하시면 현재 채용 담당자와 시스템점검에 따른 변경 사항을 안내받으실 수 있습니다.",
+          "공식 채용지원팀을 통해 담당자 신원과 변경된 서류 제출 절차를모두 확인하실 수 있습니다."
+        ]
+      },
+      {
+        "id": "JOB_Q_004",
+        "prompt": "제출해야 하는 서류는 무엇인가요?",
+        "responderId": "JOB_ACTOR_001",
+        "answerVariants": [
+          "기존 공식 채용 안내에 명시된 근로계약 서류와 동일합니다. 제출 방식만 임시로 변경되었습니다.",
+          "준비하실 서류는 원래 안내된 입사 서류와 같습니다. 현재는 승인된 임시 접수 창구로 제출하시면 됩니다.",
+          "제출 대상 서류에는 변경 사항이 없습니다. 서류 접수 방법만 시스템 점검으로 인해 일시적으로 달라졌습니다."
+        ]
+      }
+    ],
+    "computerPages": [
+      {
+        "id": "JOB_PAGE_001",
+        "pageType": "DETAIL",
+        "title": "채용 공고",
+        "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
+        "body": "기업명: 가온물류서비스\n모집직무: 물류 운영 사무원\n근무기간: 1년 (평가 후 연장 가능)\n근무형태: 계약직, 주 5일 09:00~18:00\n근무조건: 월 240만 원, 경기도 수원시 근무\n주요업무: 입출고 현황 관리, 물류 데이터 입력, 배송 일정 관리"
+      },
+      {
+        "id": "JOB_PAGE_002",
+        "pageType": "GENERAL",
+        "title": "기업 홈페이지",
+        "sourceLabel": "가온물류서비스 공식 홈페이지",
+        "body": "기업소개: 물류 입출고 관리와 배송 운영을 지원하는 종합물류 서비스 기업\n공식연락처: 000-0000-0000\n기업이 제공하는 채용 관련정보: 현재 물류 운영 사무원을 채용 중이며, 채용 절차 및 제출 서류는 공식채용 안내에서 확인할 수 있습니다. 채용 담당자의 신원과 개별 연락의 진위는공식 인사팀에 문의하여 확인할 수 있습니다."
+      },
+      {
+        "id": "JOB_PAGE_003",
+        "pageType": "OFFICIAL",
+        "title": "채용 절차",
+        "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
+        "body": "온라인 지원: 회사 공식 채용 페이지를 통해 지원서를 접수합니다.\n면접: 서류전형 합격자를 대상으로 면접을 진행합니다.\n합격 안내: 면접 결과를 확인한 후 최종 합격자에게 안내합니다.\n근로계약 진행: 회사에서 승인한 방법으로 입사 서류를 제출하고 근로계약을 체결합니다."
+      },
+      {
+        "id": "JOB_PAGE_004",
+        "pageType": "OFFICIAL",
+        "title": "서류 제출 안내",
+        "sourceLabel": "가온물류서비스 공식 채용 홈페이지",
+        "body": "제출 대상 서류: 기존 공식 안내에 명시된 입사 서류\n회사 승인 공식 제출 경로: 시스템 점검으로 회사가 승인한 임시 접수 창구"
+      }
+    ],
+    "phoneInquiries": [
+      {
+        "id": "JOB_CALL_001",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "현재 물류 운영 사무원을 실제로 채용하고 있나요?",
+        "answerVariants": [
+          "네. 해당 직무의 채용은 정상적으로 진행 중입니다.",
+          "현재 물류 운영 사무원 채용 절차를 진행하고 있습니다.",
+          "맞습니다. 채용 시스템 점검과 관계없이 모집은 계속 진행되고있습니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_002",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "저에게 연락한 채용담당자가 실제 회사 담당자인가요?",
+        "answerVariants": [
+          "네. 해당 채용담당자는 인사팀에서 확인된 직원입니다.",
+          "확인된 연락자는 현재 회사 채용 업무를 담당하고 있습니다.",
+          "맞습니다. 정식으로 등록된 채용담당자가 안내한 내용입니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_003",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "제가 받은 최종 합격 안내가 공식적으로 발송된것인가요?",
+        "answerVariants": [
+          "네. 최종 합격 안내는 회사에서 공식적으로 발송했습니다.",
+          "해당 합격 통보는 공식 채용 기록에서 확인됩니다.",
+          "맞습니다. 합격 안내와 임시 서류 접수 절차 모두 회사에서 승인했습니다."
+        ]
+      },
+      {
+        "id": "JOB_CALL_004",
+        "contactActorId": "JOB_ACTOR_002",
+        "questionText": "입사 서류는 어떤 경로로 제출해야 하나요?",
+        "answerVariants": [
+          "현재 시스템 점검으로 인사팀이 승인한 임시 접수 창구를 운영하고 있습니다.",
+          "공식 채용 시스템 점검 기간에는 회사에서 지정한 임시 서류 제출 절차를 이용하시면 됩니다.",
+          "임시 제출 창구는 공식적으로 승인된 경로이며, 점검 기간에만사용됩니다."
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "JOB_EVD_001",
+        "sourceType": "MESSAGE",
+        "sourceId": "JOB_MSG_003",
+        "fact": "채용담당자가 시스템 점검으로 변경된 임시 서류 접수 경로를 안내했다."
+      },
+      {
+        "id": "JOB_EVD_002",
+        "sourceType": "COMPUTER_PAGE",
+        "sourceId": "JOB_PAGE_004",
+        "fact": "공식 서류 제출 안내에 시스템 점검과승인된 임시 접수 절차가 명시되어 있다."
+      },
+      {
+        "id": "JOB_EVD_003",
+        "sourceType": "PHONE_INQUIRY",
+        "sourceId": "JOB_CALL_004",
+        "fact": "공식 인사팀이 임시 접수 창구의 승인사실을 확인했다."
+      },
+      {
+        "id": "JOB_EVD_004",
+        "sourceType": "QUESTION",
+        "sourceId": "JOB_Q_004",
+        "fact": "채용담당자가 제출 대상 서류는 변경되지 않았고제출 방식만 달라졌다고 답변했다."
+      }
+    ],
+    "steps": [
+      {
+        "id": "JOB_STEP_001",
+        "description": "면접 일정 안내 메시지를 받은 상태"
+      },
+      {
+        "id": "JOB_STEP_002",
+        "description": "합격 안내 메시지가 공개된 상태"
+      },
+      {
+        "id": "JOB_STEP_003",
+        "description": "서류 제출 요청 메시지가 공개된 상태"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "JOB_TRIGGER_001",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "JOB_MSG_001",
+          "stepId": "JOB_STEP_001"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "JOB_MSG_002"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "nextStepId": "JOB_STEP_002"
+        }
+      },
+      {
+        "id": "JOB_TRIGGER_002",
+        "conditionType": "ACTION_COMPLETED",
+        "when": {
+          "eventName": "MESSAGE_VIEWED",
+          "targetId": "JOB_MSG_002",
+          "stepId": "JOB_STEP_002"
+        },
+        "effects": {
+          "unlockMessageIds": [
+            "JOB_MSG_003"
+          ],
+          "unlockQuestionIds": [],
+          "unlockPageIds": [],
+          "unlockInquiryIds": [],
+          "nextStepId": "JOB_STEP_003"
+        }
+      }
+    ],
+    "scenarioData": {
+      "jobPosting": {
+        "companyName": "가온물류서비스",
+        "companyDescription": "물류 입출고 관리와 배송 운영을 지원하는 종합 물류 서비스 기업",
+        "position": "물류 운영 사무원",
+        "employmentType": "계약직",
+        "workPeriod": "1년 (평가 후 연장 가능)",
+        "workConditions": "주 5일, 09:00~18:00, 월 240만 원, 경기도 수원시 근무",
+        "mainDuties": "입출고 현황 관리, 물류 데이터 입력, 배송 일정관리",
+        "recruitmentProcess": "서류 접수 → 면접 → 최종 합격 → 근로계약",
+        "officialContact": "000-0000-0000"
+      }
+    },
+    "preventionTips": [
+      "채용 과정에서 서류 제출 방법이 변경되면 공식 인사팀에 변경 사유와승인 여부를 확인하세요.",
+      "시스템 점검 등의 이유로 임시 제출 경로를 안내받았다면 회사 공식연락처를 통해 검증하세요.",
+      "공식적으로 승인된 절차인지 확인한 후 필요한 서류만 제출하세요."
+    ]
+  },
+  "evaluationRules": {
+    "judgmentScore": 30,
+    "investigationChecks": [
+      {
+        "eventName": "OFFICIAL_INFO_VIEWED",
+        "targetId": "JOB_PAGE_004",
+        "score": 10
+      },
+      {
+        "eventName": "PHONE_INQUIRY_SELECTED",
+        "targetId": "JOB_CALL_004",
+        "score": 20
+      },
+      {
+        "eventName": "QUESTION_SELECTED",
+        "targetId": "JOB_Q_004",
+        "score": 10
+      }
+    ],
+    "responseScores": {
+      "CONTINUE_OFFICIAL": 30,
+      "VERIFY_OFFICIAL": 20,
+      "STOP_AND_REPORT": 0,
+      "SUBMIT_UNVERIFIED": 0
+    }
+  }
+}
