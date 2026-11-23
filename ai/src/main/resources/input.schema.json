@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "scenarioId": {
+      "enum": [
+        "JOB",
+        "SIDE",
+        "INV",
+        "TRAVEL"
+      ]
+    },
+    "correctJudgment": {
+      "enum": [
+        "NORMAL",
+        "SCAM"
+      ]
+    },
+    "userJudgment": {
+      "enum": [
+        "NORMAL",
+        "SCAM"
+      ]
+    },
+    "decisionCorrect": {
+      "type": "boolean"
+    },
+    "score": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "responseAction": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "completedChecks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "missedChecks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "riskActions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventName": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "targetId": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "eventName",
+          "targetId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventName": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "targetId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sequenceNo": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "eventName",
+          "targetId",
+          "sequenceNo"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "verifiedFacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "eventName": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "fact": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "sourceId",
+          "eventName",
+          "fact"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "scenarioId",
+    "correctJudgment",
+    "userJudgment",
+    "decisionCorrect",
+    "score",
+    "responseAction",
+    "reason",
+    "completedChecks",
+    "missedChecks",
+    "riskActions",
+    "actions",
+    "verifiedFacts"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "check": {
+      "type": "object",
+      "properties": {
+        "eventName": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "targetId": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "score": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "eventName",
+        "targetId",
+        "score"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
