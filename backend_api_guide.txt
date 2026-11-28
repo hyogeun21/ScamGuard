@@ -1,0 +1,364 @@
+백엔드 통신 API 연결 위치 안내
+기준: 이번에 업로드한 scamguard.zip의 실제 프론트엔드 소스
+작성일: 2026-11-28 (한국시간)
+
+이 문서는 연결 위치와 현재 JSON 계약을 정리한 안내서입니다.
+프론트 코드는 수정하지 않았으며, 실제 백엔드 명세·주소는 아직 제공되지 않아
+아래 예시 URL은 연결 방법을 설명하기 위한 예시입니다.
+파일 경로는 모두 package.json이 있는 프로젝트 루트 기준입니다.
+
+================================================================
+1. 가장 먼저 볼 곳 / 최소 연결 방법
+================================================================
+최종 평가 API는 이미 구현되어 있습니다.
+백엔드가 현재 요청·응답 JSON 형식을 그대로 지원한다면
+화면 코드를 새로 만들 필요 없이 서버 주소만 설정하면 됩니다.
+
+프로젝트 루트에 .env.local 파일 생성:
+
+VITE_EVALUATION_URL=http://localhost:8000/api/evaluate
+VITE_DEMO_FAIL_ONCE=false
+
+위 포트와 경로는 예시이므로 실제 서버 주소로 바꾸세요.
+.env.example은 설정 예시 파일입니다. 이 파일만 수정해서는 적용되지 않습니다.
+.env.local 설정 후 개발 서버를 다시 시작하세요: npm run dev
+배포 환경에서는 환경변수를 설정한 후 npm run build를 다시 실행하세요.
+
+현재 VITE_EVALUATION_URL이 비어 있으면 로컬 테스트 평가로 실행됩니다.
+주소가 있으면 실제 POST 요청을 보내며, 실패해도 테스트 평가로 대체하지 않습니다.
+
+실제 요청 발생 시점:
+문 조사 → 정상/사기·판단근거·대응행동 입력 → 최종제출
+→ 확인 팝업에서 '확인' 클릭 → API 요청 → 결과 화면
+'최종제출'만 누른 시점에는 JSON을 준비하고 확인창을 띄우며 아직 전송하지 않습니다.
+
+================================================================
+2. 수정할 파일과 함수
+================================================================
+[필수 확인]
+
+.env.local (새로 생성)
+- 실제 평가 서버 URL 설정.
+- AI 모델 비밀 키를 넣는 곳이 아닙니다.
+
+src/game/evaluation.js
+- createSubmission(run), 약 33행: 서버로 보낼 요청 JSON 생성.
+- validateEvaluation(value), 약 56행: 응답 JSON 검증 및 화면용 데이터 추출.
+- createEvaluationClient(...), 약 112행: POST, 헤더, JSON 변환,
+  HTTP 오류, 시간초과, 취소 처리.
+- fetchImpl(endpoint, ...), 약 143행: 실제 네트워크 요청 위치.
+- responseActions(scenarioId), 약 14행: 체크박스의 ID와 설명.
+- 서버 명세에 맞춰야 하는 핵심 파일입니다.
+
+src/game/doorUI.js
+- initDoor(scene), 약 9행: 환경변수를 읽어 평가 클라이언트 생성.
+- renderForm(...): 입력 검사 후 pendingSubmission 생성.
+- renderConfirm(...), 약 162행: 뒤로가기/확인 버튼.
+- startEvaluation(...), 약 180행: 실제 평가 호출·대기·성공·실패 전환.
+- renderWaiting(...), 약 222행: 대기 및 오류/재시도 화면.
+- renderResult(...), 약 264행: 점수와 피드백 출력.
+- 주소와 JSON만 맞추는 경우 이 화면 흐름은 그대로 사용하세요.
+- 시간초과 값을 별도로 지정하려면 initDoor에서
+  createEvaluationClient({ endpoint: ..., timeoutMs: 60000, ... })처럼 전달 가능.
+  60000은 예시이며 실제 서버 처리시간과 합의해 정하세요.
+
+[기록/콘텐츠 관련]
+
+src/game/state.js
+- createRunData: 한 번의 플레이 상태 초기화.
+- memo, investigatedObjects, requestedQuestions, computerPages,
+  submission, lastSubmission, evaluation 등이 여기에 있습니다.
+- 로그인·세션 ID·저장 불러오기를 도입할 때 확장할 위치입니다.
+
+src/game/OverlayScene.js
+- create: getScenario와 getComputerGraph로 로컬 콘텐츠를 읽음.
+- record(id): requestedQuestions에 중복 없이 질문 ID 기록.
+- API 요청을 이 파일의 render에 무작정 넣으면 재렌더링마다 중복 요청될 수 있습니다.
+
+src/game/scenes.js
+- ScenarioScene: 시나리오 목록과 시작 버튼.
+- 시작 시 createRunData로 새 플레이를 만듦.
+- RoomScene: 조사한 오브젝트 ID 기록 및 방 진입 처리.
+- 서버 세션 생성/시나리오 사전 로딩이 필요할 때 시작 흐름과 연결할 위치.
+
+src/game/content.js
+- SCENARIOS / getScenario: 스마트폰 메시지·전화·시나리오 제목의 로컬 예시 데이터.
+
+src/game/computerContent.js
+- COMPUTER_SCENARIOS / getComputerGraph: 컴퓨터 조사 콘텐츠와 기존 화면 전환 그래프.
+- resolveComputerPage / followComputerAction / computerBack: 노드 이동 처리.
+
+src/game/smartphoneUI.js
+- 메시지·전화 선택과 대화 표시 담당.
+- 현재 questions[].answer / callQuestions[].answer를 바로 표시합니다.
+
+src/game/smartphoneState.js
+- askMessageQuestion / askCallQuestion: 로컬 답변을 대화 기록에 추가.
+- run.smartphoneData에 대화와 선택 기록을 보관.
+
+src/game/computerUI.js
+- 방문 노드를 run.computerPages에 기록.
+- 기존 v3 노드 이동과 렌더링 담당. 공통 추가질문 기능은 없습니다.
+
+================================================================
+3. 현재 평가 요청 JSON: POST /api/evaluate
+================================================================
+메서드: POST
+요청 헤더: Content-Type: application/json
+본문 예시 (값은 설명용):
+
+{
+  "schemaVersion": 1,
+  "requestId": "550e8400-e29b-41d4-a716-446655440000",
+  "scenarioId": 1,
+  "verdict": "scam",
+  "reason": "공식 연락처로 확인한 내용과 받은 안내가 다릅니다.",
+  "responseActions": [
+    { "id": "official", "done": true },
+    { "id": "compare", "done": true },
+    { "id": "privacy", "done": false },
+    { "id": "payment", "done": false },
+    { "id": "hiring", "done": true }
+  ],
+  "investigation": {
+    "memo": "조사 메모 내용",
+    "objects": ["smartphone", "telephone", "computer", "door"],
+    "questions": ["smartphone:message-1:official", "telephone:call-1"],
+    "computerPages": ["home", "company"]
+  }
+}
+
+각 필드 의미:
+- schemaVersion: 현재 1. 계약 변경 시 프론트와 서버가 함께 관리.
+- requestId: 제출 JSON 생성 시 발급. 같은 답안의 오류 재시도에서는 유지.
+  입력창으로 돌아가 다시 최종제출하면 새로운 ID가 생성됩니다.
+- scenarioId: 숫자 1~4.
+  1 채용 사기 / 2 재택부업 사기 / 3 투자 리딩방 사기 / 4 숙소예약 사기.
+  조사 시작 오브젝트가 컴퓨터인 것은 4번입니다.
+- verdict: "normal" 또는 "scam". '정상', '사기'라는 한글 값이 아님.
+- reason: 판단근거 문자열. 앞뒤 공백 제거, 빈 값 불가, 현재 최대 10000자.
+- responseActions: 공통 4개 + 시나리오별 1개 = 5개 항목.
+  미선택도 done:false로 포함됩니다.
+- 공통 ID: official / compare / privacy / payment.
+- 전용 ID: 1 hiring / 2 work / 3 investment / 4 lodging.
+- done은 사용자가 체크한 자기보고이며 실제 행동 완료를 서버가 검증한 값은 아닙니다.
+- investigation.objects: 조사/진입 기록 ID. 전화는 스마트폰 내 메뉴이지만
+  내부 기록에서는 telephone이라는 별도 ID를 사용합니다.
+- questions: 선택한 질문 ID. 메시지는 smartphone:메시지ID:질문ID,
+  전화는 telephone:질문ID이며 중첩 followUps는 경로가 /로 이어집니다.
+- computerPages: 방문한 노드 ID의 중복 없는 목록. 방문 횟수·시간 기록 아님.
+
+현재 요청에 포함되지 않는 것:
+- run.smartphoneData의 실제 질문/답변 대화 전문.
+- 회사 정보, 연락처, 메시지 원문, 컴퓨터 본문 전체.
+- collectedClues, 플레이어 위치, 플레이 시간, 사용자/세션 ID.
+- 개별 질문 시각, 개별 노드 진입 시각.
+
+따라서 서버는 scenarioId와 질문/노드 ID에 대응하는 기준 콘텐츠 및 채점 기준을
+서버에서 갖고 있거나, 합의한 추가 필드를 요청으로 받아야 합니다.
+대화 전문이 필요하면 createSubmission의 investigation에 명시적으로 추가하세요.
+동적 콘텐츠를 사용한다면 contentVersion 같은 버전 필드도 합의해 추가하는 것이 좋습니다.
+
+================================================================
+4. 현재 프론트가 요구하는 정상 응답 JSON
+================================================================
+HTTP 성공 상태와 함께 아래 객체를 최상위로 반환:
+
+{
+  "score": 85,
+  "strengths": ["공식 연락처로 안내 내용을 확인했습니다."],
+  "improvements": ["판단근거에 비교한 자료를 구체적으로 적어보세요."],
+  "preventionTips": ["입금 전에 공식 경로로 결제 조건을 확인하세요."]
+}
+
+- score: 숫자 0~100. 문자열 "85"는 통과하지 않음.
+- strengths: 문자열 배열 → '잘한 점'.
+- improvements: 문자열 배열 → '부족한 점 · 개선할 점'.
+- preventionTips: 문자열 배열 → '예방 팁'.
+- 배열은 비어 있어도 됨. 누락/null/문자열은 검증 실패.
+- 현재 validateEvaluation은 이 네 필드만 추출하므로 다른 필드는 결과에 남지 않습니다.
+- isDemo는 프론트 클라이언트에서 붙입니다. 서버가 보낼 필요 없음.
+- 마크다운이나 HTML을 해석하지 않고 텍스트로 출력합니다.
+
+서버가 다음처럼 감싼다면 현재 코드 그대로는 실패합니다:
+{ "success": true, "data": { "score": 85, ... } }
+
+이 경우 evaluation.js의 response.json() 이후 data를 꺼내도록 변환하세요.
+예시:
+
+const body = await response.json();
+return {
+  ...validateEvaluation(body.data),
+  isDemo: false
+};
+
+서버 필드가 totalScore / feedback.goodPoints 등이라면
+validateEvaluation에 넘기기 전에 score / strengths / improvements /
+preventionTips로 변환하는 어댑터를 두세요.
+기존 화면까지 서버 필드명으로 모두 바꾸는 것보다 연결 부분에 변환을 모으기 쉽습니다.
+
+현재 구현은 단일 JSON 응답 방식입니다.
+202 + jobId 후 폴링, SSE, 스트리밍 응답은 구현되어 있지 않습니다.
+해당 방식이면 평가 클라이언트와 대기/취소 처리를 추가 구현해야 합니다.
+
+================================================================
+5. 통신·실패·인증에서 합의할 부분
+================================================================
+- 기본 시간초과는 20000ms(20초).
+- HTTP 비성공 응답은 '평가 서버 응답 오류 (상태코드)'로 표시합니다.
+- 현재 서버의 오류 JSON 메시지는 읽지 않습니다.
+  예: {"code":"...","message":"..."}를 표시하려면 evaluation.js의
+  response.ok 검사 구간에서 오류 본문을 파싱하고 화면용 메시지로 변환하세요.
+- 형식이 틀린 JSON, 네트워크 오류, 시간초과는 오류 화면으로 이동합니다.
+- '다시 판단하기'는 같은 pendingSubmission으로 재요청합니다.
+- 서버는 requestId 중복 처리 방식을 정하세요.
+  요청 취소/시간초과가 서버 작업 취소를 보장하지 않으므로 중복 평가·과금에 유의합니다.
+- 평가 중에는 창 닫기와 뒤로가기를 막습니다. 씬 정리 시 취소 신호를 전달합니다.
+
+인증이 필요하면:
+- 현재 fetch에는 Authorization 헤더가 없습니다.
+- 토큰 인증은 evaluation.js의 headers 구성 부분에 추가.
+- 교차 출처 쿠키 세션이면 credentials:'include'와 서버의 쿠키/CORS 설정을 함께 조정.
+- 로그인·토큰 갱신·세션 복구 기능은 현재 포함되어 있지 않습니다.
+- VITE_ 환경변수는 브라우저에 공개됩니다. AI 서비스 비밀 키는 백엔드에만 저장.
+- 서버에서 요청 형식·길이·시나리오 ID를 다시 검사하고 정답/채점 기준을 관리하세요.
+
+서로 다른 포트/도메인 연결:
+- 프론트 주소를 백엔드 CORS 허용 출처로 설정하고 POST 및 Content-Type을 허용.
+- Authorization을 쓰면 해당 헤더도 허용. JSON 요청은 사전 OPTIONS 요청이 생길 수 있음.
+- HTTPS 프론트에서는 HTTPS 백엔드를 사용.
+- localhost는 해당 브라우저가 실행 중인 기기를 뜻하므로 배포 시 실제 서버 주소로 변경.
+
+동일 출처 /api/evaluate 경로를 사용할 경우:
+- .env.local의 VITE_EVALUATION_URL=/api/evaluate 로 설정 가능.
+- Vite가 백엔드를 자동으로 만들거나 연결해 주지는 않습니다.
+- 업로드본에는 vite.config.js가 없었습니다.
+- 개발 프록시가 필요하면 루트에 vite.config.js를 생성하고 server.proxy의
+  '/api'를 실제 백엔드 주소로 연결하세요.
+- 배포 서버도 /api 경로를 백엔드로 전달하도록 별도 설정해야 합니다.
+- npm run preview 자체가 평가 서버는 아닙니다.
+
+================================================================
+6. 메시지·전화·컴퓨터 콘텐츠도 서버 JSON으로 받을 경우 (선택 작업)
+================================================================
+평가 API 연결과 콘텐츠 API 연결은 별개입니다.
+현재 네트워크 호출은 평가용뿐이고, 조사 콘텐츠는 파일 안의 예시 데이터입니다.
+최종 평가만 서버에 맡길 계획이면 이 절의 작업은 하지 않아도 됩니다.
+아래 API 경로는 제안이며 이미 존재하는 API가 아닙니다.
+
+A. 시나리오 콘텐츠 사전 로딩 (권장되는 단순 연결 방식)
+예: GET /api/scenarios/1
+
+1) 신규 모듈 예: src/game/contentClient.js 에 조회/JSON 검증/변환을 모음.
+2) scenes.js의 시나리오 시작 흐름에서 콘텐츠를 한 번 요청.
+3) 로딩 표시·실패 안내·재시도·중복 시작 방지 처리 후 Room 시작.
+4) content.js의 getScenario와 computerContent.js의 getComputerGraph가
+   검증된 서버 데이터를 공통 캐시에서 읽도록 연결.
+5) 시나리오 선택 목록의 SCENARIOS 참조도 제목/목록을 서버화할지 결정.
+
+현재 두 조회 함수는 동기 함수입니다.
+함수만 async로 바꾸면 OverlayScene과 RoomScene 등이 Promise를 받게 되므로
+호출부를 함께 바꾸거나, 입장 전에 받아둔 캐시를 동기로 읽게 해야 합니다.
+render 내부에서 반복 fetch하지 마세요.
+
+스마트폰 데이터가 유지해야 할 형태:
+{
+  "id": 1,
+  "title": "채용 사기",
+  "companyName": "회사명",
+  "companyDetails": "회사 인적사항",
+  "messages": [
+    {
+      "id": "message-1",
+      "title": "메시지 제목",
+      "sender": "담당자명",
+      "senderDetails": "소속 및 담당자 정보",
+      "body": "첫 회사 메시지",
+      "questions": [
+        { "id": "official", "title": "내 질문", "answer": "회사 답변" }
+      ]
+    }
+  ],
+  "contact": { "name": "공식 연락처", "number": "전화번호" },
+  "callQuestions": [
+    {
+      "id": "call-1",
+      "title": "첫 전화 질문",
+      "answer": "첫 답변",
+      "followUps": [
+        { "id": "follow-1", "title": "추가질문", "answer": "추가답변" }
+      ]
+    }
+  ]
+}
+이 예시는 필드 구조 설명용 축약본입니다. 메시지 추가질문 UI는 4개/2x2에 맞춰져 있으므로
+실제 데이터는 현재처럼 질문 4개를 제공하거나 가변 개수 레이아웃을 함께 조정하세요.
+회사 정보는 메시지 개별 companyName/companyDetails로도 지정할 수 있습니다.
+질문·메시지 ID는 기록/중복 전송 방지에 사용되므로 안정적으로 유지하세요.
+
+컴퓨터 그래프가 유지해야 할 형태:
+{
+  "root": "home",
+  "nodes": {
+    "home": {
+      "title": "컴퓨터 조사",
+      "backTo": null,
+      "body": "",
+      "actions": [{ "label": "회사 정보", "target": "company" }]
+    },
+    "company": {
+      "title": "회사 정보",
+      "backTo": "home",
+      "body": "세부 내용",
+      "actions": []
+    }
+  }
+}
+모든 action.target / backTo는 실제 존재하는 노드를 가리켜야 합니다.
+현재 v3 분기와 루트 조사 항목을 유지하고 본문/제목만 바꾸는 방식이 가장 단순합니다.
+위 축약 예시에 맞춰 기존 4개 선택지나 하위 분기를 삭제하지 마세요.
+
+B. 질문할 때마다 서버 답변을 받는 방식
+예: POST /api/dialogue (제안)
+- smartphoneUI.js의 선택 콜백 및 smartphoneState.js의 로컬 answer 참조를 수정.
+- scenarioId, 대화 채널, messageId 또는 질문 경로, sessionId 등을 합의해 전송.
+- 응답 answer를 받은 뒤 대화 기록에 추가하도록 함수 구조를 변경.
+- 로딩 중 중복 클릭 방지, 실패 표시/재시도, 응답 순서 보장,
+  창 닫힘/새 게임 전환 후 이전 응답 무시 처리가 필요.
+- 현재 상태 함수는 동기이므로 서버 호출을 끼워 넣는 것만으로는 완료되지 않습니다.
+- 기존 2x2 메시지 선택지와 전화 질문 흐름을 유지할 수 있습니다.
+- AI 자유입력 대화창은 현재 요구/구현에 포함되지 않습니다.
+
+================================================================
+7. 서버 담당자에게 전달할 합의 항목
+================================================================
+1) 평가 URL·메서드와 개발/운영 주소.
+2) 위 요청 JSON을 그대로 받을지, 서버 계약에 맞게 변환할지.
+3) 정상 응답의 필드명·자료형·최상위 감싸기 유무.
+4) 오류 응답 구조와 HTTP 상태코드.
+5) 동기 JSON 응답인지 비동기 작업/스트리밍인지, 최대 처리시간.
+6) 사용자 인증/세션이 필요한지, 토큰 또는 쿠키 방식인지.
+7) requestId 중복 재시도 처리 정책.
+8) 시나리오 정답·채점 기준·콘텐츠 버전을 서버가 어떻게 관리할지.
+9) 평가만 연결할지, 조사 콘텐츠/개별 질문도 API로 제공할지.
+10) 평가에 대화 전문과 세션 정보가 필요한지.
+
+================================================================
+8. 연결 후 확인 순서
+================================================================
+1) npm test → 기존 tests/evaluation.test.js 확인.
+   요청 본문·정상 응답·형식 오류·HTTP 오류·시간초과·취소 테스트가 있음.
+   서버 계약을 바꾸면 이 테스트도 갱신.
+2) npm run build로 빌드 확인.
+3) 서버 실행 + .env.local 설정 + 프론트 개발 서버 재시작.
+4) 문에서 답안 작성 → 최종제출 → 확인.
+5) 브라우저 개발자도구 Network에서 실제 URL, POST, 요청 JSON, 응답 JSON 확인.
+6) 결과 화면이 '테스트 평가 결과'가 아닌 'AI 평가 결과'인지 확인.
+   이 제목은 실제 AI 사용 여부를 서버에서 검증한 표시가 아니라 endpoint 설정에 따른 표시임.
+7) 서버 미실행, 4xx/5xx, 잘못된 응답, 처리 지연 시 오류/재시도 확인.
+8) 같은 requestId 재요청이 서버 정책대로 처리되는지 확인.
+9) 시나리오 1~4 각각 전용 대응행동 ID와 조사 기록 확인.
+10) 새 게임에서 이전 플레이 데이터가 초기화되는지 확인.
+
+이번 안내 작성에서는 소스와 기존 테스트 코드를 확인했습니다.
+실제 백엔드 명세와 실행 서버가 제공되지 않아 실서버 통신 검증은 하지 않았습니다.
