@@ -1,0 +1,43 @@
+{
+  "screen": {
+    "width": 1920,
+    "height": 1080
+  },
+  "origin": "top-left; x,y are screen coordinates",
+  "background": {
+    "file": "main-bg.png",
+    "width": 1920,
+    "height": 1080,
+    "x": 0,
+    "y": 0
+  },
+  "buttons": {
+    "main-start.png": {
+      "label": "게임 시작",
+      "width": 320,
+      "height": 76,
+      "x": 448,
+      "y": 900,
+      "centerX": 608,
+      "centerY": 938
+    },
+    "main-exit.png": {
+      "label": "게임 종료",
+      "width": 320,
+      "height": 76,
+      "x": 800,
+      "y": 900,
+      "centerX": 960,
+      "centerY": 938
+    },
+    "main-help.png": {
+      "label": "게임 방법",
+      "width": 320,
+      "height": 76,
+      "x": 1152,
+      "y": 900,
+      "centerX": 1312,
+      "centerY": 938
+    }
+  }
+}

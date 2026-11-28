@@ -1,0 +1,65 @@
+{
+  "screen": {
+    "width": 1920,
+    "height": 1080
+  },
+  "origin": "top-left; x,y are screen coordinates",
+  "background": {
+    "file": "scenario-bg.png",
+    "x": 0,
+    "y": 0,
+    "width": 1920,
+    "height": 1080
+  },
+  "assets": {
+    "scenario-1.png": {
+      "x": 344,
+      "y": 390,
+      "width": 600,
+      "height": 246,
+      "centerX": 644,
+      "centerY": 513
+    },
+    "scenario-2.png": {
+      "x": 976,
+      "y": 390,
+      "width": 600,
+      "height": 246,
+      "centerX": 1276,
+      "centerY": 513
+    },
+    "scenario-3.png": {
+      "x": 344,
+      "y": 660,
+      "width": 600,
+      "height": 246,
+      "centerX": 644,
+      "centerY": 783
+    },
+    "scenario-4.png": {
+      "x": 976,
+      "y": 660,
+      "width": 600,
+      "height": 246,
+      "centerX": 1276,
+      "centerY": 783
+    },
+    "scenario-main.png": {
+      "x": 528,
+      "y": 950,
+      "width": 400,
+      "height": 76,
+      "centerX": 728,
+      "centerY": 988,
+      "action": "main-menu"
+    },
+    "scenario-start.png": {
+      "x": 992,
+      "y": 950,
+      "width": 400,
+      "height": 76,
+      "centerX": 1192,
+      "centerY": 988
+    }
+  }
+}

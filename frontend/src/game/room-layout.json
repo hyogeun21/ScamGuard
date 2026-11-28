@@ -1,0 +1,145 @@
+{
+  "screen": {
+    "width": 1920,
+    "height": 1080
+  },
+  "room": {
+    "x": 64,
+    "y": 150,
+    "width": 1792,
+    "height": 900
+  },
+  "origin": "top-left; all x,y are screen coordinates",
+  "assets": {
+    "room-bg.png": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "depth": 0
+    },
+    "room-play-area.png": {
+      "x": 64,
+      "y": 150,
+      "width": 1792,
+      "height": 900,
+      "depth": 1
+    },
+    "bed.png": {
+      "width": 430,
+      "height": 244,
+      "x": 140,
+      "y": 550,
+      "depth": 10
+    },
+    "computer.png": {
+      "width": 470,
+      "height": 287,
+      "x": 650,
+      "y": 510,
+      "depth": 10
+    },
+    "bookshelf.png": {
+      "width": 260,
+      "height": 439,
+      "x": 1190,
+      "y": 360,
+      "depth": 10
+    },
+    "door.png": {
+      "width": 172,
+      "height": 440,
+      "x": 1560,
+      "y": 360,
+      "depth": 10
+    },
+    "notebook.png": {
+      "width": 28,
+      "height": 33,
+      "x": 1240,
+      "y": 680,
+      "depth": 10
+    },
+    "smartphone.png": {
+      "width": 36,
+      "height": 62,
+      "x": 445,
+      "y": 685,
+      "depth": 10
+    },
+    "player.png": {
+      "width": 79,
+      "height": 200,
+      "x": 485,
+      "y": 830,
+      "depth": 20
+    },
+    "player-back.png": {
+      "width": 79,
+      "height": 200,
+      "x": 485,
+      "y": 830,
+      "depth": 20
+    },
+    "player-side.png": {
+      "width": 67,
+      "height": 200,
+      "x": 491,
+      "y": 830,
+      "depth": 20
+    },
+    "e-icon.png": {
+      "width": 146,
+      "height": 71,
+      "x": 433,
+      "y": 612,
+      "depth": 100
+    },
+    "new-message-status.png": {
+      "width": 320,
+      "height": 64,
+      "x": 800,
+      "y": 43,
+      "text": {
+        "content": "새로운 단서 발견",
+        "x": 960,
+        "y": 75,
+        "originX": 0.5,
+        "originY": 0.5,
+        "fontFamily": "Noto Sans KR",
+        "fontSize": 28,
+        "fontWeight": "700",
+        "color": "#FFFFFF",
+        "align": "center"
+      },
+      "fixedToCamera": true,
+      "depth": 100
+    },
+    "quest-bubble.gif": {
+      "width": 60,
+      "height": 64,
+      "x": 433,
+      "y": 612,
+      "depth": 100
+    }
+  },
+  "scene": "room",
+  "rendering": {
+    "originX": 0,
+    "originY": 0,
+    "playerVariants": [
+      "player.png",
+      "player-back.png",
+      "player-side.png"
+    ],
+    "initialPlayerVariant": "player.png",
+    "playerVariantRule": "Display only one player variant at a time at the player position.",
+    "initiallyHidden": [
+      "e-icon.png",
+      "new-message-status.png"
+    ],
+    "interactionIndicator": "quest-bubble.gif",
+    "textRule": "Render asset text separately using its own originX/originY.",
+    "imageSizing": "Use width and height as display size."
+  }
+}

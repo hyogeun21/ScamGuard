@@ -1,0 +1,68 @@
+{
+  "screen": {
+    "width": 1920,
+    "height": 1080
+  },
+  "origin": "top-left",
+  "scenes": {
+    "exit-confirm": {
+      "backdrop": {
+        "color": "#000000",
+        "alpha": 0.65
+      },
+      "assets": {
+        "exit-panel.png": {
+          "x": 460,
+          "y": 215,
+          "width": 1000,
+          "height": 650
+        },
+        "exit-close.png": {
+          "x": 620,
+          "y": 650,
+          "width": 300,
+          "height": 76,
+          "action": "close-exit-popup"
+        },
+        "exit-confirm.png": {
+          "x": 1000,
+          "y": 650,
+          "width": 300,
+          "height": 76,
+          "action": "go-to-game-end"
+        }
+      }
+    },
+    "game-end": {
+      "assets": {
+        "game-end.png": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "retry-game.png": {
+          "x": 810,
+          "y": 620,
+          "width": 300,
+          "height": 76,
+          "action": "go-to-main-menu"
+        }
+      }
+    }
+  },
+  "textIncludedInImages": true,
+  "notes": [
+    "Buttons are separate images; do not render duplicate text.",
+    "Actions describe intended transitions and must be connected in the game source."
+  ],
+  "buttonStyle": {
+    "width": 300,
+    "height": 76,
+    "fontFamily": "Noto Sans CJK KR",
+    "fontSize": 28,
+    "fontWeight": 700,
+    "borderRadius": 18,
+    "textIncluded": true
+  }
+}

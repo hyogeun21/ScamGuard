@@ -1,0 +1,45 @@
+{
+  "frameWidth": 400,
+  "frameHeight": 650,
+  "columns": 3,
+  "rows": 4,
+  "frameRate": 6.25,
+  "animations": {
+    "front": {
+      "idle": 1,
+      "walk": [
+        0,
+        1,
+        2,
+        1
+      ]
+    },
+    "back": {
+      "idle": 4,
+      "walk": [
+        3,
+        4,
+        5,
+        4
+      ]
+    },
+    "right": {
+      "idle": 7,
+      "walk": [
+        6,
+        7,
+        8,
+        7
+      ]
+    },
+    "left": {
+      "idle": 10,
+      "walk": [
+        9,
+        10,
+        11,
+        10
+      ]
+    }
+  }
+}

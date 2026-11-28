@@ -1,0 +1,39 @@
+{
+  "screen": {
+    "width": 1920,
+    "height": 1080
+  },
+  "origin": "top-left; x,y are screen coordinates",
+  "assets": {
+    "help-panel.png": {
+      "x": 360,
+      "y": 120,
+      "width": 1200,
+      "height": 840,
+      "depth": 200,
+      "textIncluded": true
+    },
+    "help-close.png": {
+      "x": 1496,
+      "y": 152,
+      "width": 32,
+      "height": 32,
+      "depth": 201,
+      "hitArea": {
+        "x": 1480,
+        "y": 136,
+        "width": 64,
+        "height": 64
+      },
+      "action": "close-help"
+    }
+  },
+  "backdrop": {
+    "color": "#000000",
+    "alpha": 0.65
+  },
+  "notes": [
+    "Panel text is baked into the image; do not render duplicate text.",
+    "Close icon is a separate asset."
+  ]
+}

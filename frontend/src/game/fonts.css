@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("/fonts/NotoSansKR-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+html, body, button, input, textarea, select {
+  font-family: "Noto Sans KR", sans-serif;
+}

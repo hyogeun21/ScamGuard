@@ -1,0 +1,526 @@
+/* Phaser가 전체 DOM을 1920×1080 캔버스 비율에 맞게 확대·축소합니다. */
+.sg-window {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 22px;
+  padding: 50px 60px;
+  background-color: #131b47;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 22px;
+  color: #f3f6ff;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 28px;
+  pointer-events: auto;
+}
+.sg-window * {
+  box-sizing: border-box;
+}
+.sg-window .sg-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 0;
+}
+.sg-window .sg-heading {
+  margin: 0;
+  min-width: 0;
+  font-size: 34px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.sg-window .sg-content {
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.sg-window .sg-content:focus-visible {
+  outline: 3px solid #68bce8;
+  outline-offset: -3px;
+}
+.sg-window .sg-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.sg-window .sg-image-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font: inherit;
+}
+.sg-window .sg-image-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.sg-window .sg-image-button:hover {
+  opacity: 0.8;
+}
+.sg-window button:focus-visible {
+  outline: 3px solid #68bce8;
+  outline-offset: 3px;
+}
+.sg-window textarea:focus-visible {
+  outline: 4px solid #68bce8;
+  outline-offset: 4px;
+}
+.sg-window .sg-fallback {
+  padding: 12px 18px;
+  border: 2px solid #5f92d4;
+  border-radius: 10px;
+  background: #2867d2;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 60px;
+  font-size: 26px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.sg-window .sg-bubble {
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: 88%;
+  padding: 20px 24px;
+  border-radius: 20px 20px 20px 5px;
+  background: #1c2d62;
+  box-shadow: 0 3px 9px #060e2833;
+  font-size: 28px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+.sg-window .sg-bubble.sg-outgoing {
+  align-self: flex-end;
+  background: #2755a0;
+  border-radius: 20px 20px 5px 20px;
+}
+.sg-window .sg-caption {
+  margin: 0;
+  color: #becff0;
+  font-size: 22px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.sg-window .sg-option {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px;
+  border: 2px solid #5f92d4;
+  border-radius: 14px;
+  background: #1c2d62;
+  color: #f3f6ff;
+  text-align: left;
+  font: inherit;
+  line-height: 1.6;
+  cursor: pointer;
+}
+.sg-window .sg-option:hover {
+  background: #3070da;
+}
+.sg-window .sg-number {
+  flex: 0 0 auto;
+  color: #9ec8ff;
+}
+.sg-window .sg-option-text {
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.sg-window .sg-note {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  resize: none;
+  border: 1px solid #5f92d4;
+  border-radius: 10px;
+  background: #245bb4;
+  padding: 20px;
+  font:
+    28px/1.8 "Noto Sans KR",
+    sans-serif;
+  color: #f3f6ff;
+  pointer-events: auto;
+}
+.sg-window .sg-content.sg-note-content {
+  padding: 4px;
+  overflow: hidden;
+}
+.sg-window .sg-content.sg-center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.sg-window .sg-message {
+  margin: 0;
+  font-size: 29px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* 문 제출·평가 */
+.sg-window .sg-section-title {
+  margin: 12px 0 0;
+  font-size: 28px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.sg-window .sg-verdicts {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.sg-window [role="radio"][aria-checked="true"] {
+  outline: 5px solid #9b6328;
+  outline-offset: 5px;
+  border-radius: 10px;
+}
+.sg-window .sg-reason {
+  width: 100%;
+  min-height: 220px;
+  flex: 0 0 260px;
+  resize: vertical;
+  border: 2px solid #5f92d4;
+  border-radius: 12px;
+  padding: 20px;
+  background: #245bb4;
+  color: #f3f6ff;
+  font:
+    27px/1.7 "Noto Sans KR",
+    sans-serif;
+}
+.sg-window .sg-response-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex: 0 0 auto;
+  padding: 18px 20px;
+  background: #245bb4;
+  border-radius: 10px;
+  cursor: pointer;
+  line-height: 1.7;
+}
+.sg-window .sg-response-row > span:first-child {
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.sg-window .sg-check-status {
+  font-size: 22px;
+  color: #becff0;
+  white-space: nowrap;
+}
+.sg-window .sg-response-row input {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  accent-color: #ffc86a;
+  cursor: pointer;
+}
+.sg-window .sg-error {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #ffbdc8;
+  font-size: 26px;
+  line-height: 1.6;
+}
+.sg-window .sg-score {
+  font-size: 64px;
+  font-weight: 700;
+  color: #ffbd40;
+  margin: 0;
+}
+
+/* Selection action floats above the investigation content. */
+.sg-window .sg-content .sg-bubble,
+.sg-window .sg-content .sg-caption {
+  user-select: text;
+  cursor: text;
+}
+.sg-window .sg-selection-add {
+  position: absolute;
+  z-index: 10;
+  right: 50px;
+  bottom: 118px;
+  filter: drop-shadow(0 3px 8px #0008);
+}
+.sg-window .sg-selection-status {
+  position: absolute;
+  z-index: 10;
+  right: 50px;
+  bottom: 118px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #123061;
+  color: white;
+  font-size: 24px;
+}
+
+/* 메모장: 제목은 PNG에 포함, 입력 영역은 괘선 없는 단색 배경입니다. */
+.sg-window.sg-notebook-window {
+  padding: 0;
+  gap: 0;
+  grid-template-rows: 70px minmax(0, 1fr);
+  color: #f3f5ff;
+  background-color: #111a40;
+}
+.sg-notebook-window .sg-header { position: relative; height: 70px; }
+.sg-notebook-window .sg-heading {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip-path: inset(50%);
+}
+.sg-notebook-window .sg-header .sg-image-button {
+  position: absolute; right: 22px; top: 13px;
+}
+.sg-notebook-window .sg-header .sg-image-button img { width: 24px; height: 24px; }
+.sg-notebook-window .sg-content.sg-note-content {
+  margin: 32px 48px 48px;
+  padding: 0; display: block;
+}
+.sg-notebook-window .sg-note {
+  display: block; border: 0; border-radius: 0;
+  padding: 0 12px; color: #f3f5ff;
+  font: 24px/36px "Noto Sans KR", sans-serif;
+  background-color: #111a40;
+  background-image: none;
+  overflow-wrap: anywhere; white-space: pre-wrap;
+  overflow-y: auto; scrollbar-gutter: stable;
+  tab-size: 4;
+}
+.sg-notebook-window .sg-note::placeholder { color: #b8c4da; opacity: 1; }
+.sg-notebook-window .sg-note:focus-visible { outline: 2px solid #749cee; outline-offset: 5px; }
+.sg-notebook-window .sg-footer { display: none; }
+
+/* Original blue family, with slightly reduced saturation and brightness. */
+.sg-window.sg-door-window {
+  --door-blue: #2867d2;
+  --door-cyan: #68bce8;
+  padding: 0 32px 28px;
+  gap: 16px;
+  grid-template-rows: 64px minmax(0, 1fr) auto;
+  background-color: #131b47;
+  color: #ffffff;
+  border-radius: 24px;
+  font-size: 22px;
+}
+.sg-door-window .sg-header {
+  position: relative;
+  height: 64px;
+  min-height: 64px;
+  align-items: center;
+  justify-content: center;
+}
+.sg-door-window .sg-heading {
+  width: 100%;
+  padding: 0 56px;
+  text-align: center;
+  font-size: 26px;
+  line-height: 1.2;
+}
+.sg-door-window .sg-header .sg-image-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  border: 0;
+}
+.sg-door-window .sg-header .sg-image-button img { width: 16px; height: 16px; }
+.sg-door-window .sg-section-title { font-size: 23px; margin-top: 8px; color: #ffffff; }
+.sg-door-window .sg-caption { color: #d2deff; font-size: 18px; }
+.sg-door-window .sg-content { gap: 14px; padding: 6px; }
+.sg-door-window .sg-door-action {
+  min-width: 180px;
+  min-height: 50px;
+  padding: 8px 24px;
+  background: var(--door-blue);
+  border: 2px solid var(--door-cyan);
+  border-radius: 18px;
+  color: #ffffff;
+  font: 700 24px/1.3 "Noto Sans KR", sans-serif;
+  cursor: pointer;
+}
+.sg-door-window .sg-door-action:hover { filter: brightness(1.06); }
+.sg-door-window .sg-door-action[aria-checked="true"] {
+  outline: 4px solid #ffbd40;
+  outline-offset: 3px;
+}
+.sg-door-window .sg-verdicts { gap: 20px; }
+.sg-door-window .sg-reason {
+  flex: 0 0 160px;
+  min-height: 160px;
+  max-height: 300px;
+  background: var(--door-blue);
+  border: 2px solid var(--door-cyan);
+  border-radius: 18px;
+  padding: 14px 18px;
+  color: #ffffff;
+  caret-color: #ffffff;
+  font: 22px/1.6 "Noto Sans KR", sans-serif;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.sg-door-window .sg-reason::placeholder { color: #e2ebff; opacity: 1; }
+.sg-door-window .sg-response-row {
+  padding: 12px 16px;
+  gap: 14px;
+  border: 2px solid var(--door-cyan);
+  border-radius: 18px;
+  background: var(--door-blue);
+  color: #ffffff;
+  font-size: 20px;
+}
+.sg-door-window .sg-response-row:has(input:checked) { border-color: #ffbd40; }
+.sg-door-window .sg-check-status { color: #ffffff; font-size: 18px; }
+.sg-door-window .sg-response-row input { accent-color: #ffbd40; width: 28px; height: 28px; flex-basis: 28px; }
+.sg-door-window .sg-footer .sg-door-action { width: 283px; }
+.sg-door-window .sg-bubble { background: #182461; border: 1px solid #386bd1; color: #ffffff; }
+.sg-door-window .sg-error { color: #ffbdc8; font-size: 21px; }
+.sg-door-window .sg-score { color: #ffbd40; }
+
+/* Hide automatic focus rings; Tab navigation keeps the visible keyboard cue. */
+.sg-window:not(.sg-keyboard-navigation) button:not([aria-checked="true"]):focus-visible,
+.sg-window:not(.sg-keyboard-navigation) .sg-content:focus-visible {
+  outline-color: transparent;
+}
+
+/* Blue controls stay coordinated with the existing navy image panels. */
+.sg-window { color-scheme: dark; }
+.sg-window .sg-content, .sg-window textarea {
+  scrollbar-color: #5f83bd #182461;
+  scrollbar-width: thin;
+}
+.sg-window ::selection { background: #416fb4; color: #ffffff; }
+.sg-door-window .sg-reason { background: #245bb4; }
+.sg-door-window .sg-response-row { background: #2863c3; }
+
+/* Computer browser: fixed left navigation, replaceable right detail view. */
+.sg-window.sg-computer-window {
+  background-color: #131b47;
+  border-radius: 24px;
+  color: #f3f6ff;
+  font-size: 22px;
+}
+.sg-com-browser-bar { position: absolute; inset: 0 0 auto; height: 69px; }
+.sg-com-browser-title {
+  position: absolute; left: 145px; top: 15px; width: 780px; height: 40px;
+  display: flex; align-items: center; margin: 0;
+  font-size: 22px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sg-com-close {
+  position: absolute; display: grid; place-items: center;
+  border: 0; background: transparent; color: #c5d7ff; font: 36px/1 Arial,sans-serif;
+  border-radius: 10px; cursor: pointer;
+}
+.sg-com-close:hover { background: #23366b; }
+.sg-com-list { position: absolute; background: url('/assets/comlist.png') center/100% 100% no-repeat; padding: 24px 16px; }
+.sg-com-list-title { margin: 0 0 20px; font-size: 24px; text-align: center; }
+.sg-com-list-options { display: flex; flex-direction: column; gap: 16px; max-height: calc(100% - 58px); overflow-y: auto; padding: 4px; }
+.sg-com-category, .sg-com-question, .sg-com-action {
+  background: #2867d2; color: #ffffff; border: 2px solid #68bce8; border-radius: 14px;
+  font: 600 21px/1.5 'Noto Sans KR',sans-serif; padding: 12px 14px;
+  text-align: left; white-space: pre-wrap; overflow-wrap: anywhere; cursor: pointer;
+}
+.sg-com-category { width: 100%; min-height: 64px; flex-shrink: 0; }
+.sg-com-category[aria-pressed="true"] { background: #2455ac; border-color: #ffbd40; box-shadow: inset 0 0 0 1px #ffbd40; }
+.sg-com-category:hover, .sg-com-question:hover, .sg-com-action:hover { filter: brightness(1.06); }
+.sg-com-detail { position: absolute; background: url('/assets/comex.png') center/100% 100% no-repeat; }
+.sg-com-detail-title {
+  position: absolute; left: 4%; right: 4%; top: 15.1%; height: 15.3%; margin: 0; padding: 8px 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 25px; line-height: 1.4; text-align: center;
+  overflow: auto; overflow-wrap: anywhere; white-space: pre-wrap;
+}
+.sg-computer-window .sg-content.sg-com-body {
+  position: absolute; left: 4%; right: 4%; top: 34%; bottom: 102px;
+  padding: 14px 16px; border: 1px solid #386bd1; border-radius: 14px;
+  background: #111b49; color: #f3f6ff;
+  display: flex; flex-direction: column; gap: 16px;
+  overflow-y: auto; min-height: 0;
+}
+.sg-com-prose, .sg-com-description {
+  margin: 0; flex: 0 0 auto; font-size: 22px; line-height: 1.8;
+  white-space: pre-wrap; overflow-wrap: anywhere; user-select: text;
+}
+.sg-com-question { width: 100%; flex-shrink: 0; }
+.sg-com-detail-footer { position: absolute; left: 4%; right: 4%; bottom: 24px; min-height: 54px; display: flex; justify-content: flex-end; align-items: center; gap: 16px; }
+.sg-com-action { min-width: 170px; text-align: center; padding: 10px 20px; }
+
+/* Smartphone home/list + independently dismissible message/call detail. */
+.sg-window.sg-smartphone-window { color: #f3f6ff; font-size: 20px; }
+.sg-smart-sr { position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0; }
+.sg-smart-device { position:absolute; background:url('/assets/smartphone-home-panel.png') center/100% 100% no-repeat; }
+.sg-smart-device-header { position:absolute;left:24px;right:24px;top:58px;height:54px;display:flex;align-items:center; }
+.sg-smart-device-title { position:absolute;left:38px;right:38px;margin:0;font-size:21px;line-height:1.3;text-align:center; }
+.sg-smart-close,.sg-smart-home-back { position:absolute;width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:10px;background:transparent;color:#c8dbff;cursor:pointer;font:30px/1 Arial,sans-serif;padding:0; }
+.sg-smart-close { right:0;top:7px; }
+.sg-smart-home-back { left:0;top:7px; }
+.sg-smart-close:hover,.sg-smart-home-back:hover { background:#23376b; }
+.sg-smart-apps { position:absolute;left:48px;right:48px;top:190px;display:grid;grid-template-columns:1fr 1fr;gap:30px; }
+.sg-smart-app { display:flex;flex-direction:column;align-items:center;gap:12px;border:0;background:transparent;color:white;font:600 21px/1.4 'Noto Sans KR',sans-serif;padding:0;cursor:pointer; }
+.sg-smart-app-icon { width:80px;height:80px; }
+.sg-smart-app:hover .sg-smart-app-icon { filter:brightness(1.1); }
+.sg-smart-list { position:absolute;left:26px;right:26px;top:138px;bottom:32px;overflow:auto;display:flex;flex-direction:column;gap:14px;padding:2px; }
+.sg-smart-message-item { position:relative;width:100%;min-height:92px;flex:0 0 auto;background:url('/assets/smartphone-message-item.png') center/100% 100% no-repeat;border:0;border-radius:17px;color:white;cursor:pointer;padding:12px 14px 12px 84px;text-align:left;font:600 20px/1.4 'Noto Sans KR',sans-serif; }
+.sg-smart-message-label { display:block;white-space:pre-wrap;overflow-wrap:anywhere; }
+.sg-smart-message-item[aria-pressed="true"] { outline:2px solid #ffbd40;outline-offset:-2px; }
+.sg-smart-contact { position:absolute;left:28px;right:28px;top:122px;display:flex;flex-direction:column;gap:4px;font-size:16px;line-height:1.4;overflow-wrap:anywhere; }
+.sg-smart-contact span { color:#becff0;font-size:14px; }
+.sg-smart-call-list { top:196px;bottom:90px;gap:12px; }
+.sg-smart-call-label { font-size:15px;color:#becff0;margin:0;line-height:1.5; }
+.sg-smart-call-question { width:100%;min-height:82px;flex:0 0 auto;padding:14px;border:2px solid #68bce8;border-radius:17px;background:#182461;color:white;text-align:left;font:500 17px/1.5 'Noto Sans KR',sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;cursor:pointer; }
+.sg-smart-call-question[aria-pressed="true"] { border-color:#ffbd40; }
+.sg-smart-call-controls { position:absolute;left:28px;right:28px;bottom:28px;display:flex;gap:10px; }
+.sg-smart-small-action { flex:1;padding:9px 6px;border:1px solid #68bce8;border-radius:12px;background:#2867d2;color:white;font:500 16px/1.4 'Noto Sans KR',sans-serif;cursor:pointer; }
+.sg-smart-detail { position:absolute; }
+.sg-smart-message-detail { background:url('/assets/smartphone-message-detail.png') center/100% 100% no-repeat; }
+.sg-smart-detail .sg-smart-detail-close { top:16px;right:16px; }
+.sg-smart-company { position:absolute;left:34px;right:70px;top:18px;height:76px;overflow:auto; }
+.sg-smart-company h3 { font-size:23px;line-height:1.4;margin:0 0 4px;overflow-wrap:anywhere; }
+.sg-smart-company p { font-size:17px;line-height:1.5;margin:0;color:#c4d5f5;white-space:pre-wrap;overflow-wrap:anywhere; }
+.sg-smart-sender { position:absolute;left:87px;right:48px;top:109px;height:52px;display:flex;align-items:center;font-size:21px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere; }
+.sg-smartphone-window .sg-content.sg-smart-thread { position:absolute;display:flex;flex-direction:column;gap:12px;padding:8px;overflow-y:auto;min-height:0; }
+.sg-smart-message-thread { left:45px;right:45px;top:194px;height:183px; }
+.sg-smartphone-window .sg-smart-bubble { max-width:83%;padding:10px 16px;font-size:18px;line-height:1.6;background:#273f7e;color:#ffffff; }
+.sg-smartphone-window .sg-smart-bubble.sg-outgoing { background:#2867d2; }
+.sg-smart-message-questions { position:absolute;left:34px;right:34px;top:412px;height:188px;background:#182461;border-radius:16px;padding:18px 18px 12px; }
+.sg-smart-message-questions h4 { margin:0 0 10px;font-size:20px;line-height:1.4; }
+.sg-smart-question-grid { display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:56px;gap:10px 12px;max-height:122px;overflow:auto; }
+.sg-smart-route { border:0;background:url('/assets/smartphone-route.png') center/100% 100% no-repeat;color:white;padding:6px 12px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;font:500 16px/1.35 'Noto Sans KR',sans-serif;cursor:pointer; }
+.sg-smart-route:disabled { opacity:.45;cursor:default; }
+.sg-smart-call-detail { background:url('/assets/smartphone-call-detail.png') center/100% 100% no-repeat; }
+.sg-smart-call-name { position:absolute;left:36px;right:70px;top:28px;font-size:24px;margin:0;line-height:1.4; }
+.sg-smart-call-number { position:absolute;left:4%;right:4%;top:15.1%;height:15.3%;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:24px;line-height:1.5;overflow:auto;overflow-wrap:anywhere;white-space:pre-wrap; }
+.sg-smart-call-thread { left:4%;right:4%;top:34%;bottom:30px; }
+.sg-smartphone-window .sg-selection-add,.sg-smartphone-window .sg-selection-status { bottom:20px;right:34px; }
