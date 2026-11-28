@@ -1,0 +1,37 @@
+[
+  {
+    "file": "computer-click.wav",
+    "durationSeconds": 0.18,
+    "sampleRate": 44100,
+    "channels": 1,
+    "peakDbFS": -6.4
+  },
+  {
+    "file": "smartphone-tap.wav",
+    "durationSeconds": 0.14,
+    "sampleRate": 44100,
+    "channels": 1,
+    "peakDbFS": -8.9
+  },
+  {
+    "file": "player-footsteps.wav",
+    "durationSeconds": 0.8,
+    "sampleRate": 44100,
+    "channels": 1,
+    "peakDbFS": -10.5
+  },
+  {
+    "file": "interaction-press.wav",
+    "durationSeconds": 0.17,
+    "sampleRate": 44100,
+    "channels": 1,
+    "peakDbFS": -8.4
+  },
+  {
+    "file": "bgm-calm-loop.wav",
+    "durationSeconds": 48.0,
+    "sampleRate": 44100,
+    "channels": 2,
+    "peakDbFS": -13.2
+  }
+]
